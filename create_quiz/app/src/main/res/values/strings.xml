@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">create_quiz</string>
+    <string name="app_name">Create_quiz</string>
+    <string name="nextButtonTxt">Next</string>
+    <string name="quizTitleTxt">QUIZ</string>
+    <string name="question_Hint">Question</string>
+    <string name="correct_answer_Hint">Correct Answer</string>
+    <string name="wrong_answer_Hint">Wrong answer</string>
 </resources>

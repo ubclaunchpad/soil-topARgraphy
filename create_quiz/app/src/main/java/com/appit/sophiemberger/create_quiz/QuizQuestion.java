@@ -7,7 +7,7 @@ public class QuizQuestion {
     private String correctAnswer;
     private String wrongAnswer1;
     private String wrongAnswer2;
-    private String wrongAnswer3;
+    private String WrongAnswer3;
 
 
     //constructor
@@ -16,12 +16,11 @@ public class QuizQuestion {
         this.correctAnswer = ca;
         this.wrongAnswer1 = wa1;
         this.wrongAnswer2 = wa2;
-        this.wrongAnswer3 = wa3;
+        this.WrongAnswer3 = wa3;
     }
 
 
     //setters
-
     public void setQuestion(String question) {
         this.question = question;
     }
@@ -39,12 +38,11 @@ public class QuizQuestion {
     }
 
     public void setWrongAnswer3(String wrongAnswer3) {
-        this.wrongAnswer3 = wrongAnswer3;
+        WrongAnswer3 = wrongAnswer3;
     }
 
 
     //getters
-
     public String getQuestion() {
         return question;
     }
@@ -62,6 +60,8 @@ public class QuizQuestion {
     }
 
     public String getWrongAnswer3() {
-        return wrongAnswer3;
+        return WrongAnswer3;
     }
+
+
 }
