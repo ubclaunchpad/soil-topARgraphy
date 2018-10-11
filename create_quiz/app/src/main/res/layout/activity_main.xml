@@ -47,6 +47,7 @@
             android:ems="10"
             android:hint="@string/question_Hint"
             android:inputType="text|number"
+            android:imeOptions="actionNext"
             android:textAlignment="center" />
 
         <EditText
@@ -57,6 +58,7 @@
             android:ems="10"
             android:hint="@string/correct_answer_Hint"
             android:inputType="text|number"
+            android:imeOptions="actionNext"
             android:textAlignment="center" />
 
         <EditText
@@ -66,6 +68,7 @@
             android:ems="10"
             android:hint="@string/wrong_answer_Hint"
             android:inputType="text|number"
+            android:imeOptions="actionNext"
             android:textAlignment="center" />
 
         <EditText
@@ -75,6 +78,7 @@
             android:ems="10"
             android:hint="@string/wrong_answer_Hint"
             android:inputType="text|number"
+            android:imeOptions="actionNext"
             android:textAlignment="center" />
 
         <EditText

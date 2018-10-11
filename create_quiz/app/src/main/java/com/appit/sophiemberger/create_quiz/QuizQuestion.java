@@ -1,5 +1,7 @@
 package com.appit.sophiemberger.create_quiz;
 
+import android.widget.EditText;
+
 public class QuizQuestion {
 
     //fields
@@ -11,7 +13,7 @@ public class QuizQuestion {
 
 
     //constructor
-    public void quizQuestion(String q, String ca, String wa1, String wa2, String wa3){
+    public void quizQuestion(String q, String ca, String wa1, String wa2, String wa3) {
         this.question = q;
         this.correctAnswer = ca;
         this.wrongAnswer1 = wa1;
@@ -62,6 +64,5 @@ public class QuizQuestion {
     public String getWrongAnswer3() {
         return WrongAnswer3;
     }
-
 
 }
