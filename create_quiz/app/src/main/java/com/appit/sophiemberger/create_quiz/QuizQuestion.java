@@ -13,12 +13,12 @@ public class QuizQuestion {
 
 
     //constructor
-    public void quizQuestion(String q, String ca, String wa1, String wa2, String wa3) {
-        this.question = q;
-        this.correctAnswer = ca;
-        this.wrongAnswer1 = wa1;
-        this.wrongAnswer2 = wa2;
-        this.WrongAnswer3 = wa3;
+    public QuizQuestion(String question, String correctAnswer, String wrongAnswer1, String wrongAnswer2, String wrongAnswer3) {
+        this.question = question;
+        this.correctAnswer = correctAnswer;
+        this.wrongAnswer1 = wrongAnswer1;
+        this.wrongAnswer2 = wrongAnswer2;
+        this.WrongAnswer3 = wrongAnswer3;
     }
 
 

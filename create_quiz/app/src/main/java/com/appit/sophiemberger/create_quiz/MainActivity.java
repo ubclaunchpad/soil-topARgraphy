@@ -15,16 +15,23 @@ public class MainActivity extends AppCompatActivity {
     private EditText wrongAnswer2Input;
     private EditText wrongAnswer3Input;
 
+    String question;
+    String correctAnswer;
+    String wrongAnswer1;
+    String wrongAnswer2;
+    String wrongAnswer3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         questionInput = findViewById(R.id.qEditText);
         questionInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                String question = questionInput.getText().toString();
+                question = questionInput.getText().toString();
             }
         });
 
@@ -33,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         correctAnswerInput.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                String correctAnswer = correctAnswerInput.getText().toString();
+                correctAnswer = correctAnswerInput.getText().toString();
             }
         });
 
@@ -42,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         wrongAnswer1Input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                String wrongAnswer1 = wrongAnswer1Input.getText().toString();
+                wrongAnswer1 = wrongAnswer1Input.getText().toString();
             }
         });
 
@@ -51,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         wrongAnswer2Input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                String wrongAnswer2 = wrongAnswer2Input.getText().toString();
+                wrongAnswer2 = wrongAnswer2Input.getText().toString();
             }
         });
 
@@ -60,16 +67,21 @@ public class MainActivity extends AppCompatActivity {
         wrongAnswer3Input.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                String wrongAnswer3 = wrongAnswer3Input.getText().toString();
+                wrongAnswer3 = wrongAnswer3Input.getText().toString();
             }
         });
+
+
     }
 
 
-    //Opens next question screen
+    //Opens next question screen and instantiates a QuizQuestion object
+    //QuizQuestion is added to QuizQuestion queue
     public void nextQuestion(View view) {
         Intent nextQuestionScreen = new Intent(this, MainActivity.class);
         startActivity(nextQuestionScreen);
+        QuizQuestion newQuestion = new QuizQuestion(question, correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3);
+        QuizQuestions.quizQuestions.add(newQuestion);
 
     }
 
