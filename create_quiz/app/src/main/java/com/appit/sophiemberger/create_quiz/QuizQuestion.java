@@ -1,6 +1,5 @@
 package com.appit.sophiemberger.create_quiz;
 
-import android.widget.EditText;
 
 public class QuizQuestion {
 
