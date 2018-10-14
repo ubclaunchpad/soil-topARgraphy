@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="CMakeSettings">
     <configurations>
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
@@ -7,12 +12,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="53c76c72-09aa-4ba0-9c59-d5e0f4ec2527" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/editor/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/editor/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/soil-topARgraphy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/soil-topARgraphy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/editor/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/editor/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/editor/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/editor/build.gradle" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,44 +30,51 @@
       <file leaf-file-name="QuizPanel.kt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+            <state>
+              <caret selection-end-column="54" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/editor/app/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QuizPanelFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="QuizPanelFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+            <state relative-caret-position="268">
+              <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quiz_panel_fragment.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="quiz_panel_fragment.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="12" lean-forward="true" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-            </state>
-          </provider>
           <provider editor-type-id="android-designer2">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1">
+              <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="QuizPanelViewModel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state />
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            </state>
           </provider>
         </entry>
       </file>
@@ -78,12 +89,15 @@
         <option value="$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelFragment.java" />
         <option value="$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt" />
         <option value="$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml" />
+        <option value="$PROJECT_DIR$/editor/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java" />
+        <option value="$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizQuestions" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-302" />
-    <option name="y" value="142" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="39" />
+    <option name="y" value="54" />
     <option name="width" value="1440" />
     <option name="height" value="811" />
   </component>
@@ -93,9 +107,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -191,7 +202,12 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ca" type="462c0819:PsiDirectoryNode" />
+              <item name="ubc" type="462c0819:PsiDirectoryNode" />
+              <item name="eml" type="462c0819:PsiDirectoryNode" />
+              <item name="soiltopargraphy" type="462c0819:PsiDirectoryNode" />
+              <item name="editor" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="soil-topARgraphy" type="b2602c69:ProjectViewProjectNode" />
@@ -200,8 +216,42 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ca" type="462c0819:PsiDirectoryNode" />
+              <item name="ubc" type="462c0819:PsiDirectoryNode" />
+              <item name="eml" type="462c0819:PsiDirectoryNode" />
+              <item name="soiltopargraphy" type="462c0819:PsiDirectoryNode" />
+              <item name="editor" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="soil-topARgraphy" type="b2602c69:ProjectViewProjectNode" />
+              <item name="soil-topARgraphy" type="462c0819:PsiDirectoryNode" />
+              <item name="editor" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="ca" type="462c0819:PsiDirectoryNode" />
+              <item name="ubc" type="462c0819:PsiDirectoryNode" />
+              <item name="eml" type="462c0819:PsiDirectoryNode" />
+              <item name="soiltopargraphy" type="462c0819:PsiDirectoryNode" />
+              <item name="editor" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="quizpanel" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="soil-topARgraphy" type="1abcf292:AndroidViewProjectNode" />
+              <item name="soil-topARgraphy" type="e9137016:NonAndroidModuleNode" />
             </path>
           </expand>
           <select />
@@ -214,9 +264,9 @@
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RunDashboard">
@@ -305,28 +355,33 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="811" extended-state="6" />
+    <frame x="39" y="54" width="1440" height="811" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Android Profiler" show_stripe_button="false" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
+      <window_info id="Build Variants" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" visible="true" weight="0.3277311" />
       <window_info anchor="right" id="Preview" order="4" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info anchor="bottom" id="Logcat" />
+      <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.529246" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.5286123" />
+      <window_info anchor="right" id="Assistant" weight="0.33476394" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" id="Device File Explorer" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info id="Captures" order="2" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -341,19 +396,114 @@
     <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="12" lean-forward="true" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
           <caret line="13" column="24" selection-start-line="13" selection-start-column="24" selection-end-line="13" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -382,14 +532,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="18" lean-forward="true" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -430,13 +580,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt">
@@ -465,28 +615,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/editor/app/gradlew">
       <provider selected="true" editor-type-id="text-editor">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="18" selection-start-line="13" selection-start-column="18" selection-end-line="13" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/settings.gradle">
@@ -499,14 +630,52 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml">
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="12" lean-forward="true" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelViewModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/res/layout/quiz_panel_fragment.xml">
       <provider editor-type-id="android-designer2">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1">
+          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizQuestions">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/app/src/main/java/ca/ubc/eml/soiltopargraphy/editor/ui/quizpanel/QuizPanelFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="71" column="8" selection-start-line="71" selection-start-column="8" selection-end-line="71" selection-end-column="8" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>
@@ -526,7 +695,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>No facets are configured</last-edited>
+          <last-edited>Android</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
