@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -66,12 +67,21 @@ class FlagAdapter extends RecyclerView.Adapter<FlagAdapter.mViewHolder> {
         public TextView name;
         public TextView description;
         public ImageView image;
+        public Button editButton;
 
         public mViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.nameTextView);
             description = view.findViewById(R.id.descriptionTextView);
             image = view.findViewById(R.id.mImageView);
+            editButton = view.findViewById(R.id.editButton);
+
+            editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
         }
     }
 
