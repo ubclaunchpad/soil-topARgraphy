@@ -30,8 +30,7 @@ Students
 - Alex Zhang, Developer (Oct 2018 - present)
 - Ranky Lau, Developer (Oct 2018 - present)
 - Sarah Bornais, Developer (Oct 2018 - present)
-- Sherwyn D'Souza, Developer (Oct 2018 - present)
-- Sherwyn D'Souza, Developer (Oct 2018 - present)
+- Sherwyn D'Souza, Developer (Oct 2018 - present) 
 - Sophie Berger, Developer (Oct 2018 - present)
 
 ## Development
