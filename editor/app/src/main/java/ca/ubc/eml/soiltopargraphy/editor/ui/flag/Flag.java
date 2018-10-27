@@ -1,21 +1,21 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
-import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.JInfoPanel;
+import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
 
 import java.util.ArrayList;
 
 
 
-public class JFlag {
+public class Flag {
 
     private String location;
     private float latitude;
     private float longitude;
-    private ArrayList<JInfoPanel> infoPanels;
+    private ArrayList<InfoPanel> infoPanels;
     private int id;
 
 
-    public JFlag(String location, float latitude, float longitude, ArrayList<JInfoPanel> infoPanels, int id) {
+    public Flag(String location, float latitude, float longitude, ArrayList<InfoPanel> infoPanels, int id) {
         this.location = location;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -23,11 +23,11 @@ public class JFlag {
         this.id = id;
     }
 
-    public void addInfoPanel(JInfoPanel infoPanel) {
+    public void addInfoPanel(InfoPanel infoPanel) {
         infoPanels.add(infoPanel);
     }
 
-    public void removeInfoPanel(JInfoPanel infoPanel) {
+    public void removeInfoPanel(InfoPanel infoPanel) {
         infoPanels.remove(infoPanel);
     }
 
@@ -55,11 +55,11 @@ public class JFlag {
         this.longitude = longitude;
     }
 
-    public ArrayList<JInfoPanel> getInfoPanels() {
+    public ArrayList<InfoPanel> getInfoPanels() {
         return infoPanels;
     }
 
-    public void setInfoPanels(ArrayList<JInfoPanel> infoPanels) {
+    public void setInfoPanels(ArrayList<InfoPanel> infoPanels) {
         this.infoPanels = infoPanels;
     }
 
