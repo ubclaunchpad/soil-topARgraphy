@@ -32,13 +32,13 @@
         android:hint="@string/description_text_field"
         android:inputType="text"
         android:scrollbars="vertical"
-        android:scrollHorizontally="true"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/to_image_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Title"
-        tools:targetApi="o" />
+        tools:targetApi="o"
+        />
 
     <Button
         android:id="@+id/to_image_add"
