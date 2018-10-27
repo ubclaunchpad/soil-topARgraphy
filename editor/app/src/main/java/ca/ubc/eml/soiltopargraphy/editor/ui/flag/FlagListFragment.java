@@ -1,13 +1,11 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.util.DiffUtil;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.recyclerview.extensions.ListAdapter;
-import java.util.List;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
 
@@ -33,22 +30,15 @@ public class FlagListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-
-        View mView = inflater.inflate(R.layout.flag_list_fragment, container, false);
-        RecyclerView recyclerView = mView.findViewById(R.id.recyclerView);
-
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-
-        FlagAdapter flagAdapter = new FlagAdapter();
-        recyclerView.setAdapter(flagAdapter);
-
         return inflater.inflate(R.layout.flag_list_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        FlagListViewModel flagViewModel = ViewModelProviders.of(this).get(FlagListViewModel.class);
+        FlagAdapter flagAdapter = new FlagAdapter();
+        flagAdapter.submitList(flagViewModel.getFlagList());
     }
 
 }
@@ -74,17 +64,19 @@ class FlagViewHolder extends RecyclerView.ViewHolder {
             }
         });
     }
-}
 
+    public void bindTo(Flag flag) {
+        this.name.setText(flag.getPanel().getName());
 
-class FlagViewModel extends ViewModel {
-    private List<Flag> flagList;
-
-    public List<Flag> getFlagList(){
-        if(flagList == null) {
-            //TODO: database query
+        String description = flag.getPanel().getDescription();
+        if(description.length() > 50) {
+            this.description.setText(flag.getPanel().getName().substring(0, 47) + "...");
         }
-        return flagList;
+        else {
+            this.description.setText(flag.getPanel().getName());
+        }
+
+        this.image.setImageURI(flag.getPanel().getImage());
     }
 }
 
@@ -105,24 +97,7 @@ class FlagAdapter extends ListAdapter<Flag, FlagViewHolder> {
 
     @Override
     public void onBindViewHolder(FlagViewHolder holder, int position) {
-
-        // Gets the list of flags that will be displayed in the list view from the view model
-        FlagViewModel model = ViewModelProviders.of(FlagListFragment.newInstance()).get(FlagViewModel.class);
-        List<Flag> flagList = model.getFlagList();
-
-        Flag flag = flagList.get(position);
-
-        holder.name.setText(flag.getPanel().getName());
-
-        String description = flag.getPanel().getDescription();
-        if(description.length() > 50) {
-            holder.description.setText(flag.getPanel().getName().substring(0, 47) + "...");
-        }
-        else {
-            holder.description.setText(flag.getPanel().getName());
-        }
-
-        holder.image.setImageURI(flag.getPanel().getImage());
+        holder.bindTo(this.getItem(position));
     }
 
     //Calculates updates for the list of flags to be displayed
