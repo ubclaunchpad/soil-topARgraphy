@@ -5,4 +5,5 @@ import android.net.Uri
 
 class ImagePanelViewModel : ViewModel(){
     var uri: Uri?=null
+    var imageTitle: String?=null
 }// TODO: Implement the ViewModel
