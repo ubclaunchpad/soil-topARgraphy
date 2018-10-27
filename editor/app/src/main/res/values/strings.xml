@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Soil TopARgraphy Editor</string>
+    <string name="description_text_field">Enter the description for the panel</string>
+    <string name="info_panel_title_edit">Enter the title for this info panel</string>
+    <string name="proceed_image_add_button">Press this button to add an image</string>
+    <string name="edit_info_panel">Press this button to edit info panel</string>
+    <string name="add_image_button">add image</string>
     <string name="share_level_title">Share your custom level</string>
 </resources>
