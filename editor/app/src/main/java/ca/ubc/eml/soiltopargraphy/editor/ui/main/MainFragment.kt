@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageView
 import ca.ubc.eml.soiltopargraphy.editor.R
 
@@ -57,16 +58,27 @@ class ImagePanelFragment : Fragment() {
     fun addImageFromGallery() {
         val getIntent = Intent(Intent.ACTION_GET_CONTENT)
         getIntent.setType("image/*")
-        val pickIntent = Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val pickIntent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         pickIntent.setType("image/*")
-        val chooserIntent = Intent.createChooser(getIntent,"Select image")
+        val chooserIntent = Intent.createChooser(getIntent, "Select image")
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(pickIntent))
-        startActivityForResult(chooserIntent,IMAGE_PICK_CODE )
+        startActivityForResult(chooserIntent, IMAGE_PICK_CODE)
     }
 
     fun addImageFromCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(Intent.createChooser(intent, "Pick an appropriate app"), CAMERA_PICK_CODE)
+    }
+
+    fun onToViewInfoPanelButtonClick() {
+        mViewModel?.imageTitle = view?.findViewById<EditText>(R.id.image_title)?.text.toString()
+        val manager = activity?.supportFragmentManager
+        if(manager!=null){
+            val transaction = manager.beginTransaction()
+            transaction.replace(R.id.container, InfoPanelFragment.newInstance())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
 
@@ -77,6 +89,8 @@ class ImagePanelFragment : Fragment() {
         addImageViaCameraButton.setOnClickListener { onImageAddCameraButtonClick() }
         val addImageViaGalleryButton = view.findViewById<Button>(R.id.add_image_via_gallery_button)
         addImageViaGalleryButton.setOnClickListener { onImageAddGalleryButtonClick() }
+        val toViewInfoPanelButton = view.findViewById<Button>(R.id.to_view_info_panel_button)
+        toViewInfoPanelButton.setOnClickListener { }
         return view
     }
 
