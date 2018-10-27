@@ -9,16 +9,16 @@ import java.util.ArrayList;
 public class JFlag {
 
     private String location;
-    private float lattitude;
-    private float longditude;
+    private float latitude;
+    private float longitude;
     private ArrayList<JInfoPanel> infoPanels;
     private int id;
 
 
-    public JFlag(String location, float lattitude, float longditude, ArrayList<JInfoPanel> infoPanels, int id) {
+    public JFlag(String location, float latitude, float longitude, ArrayList<JInfoPanel> infoPanels, int id) {
         this.location = location;
-        this.lattitude = lattitude;
-        this.longditude = longditude;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.infoPanels = infoPanels;
         this.id = id;
     }
@@ -39,20 +39,20 @@ public class JFlag {
         this.location = location;
     }
 
-    public float getLattitude() {
-        return lattitude;
+    public float getLatitude() {
+        return latitude;
     }
 
-    public void setLattitude(float lattitude) {
-        this.lattitude = lattitude;
+    public void setLatitude(float latitude) {
+        this.latitude = latitude;
     }
 
-    public float getLongditude() {
-        return longditude;
+    public float getLongitude() {
+        return longitude;
     }
 
-    public void setLongditude(float longditude) {
-        this.longditude = longditude;
+    public void setLongitude(float longitude) {
+        this.longitude = longitude;
     }
 
     public ArrayList<JInfoPanel> getInfoPanels() {
