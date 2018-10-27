@@ -17,11 +17,11 @@ import ca.ubc.eml.soiltopargraphy.editor.R
 
 class DescriptionPanelFragment : Fragment() {
 
-    private lateinit var mViewModel: DescriptionPanelViewModel
+    private var mViewModel: DescriptionPanelViewModel? = null
     fun onToImageAddButtonClick(){
         //record the field in ui to the viewModel
-        mViewModel.name = view?.findViewById<EditText>(R.id.Title)?.text.toString()
-        mViewModel.description = view?.findViewById<EditText>(R.id.Description)?.text.toString()
+        mViewModel?.name = view?.findViewById<EditText>(R.id.Title)?.text.toString()
+        mViewModel?.description = view?.findViewById<EditText>(R.id.Description)?.text.toString()
         //call imagePanelFragment
         val manager = activity?.supportFragmentManager
         if(manager!=null){
