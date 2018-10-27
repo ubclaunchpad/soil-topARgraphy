@@ -1,14 +1,12 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel
 
 import android.Manifest
-import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
+import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
@@ -20,10 +18,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import ca.ubc.eml.soiltopargraphy.editor.R
-import com.bumptech.glide.Glide
-import android.support.v4.content.FileProvider
-import java.io.File
-import java.io.IOException
 
 /**
  * Fragment where user uploads image from library or take image
@@ -31,82 +25,55 @@ import java.io.IOException
 
 
 class ImagePanelFragment : Fragment() {
-    lateinit var photoPath: String
-    lateinit var photoUri: Uri
-    private lateinit var mViewModel: ImagePanelViewModel
-    private lateinit var mImageView: ImageView
 
-    private fun onImageAddCameraButtonClick() {
+    private var mViewModel: ImagePanelViewModel? = null
+    fun onImageAddCameraButtonClick() {
         //check permission
-        var camerapermission = ContextCompat.checkSelfPermission(this.context!!,Manifest.permission.CAMERA)
+        val permission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.CAMERA)
         val requestCode = 0
-        if (camerapermission != PackageManager.PERMISSION_GRANTED) {
+        if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this.requireActivity(),
                     arrayOf(Manifest.permission.CAMERA),
                     requestCode)
         }
-        camerapermission = ContextCompat.checkSelfPermission(this.context!!,Manifest.permission.CAMERA)
-        if ( camerapermission == PackageManager.PERMISSION_GRANTED)
+        if (permission == PackageManager.PERMISSION_GRANTED)
             addImageFromCamera()
+
     }
 
     //add image via gallery
-    private fun onImageAddGalleryButtonClick() {
+    fun onImageAddGalleryButtonClick() {
         //check permission
-        var permission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
+        val permission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
         val requestCode = 0
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this.requireActivity(),
                     arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                     requestCode)
         }
-        permission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
         if (permission == PackageManager.PERMISSION_GRANTED)
             addImageFromGallery()
     }
 
-    private fun addImageFromGallery() {
+    fun addImageFromGallery() {
         val getIntent = Intent(Intent.ACTION_GET_CONTENT)
         getIntent.setType("image/*")
-        startActivityForResult(getIntent, IMAGE_PICK_CODE)
+        val pickIntent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        pickIntent.setType("image/*")
+        val chooserIntent = Intent.createChooser(getIntent, "Select image")
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(pickIntent))
+        startActivityForResult(chooserIntent, IMAGE_PICK_CODE)
     }
 
-    private fun createImageFile(): File? {
-        val fileName = "MyPicture"
-        val storageDir = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        val image = File.createTempFile(
-                fileName,
-                ".jpg",
-                storageDir
-        )
-        photoPath = image.absolutePath
-        return image
-    }
-
-    private fun addImageFromCamera() {
+    fun addImageFromCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if(intent.resolveActivity(context?.packageManager)!=null){
-            var photoFile: File? = null
-            try{
-                photoFile = createImageFile()
-            }
-            catch (e: IOException){}
-            if(photoFile != null){
-                 photoUri = FileProvider.getUriForFile(
-                        context!!,
-                        "ca.ubc.eml.soiltopargraphy.editor.fileProvider",
-                        photoFile
-                )
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri)
-                startActivityForResult(intent, CAMERA_PICK_CODE)
-            }
-        }
+        startActivityForResult(Intent.createChooser(intent, "Pick an appropriate app"), CAMERA_PICK_CODE)
     }
 
-    private fun onToViewInfoPanelButtonClick() {
+    fun onToViewInfoPanelButtonClick() {
         mViewModel?.imageTitle = view?.findViewById<EditText>(R.id.image_title)?.text.toString()
         val manager = activity?.supportFragmentManager
-        if (manager != null) {
+        if(manager!=null){
             val transaction = manager.beginTransaction()
             transaction.replace(R.id.container, InfoPanelFragment.newInstance())
             transaction.addToBackStack(null)
@@ -123,17 +90,13 @@ class ImagePanelFragment : Fragment() {
         val addImageViaGalleryButton = view.findViewById<Button>(R.id.add_image_via_gallery_button)
         addImageViaGalleryButton.setOnClickListener { onImageAddGalleryButtonClick() }
         val toViewInfoPanelButton = view.findViewById<Button>(R.id.to_view_info_panel_button)
-        toViewInfoPanelButton.setOnClickListener { onToViewInfoPanelButtonClick() }
-        mImageView = view.findViewById(R.id.imageView)
+        toViewInfoPanelButton.setOnClickListener { }
         return view
     }
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mViewModel = activity?.run {
-            ViewModelProviders.of(this).get(ImagePanelViewModel::class.java)
-        } ?: throw Exception("Invalid Activity")
+        mViewModel = ViewModelProviders.of(this).get(ImagePanelViewModel::class.java)
 
         // TODO: Use the ViewModel
     }
@@ -148,22 +111,17 @@ class ImagePanelFragment : Fragment() {
         private val CAMERA_PICK_CODE = 21
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode != RESULT_CANCELED) {
-            if (requestCode == CAMERA_PICK_CODE && resultCode == RESULT_OK) {
-                mViewModel?.uri = photoUri
-                mImageView.setImageURI(mViewModel?.uri)
-                Glide.with(context!!).load(photoUri).into(mImageView)
-                mImageView?.visibility = View.VISIBLE
-            }
-            if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK) {
-
-//            view?.findViewById<ImageView>(R.id.imageView)?.setImageURI(data.data)
-                Glide.with(context!!).load(data?.data).into(mImageView)
-//            transformPicture(data.data)
-                view?.findViewById<ImageView>(R.id.imageView)?.visibility = View.VISIBLE
-                mViewModel!!.uri = data!!.data
-            }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+        if (requestCode == CAMERA_PICK_CODE && resultCode == RESULT_OK) {
+            val imageBitmap = data.extras.get("data") as Bitmap
+            view?.findViewById<ImageView>(R.id.imageView)?.setImageBitmap(imageBitmap)
+            view?.findViewById<ImageView>(R.id.imageView)?.visibility = View.VISIBLE
+            mViewModel?.uri = data.data
+        }
+        if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK) {
+            view?.findViewById<ImageView>(R.id.imageView)?.setImageURI(data.data)
+            view?.findViewById<ImageView>(R.id.imageView)?.visibility = View.VISIBLE
+            mViewModel?.uri = data.data
         }
     }
 
