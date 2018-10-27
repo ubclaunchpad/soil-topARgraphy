@@ -67,9 +67,9 @@ class ImagePanelFragment : Fragment() {
 
     fun addImageFromCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
         startActivityForResult(Intent.createChooser(intent, "Pick an appropriate app"), CAMERA_PICK_CODE)
     }
-
     fun onToViewInfoPanelButtonClick() {
         mViewModel?.imageTitle = view?.findViewById<EditText>(R.id.image_title)?.text.toString()
         val manager = activity?.supportFragmentManager
@@ -90,13 +90,15 @@ class ImagePanelFragment : Fragment() {
         val addImageViaGalleryButton = view.findViewById<Button>(R.id.add_image_via_gallery_button)
         addImageViaGalleryButton.setOnClickListener { onImageAddGalleryButtonClick() }
         val toViewInfoPanelButton = view.findViewById<Button>(R.id.to_view_info_panel_button)
-        toViewInfoPanelButton.setOnClickListener { }
+        toViewInfoPanelButton.setOnClickListener {onToViewInfoPanelButtonClick() }
         return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this).get(ImagePanelViewModel::class.java)
+        mViewModel = activity?.run {
+            ViewModelProviders.of(this).get(ImagePanelViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
 
         // TODO: Use the ViewModel
     }

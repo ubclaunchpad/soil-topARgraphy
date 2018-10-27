@@ -41,7 +41,9 @@ class DescriptionPanelFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mViewModel = ViewModelProviders.of(this).get(DescriptionPanelViewModel::class.java)
+        mViewModel = activity?.run {
+            ViewModelProviders.of(this).get(DescriptionPanelViewModel::class.java)
+        } ?: throw Exception("Invalid Activity")
         // TODO: Use the ViewModel
     }
 
