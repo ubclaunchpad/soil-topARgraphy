@@ -5,4 +5,5 @@
     <string name="proceed_image_add_button">Press this button to add an image</string>
     <string name="edit_info_panel">Press this button to edit info panel</string>
     <string name="add_image_button">add image</string>
+    <string name="Image_Title">Enter Image TItle</string>
 </resources>
