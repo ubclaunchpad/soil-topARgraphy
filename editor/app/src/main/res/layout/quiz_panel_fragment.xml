@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.quizpanel.QuizPanelFragment">
 
     <Button
@@ -23,24 +21,13 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="@string/quizTitleTxt"
-        android:textAllCaps="true"
         android:textAlignment="center"
+        android:textAllCaps="true"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="378dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/nexButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleTxt">
 
     <EditText
         android:id="@+id/qEditText"
@@ -49,8 +36,8 @@
         android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="@string/question_Hint"
-        android:inputType="text"
         android:imeOptions="actionNext"
+        android:inputType="text"
         android:textAlignment="center" />
 
     <EditText
@@ -60,8 +47,8 @@
         android:layout_marginTop="70dp"
         android:ems="10"
         android:hint="@string/correct_answer_Hint"
-        android:inputType="text"
         android:imeOptions="actionNext"
+        android:inputType="text"
         android:textAlignment="center" />
 
     <EditText
@@ -70,8 +57,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/wrong_answer_Hint"
-        android:inputType="text"
         android:imeOptions="actionNext"
+        android:inputType="text"
         android:textAlignment="center" />
 
     <EditText
@@ -80,8 +67,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/wrong_answer_Hint"
-        android:inputType="text"
         android:imeOptions="actionNext"
+        android:inputType="text"
         android:textAlignment="center" />
 
     <EditText

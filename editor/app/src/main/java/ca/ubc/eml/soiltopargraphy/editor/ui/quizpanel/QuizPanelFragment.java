@@ -1,7 +1,6 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,12 +14,17 @@ import ca.ubc.eml.soiltopargraphy.editor.MainActivity;
 import ca.ubc.eml.soiltopargraphy.editor.R;
 
 /**
- * Quiz Panel where user enters 1 question and 4 answers
  */
 
 public class QuizPanelFragment extends Fragment {
 
     private QuizPanelViewModel mViewModel;
+
+    private String type;
+    private String info1;
+    private String info2;
+    private String info3;
+    private String info4;
 
     private QuizPanel quizPanel = new QuizPanel("","","","","");
 
@@ -46,19 +50,19 @@ public class QuizPanelFragment extends Fragment {
                 String value = editText.getText().toString();
                 switch (editText.getId()) {
                     case R.id.qEditText:
-                        quizPanel. = value;
+                        type = value;
                         break;
                     case R.id.caEditText:
-                        correctAnswer = value;
+                        info1 = value;
                         break;
                     case R.id.wa1EditText:
-                        wrongAnswer1 = value;
+                        info2 = value;
                         break;
                     case R.id.wa2EditText:
-                        wrongAnswer2 = value;
+                        info3 = value;
                         break;
                     case R.id.wa3EditText:
-                        wrongAnswer3 = value;
+                        info4 = value;
                         break;
                 }
             }
@@ -66,11 +70,7 @@ public class QuizPanelFragment extends Fragment {
     }
 
     public void nextQuestion(View view) {
-        Intent nextQuestionScreen = new Intent(this, QuizPanelFragment.class);
-        startActivity(nextQuestionScreen);
-        QuizPanel newQuestion = new QuizPanel(question, correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3);
-        QuizPanel.quizQuestions.add(newQuestion);
-
+        QuizPanel newQuestion = new QuizPanel(type, info1, info2, info3, info4);
     }
 
 }

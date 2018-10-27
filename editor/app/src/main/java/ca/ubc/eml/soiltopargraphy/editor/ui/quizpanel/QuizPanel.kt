@@ -7,8 +7,8 @@ package ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel
 data class QuizPanel(
 
 //fields
-var question: String,
-var correctAnswer: String,
-var wrongAnswer1: String,
-var wrongAnswer2: String,
-var WrongAnswer3: String)
+var type: String,
+var info1: String,
+var info2: String,
+var info3: String,
+var info4: String)
