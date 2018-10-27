@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,17 @@ public class FlagListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.flag_list_fragment, container, false);
+
+        View flagListView = inflater.inflate(R.layout.flag_list_fragment, container, false);
+        RecyclerView recyclerView = flagListView.findViewById(R.id.recyclerView);
+
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        FlagAdapter flagAdapter = new FlagAdapter();
+        recyclerView.setAdapter(flagAdapter);
+
+        return flagListView;
     }
 
     @Override
@@ -45,10 +56,10 @@ public class FlagListFragment extends Fragment {
 
 
 class FlagViewHolder extends RecyclerView.ViewHolder {
-    public TextView name;
-    public TextView description;
-    public ImageView image;
-    public Button editButton;
+    private TextView name;
+    private TextView description;
+    private ImageView image;
+    private Button editButton;
 
     public FlagViewHolder(View view) {
         super(view);
