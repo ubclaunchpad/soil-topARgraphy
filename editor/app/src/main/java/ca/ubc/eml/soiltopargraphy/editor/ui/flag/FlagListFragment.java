@@ -1,10 +1,12 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
+import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,8 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
+import android.support.v7.recyclerview.extensions.ListAdapter;
 import java.util.List;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
@@ -25,8 +26,6 @@ import ca.ubc.eml.soiltopargraphy.editor.R;
 
 public class FlagListFragment extends Fragment {
 
-    private FlagListViewModel mViewModel;
-
     public static FlagListFragment newInstance() {
         return new FlagListFragment();
     }
@@ -36,16 +35,12 @@ public class FlagListFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View mView = inflater.inflate(R.layout.flag_list_fragment, container, false);
-        RecyclerView recyclerView;
-        recyclerView = mView.findViewById(R.id.recyclerView);
-
-        // Generates the list of flags that will be displayed in the list view
-        // TODO: make a query to the database
-        List<Flag> flagList = new ArrayList<>();
-        FlagAdapter flagAdapter = new FlagAdapter(flagList);
+        RecyclerView recyclerView = mView.findViewById(R.id.recyclerView);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
+
+        FlagAdapter flagAdapter = new FlagAdapter();
         recyclerView.setAdapter(flagAdapter);
 
         return inflater.inflate(R.layout.flag_list_fragment, container, false);
@@ -54,53 +49,67 @@ public class FlagListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(FlagListViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }
 
-class FlagAdapter extends RecyclerView.Adapter<FlagAdapter.mViewHolder> {
+
+class FlagViewHolder extends RecyclerView.ViewHolder {
+    public TextView name;
+    public TextView description;
+    public ImageView image;
+    public Button editButton;
+
+    public FlagViewHolder(View view) {
+        super(view);
+        name = view.findViewById(R.id.nameTextView);
+        description = view.findViewById(R.id.descriptionTextView);
+        image = view.findViewById(R.id.mImageView);
+        editButton = view.findViewById(R.id.editButton);
+
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+}
+
+
+class FlagViewModel extends ViewModel {
     private List<Flag> flagList;
 
-    public class mViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;
-        public TextView description;
-        public ImageView image;
-        public Button editButton;
-
-        public mViewHolder(View view) {
-            super(view);
-            name = view.findViewById(R.id.nameTextView);
-            description = view.findViewById(R.id.descriptionTextView);
-            image = view.findViewById(R.id.mImageView);
-            editButton = view.findViewById(R.id.editButton);
-
-            editButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
+    public List<Flag> getFlagList(){
+        if(flagList == null) {
+            //TODO: database query
         }
+        return flagList;
+    }
+}
+
+
+class FlagAdapter extends ListAdapter<Flag, FlagViewHolder> {
+
+    public FlagAdapter() {
+        super(FlagAdapter.DIFF_CALLBACK);
     }
 
-    public FlagAdapter (List<Flag> flagList) {
-        this.flagList = flagList;
-    }
-
-    // Tells the recyclerview to use the flag_list_fragment_view layout as the layout for each row in the recyclerview
     @Override
-    public mViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FlagViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.flag_list_fragment_row, parent, false);
 
-        return new mViewHolder(itemView);
+        return new FlagViewHolder(itemView);
     }
 
-    // "Binds" each datapoint from the database to a viewholder in the recyclerview
     @Override
-    public void onBindViewHolder(mViewHolder holder, int position) {
+    public void onBindViewHolder(FlagViewHolder holder, int position) {
+
+        // Gets the list of flags that will be displayed in the list view from the view model
+        FlagViewModel model = ViewModelProviders.of(FlagListFragment.newInstance()).get(FlagViewModel.class);
+        List<Flag> flagList = model.getFlagList();
+
         Flag flag = flagList.get(position);
 
         holder.name.setText(flag.getPanel().getName());
@@ -116,11 +125,17 @@ class FlagAdapter extends RecyclerView.Adapter<FlagAdapter.mViewHolder> {
         holder.image.setImageURI(flag.getPanel().getImage());
     }
 
-    // Returns the number of items in the recyclerview
-    @Override
-    public int getItemCount() {
-        return flagList.size();
-    }
+    //Calculates updates for the list of flags to be displayed
+    public static final DiffUtil.ItemCallback<Flag> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Flag>() {
+                @Override
+                public boolean areItemsTheSame(@NonNull Flag oldFlag, @NonNull Flag newFlag) {
+                    return oldFlag.getID() == newFlag.getID();
+                }
+                @Override
+                public boolean areContentsTheSame(@NonNull Flag oldFlag, @NonNull Flag newFlag) {
+                    return oldFlag.equals(newFlag);
+                }
+            };
 
 }
-
