@@ -5,9 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.flag.FlagMapFragment">
 
-    <TextView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/flagToolBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
 
 </FrameLayout>
