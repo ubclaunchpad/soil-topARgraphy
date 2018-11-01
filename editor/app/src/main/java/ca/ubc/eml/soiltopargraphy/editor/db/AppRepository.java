@@ -12,27 +12,21 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
 public class AppRepository {
 
     private FlagDao mFlagDao;
-    private LiveData<List<Flag>> mAllFlags;
-
     private InfoPanelDao mInfoPanelDao;
-    private LiveData<List<InfoPanel>> mAllInfoPanel;
 
     // Making this public so FlagMapViewModel can access
     public AppRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
+
         mFlagDao = db.flagDao();
-        mAllFlags = mFlagDao.getAllFlags();
-
         mInfoPanelDao = db.infoPanelDao();
-        mAllInfoPanel = mInfoPanelDao.getAllInfoPanels();
-
     }
 
     public LiveData<List<Flag>> getAllFlags() {
-        return mAllFlags;
+        return mFlagDao.getAllFlags();
     }
     public LiveData<List<InfoPanel>> getAllInfoPanels() {
-        return mAllInfoPanel;
+        return mInfoPanelDao.getAllInfoPanels();
     }
 
     // Must call this on non-UI thread or app will crash
