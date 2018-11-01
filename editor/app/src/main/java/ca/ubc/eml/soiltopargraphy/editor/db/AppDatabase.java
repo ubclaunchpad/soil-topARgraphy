@@ -21,7 +21,7 @@ public abstract class AppDatabase extends RoomDatabase {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "flag_database")
+                            AppDatabase.class, "soil_topargraphy_database")
                             .build();
                 }
             }
