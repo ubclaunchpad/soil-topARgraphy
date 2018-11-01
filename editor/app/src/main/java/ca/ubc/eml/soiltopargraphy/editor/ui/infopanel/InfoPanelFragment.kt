@@ -1,6 +1,7 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel
 
 import android.arch.lifecycle.ViewModelProviders
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.EventLogTags
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import ca.ubc.eml.soiltopargraphy.editor.R
+import com.bumptech.glide.Glide
 import org.w3c.dom.Text
 
 class InfoPanelFragment : Fragment() {
@@ -35,11 +37,16 @@ class InfoPanelFragment : Fragment() {
         val imgmodel = activity?.run{
             ViewModelProviders.of(this).get(ImagePanelViewModel::class.java)
         }
+        loadUriInto(imgmodel?.uri!!,imageView)
         titleView.text = descModel?.name
         descriptionView.text = descModel?.description
-        imageView.setImageURI(imgmodel?.uri)
         imageTitleView.text = imgmodel?.imageTitle
+
         return view
+    }
+
+    fun loadUriInto(uri: Uri,view: ImageView) {
+        Glide.with(context!!).load(uri).into(view)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
