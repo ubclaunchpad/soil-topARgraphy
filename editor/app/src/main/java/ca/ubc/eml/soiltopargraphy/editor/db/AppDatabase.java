@@ -6,19 +6,22 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag;
+import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
 
-@Database(entities = {Flag.class}, version = 1)
-public abstract class FlagRoomDatabase extends RoomDatabase {
+@Database(entities = {Flag.class, InfoPanel.class}, version = 1)
+public abstract class AppDatabase extends RoomDatabase {
+
     public abstract FlagDao flagDao();
+    public abstract InfoPanelDao infoPanelDao();
 
-    private static volatile FlagRoomDatabase INSTANCE;
+    private static volatile AppDatabase INSTANCE;
 
-    static FlagRoomDatabase getDatabase(final Context context) {
+    static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (FlagRoomDatabase.class) {
+            synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            FlagRoomDatabase.class, "flag_database")
+                            AppDatabase.class, "flag_database")
                             .build();
                 }
             }

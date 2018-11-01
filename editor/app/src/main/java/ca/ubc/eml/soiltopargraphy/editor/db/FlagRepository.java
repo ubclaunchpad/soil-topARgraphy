@@ -13,13 +13,14 @@ public class FlagRepository {
     private FlagDao mFlagDao;
     private LiveData<List<Flag>> mAllFlags;
 
-    FlagRepository(Application application) {
-        FlagRoomDatabase db = FlagRoomDatabase.getDatabase(application);
+    // Making this public so FlagMapViewModel can access
+    public FlagRepository(Application application) {
+        AppDatabase db = AppDatabase.getDatabase(application);
         mFlagDao = db.flagDao();
         mAllFlags = mFlagDao.getAllFlags();
     }
 
-    LiveData<List<Flag>> getAllFlags() {
+    public LiveData<List<Flag>> getAllFlags() {
         return mAllFlags;
     }
 
