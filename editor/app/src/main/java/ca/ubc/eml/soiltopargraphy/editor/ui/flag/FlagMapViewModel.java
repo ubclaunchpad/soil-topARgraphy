@@ -1,16 +1,15 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
-import android.arch.lifecycle.ViewModel;
-import java.util.List;
-import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository;
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
+import java.util.List;
+
+import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository;
+
 public class FlagMapViewModel extends AndroidViewModel {
     private boolean flagItemClicked;
-    private AppRepository mRepository;
-
     public void setFlagItemClicked(boolean isClicked) {
         flagItemClicked = isClicked;
     }
@@ -18,6 +17,8 @@ public class FlagMapViewModel extends AndroidViewModel {
     public boolean getFlagItemClicked() {
         return flagItemClicked;
     }
+
+    private AppRepository mRepository;
 
     // gets a reference to the repository and he list of words from the repository.
     public FlagMapViewModel (Application application) {
