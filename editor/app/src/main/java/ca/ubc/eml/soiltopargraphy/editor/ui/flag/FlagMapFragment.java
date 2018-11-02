@@ -15,6 +15,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
 
@@ -29,6 +31,13 @@ public class FlagMapFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        mViewModel = ViewModelProviders.of(this).get(FlagMapViewModel.class);
+
+        //Ensures the toolbar initially displays the options that it should
+        //(ie. just the listview option) when the flag item is not clicked
+        mViewModel.setFlagItemClicked(false);
+
         View view = inflater.inflate(R.layout.flag_map_fragment, container, false);
         Toolbar flagToolBar = view.findViewById(R.id.flagToolBar);
 
@@ -37,6 +46,29 @@ public class FlagMapFragment extends Fragment {
 
         //Ensures that the menu is actually displayed in the toolbar
         setHasOptionsMenu(true);
+
+        //Assigns an onClickListener to flag item that will update the toolbar when flag is clicked
+        //TODO: Button flagItem should be replaced with actual flag item before merging
+        Button flagItem = view.findViewById(R.id.flagItem);
+        flagItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //When flag is clicked, updates the view model variable to reflect this and refreshes the toolbar view
+                mViewModel.setFlagItemClicked(true);
+                getActivity().invalidateOptionsMenu();
+            }
+        });
+
+        //After clicking on the flag, if the user clicks anywhere else on the screen, updates
+        //the toolbar to go back to showing only the listview item
+        FrameLayout frameLayout = view.findViewById(R.id.frameLayout);
+        frameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.setFlagItemClicked(false);
+                getActivity().invalidateOptionsMenu();
+            }
+        });
 
         return view;
     }
@@ -50,7 +82,7 @@ public class FlagMapFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_flag_not_selected, menu);
+        inflater.inflate(R.menu.menu_flag_map, menu);
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -65,6 +97,12 @@ public class FlagMapFragment extends Fragment {
                 transaction.replace(R.id.container, new FlagListFragment());
                 transaction.commit();
                 break;
+            case R.id.action_edit:
+                //TODO: insert code to edit flag here
+                break;
+            case R.id.action_delete:
+                //TODO: insert code to delete flag here
+                break;
             default:
                 break;
         }
@@ -72,4 +110,19 @@ public class FlagMapFragment extends Fragment {
         return true;
     }
 
+    @Override
+    public void onPrepareOptionsMenu (Menu menu) {
+        //When flag is clicked, shows only edit and delete options
+        if (mViewModel.getFlagItemClicked()) {
+            menu.findItem(R.id.action_to_listview).setVisible(false);
+            menu.findItem(R.id.action_edit).setVisible(true);
+            menu.findItem(R.id.action_delete).setVisible(true);
+        }
+        //When flag is not clicked, shows only listview options
+        else {
+            menu.findItem(R.id.action_to_listview).setVisible(true);
+            menu.findItem(R.id.action_edit).setVisible(false);
+            menu.findItem(R.id.action_delete).setVisible(false);
+        }
+    }
 }
