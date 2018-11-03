@@ -5,5 +5,8 @@
     <string name="proceed_image_add_button">Press this button to add an image</string>
     <string name="edit_info_panel">Press this button to edit info panel</string>
     <string name="add_image_button">add image</string>
-    <string name="Image_Title">Enter Image TItle</string>
+    <string name="Image_Title">Enter Image Title</string>
+    <string name="add_image_via_gallery">Add image via gallery</string>
+    <string name="add_image_via_camera">Add image via camera</string>
+    <string name="proceed_info_panel">Go to info panel</string>
 </resources>

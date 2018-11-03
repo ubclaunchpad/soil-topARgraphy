@@ -1,6 +1,7 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel
 
 import android.Manifest
+import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.arch.lifecycle.ViewModelProviders
 import android.content.ContentProvider
@@ -178,20 +179,22 @@ class ImagePanelFragment : Fragment() {
         private val CAMERA_PICK_CODE = 21
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if (requestCode == CAMERA_PICK_CODE && resultCode == RESULT_OK) {
-            mViewModel?.uri = photoUri
-            mImageView.setImageURI(mViewModel?.uri)
-            Glide.with(context!!).load(photoUri).into(mImageView)
-            mImageView?.visibility = View.VISIBLE
-        }
-        if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode != RESULT_CANCELED) {
+            if (requestCode == CAMERA_PICK_CODE && resultCode == RESULT_OK) {
+                mViewModel?.uri = photoUri
+                mImageView.setImageURI(mViewModel?.uri)
+                Glide.with(context!!).load(photoUri).into(mImageView)
+                mImageView?.visibility = View.VISIBLE
+            }
+            if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK) {
 
 //            view?.findViewById<ImageView>(R.id.imageView)?.setImageURI(data.data)
-            Glide.with(context!!).load(data.data).into(mImageView)
+                Glide.with(context!!).load(data?.data).into(mImageView)
 //            transformPicture(data.data)
-            view?.findViewById<ImageView>(R.id.imageView)?.visibility = View.VISIBLE
-            mViewModel?.uri = data.data
+                view?.findViewById<ImageView>(R.id.imageView)?.visibility = View.VISIBLE
+                mViewModel?.uri = data?.data
+            }
         }
     }
 
