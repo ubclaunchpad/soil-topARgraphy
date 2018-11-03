@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Soil TopARgraphy Editor</string>
+    <string name="share_level_title">Share your custom level</string>
 </resources>
