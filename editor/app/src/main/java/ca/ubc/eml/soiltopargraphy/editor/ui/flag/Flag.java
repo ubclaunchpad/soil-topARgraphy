@@ -1,6 +1,7 @@
-package main.java.ca.ubc.eml.soiltopargraphy.editor.ui.flag;
+package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
-import main.java.ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
+
+import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
 
 public class Flag {
 

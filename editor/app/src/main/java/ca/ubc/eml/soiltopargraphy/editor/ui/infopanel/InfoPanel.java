@@ -1,4 +1,4 @@
-package main.java.ca.ubc.eml.soiltopargraphy.editor.ui.infopanel;
+package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
