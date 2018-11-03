@@ -37,7 +37,7 @@ class InfoPanelFragment : Fragment() {
         val imgmodel = activity?.run{
             ViewModelProviders.of(this).get(ImagePanelViewModel::class.java)
         }
-        loadUriInto(imgmodel?.uri!!,imageView)
+        loadUriInto(imgmodel?.uri,imageView)
         titleView.text = descModel?.name
         descriptionView.text = descModel?.description
         imageTitleView.text = imgmodel?.imageTitle
@@ -45,8 +45,10 @@ class InfoPanelFragment : Fragment() {
         return view
     }
 
-    fun loadUriInto(uri: Uri,view: ImageView) {
-        Glide.with(context!!).load(uri).into(view)
+    fun loadUriInto(uri: Uri?,view: ImageView) {
+        if(uri!=null) {
+            Glide.with(context!!).load(uri).into(view)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
