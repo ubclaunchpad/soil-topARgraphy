@@ -1,14 +1,19 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
 
+@Entity(tableName = "flag_table")
 public class Flag {
 
     private String location;
     private float latitude;
     private float longitude;
     private InfoPanel infoPanel;
+    @PrimaryKey
     private int id;
 
 
