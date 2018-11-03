@@ -1,4 +1,4 @@
-package main.java.ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel
+package ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel
 
 import android.arch.persistence.room.Entity
 
