@@ -4,15 +4,9 @@ import android.Manifest
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
 import android.arch.lifecycle.ViewModelProviders
-import android.content.ContentProvider
-import android.content.ContentValues
-import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
@@ -27,26 +21,9 @@ import android.widget.EditText
 import android.widget.ImageView
 import ca.ubc.eml.soiltopargraphy.editor.R
 import com.bumptech.glide.Glide
-import android.system.Os.mkdir
-import java.nio.file.Files.exists
-import java.io.File.separator
-import android.os.Environment.getExternalStorageDirectory
-import android.os.StrictMode
-import android.support.annotation.RequiresApi
 import android.support.v4.content.FileProvider
-import android.util.Log
 import java.io.File
-import java.io.FileOutputStream
 import java.io.IOException
-import java.io.OutputStream
-import java.net.URI
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.ZoneId
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
-import java.util.*
-
 
 /**
  * Fragment where user uploads image from library or take image
