@@ -3,7 +3,7 @@ package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import main.java.ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuizPanel;
+import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuizPanel;
 
 @Entity(tableName = "info_panel_table")
 public class InfoPanel {
