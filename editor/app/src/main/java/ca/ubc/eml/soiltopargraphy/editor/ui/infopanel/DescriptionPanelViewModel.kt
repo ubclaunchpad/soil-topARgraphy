@@ -3,7 +3,7 @@ package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel
 import android.arch.lifecycle.ViewModel
 
 class DescriptionPanelViewModel : ViewModel() {
-    var name: String?=null
-    var description: String?=null
+    lateinit var name: String
+    lateinit var description: String
     // TODO: Implement the ViewModel
 }
