@@ -21,12 +21,10 @@ public class QuizPanelFragment extends Fragment {
     private QuizPanelViewModel mViewModel;
 
     private String type;
-    private String info1;
-    private String info2;
-    private String info3;
-    private String info4;
-
-    private QuizPanel quizPanel = new QuizPanel("","","","","");
+    private String color;
+    private String density;
+    private String fruitfulness;
+    private String humidity;
 
 
     public static QuizPanelFragment newInstance() {
@@ -49,28 +47,29 @@ public class QuizPanelFragment extends Fragment {
                 EditText editText = (EditText) v;
                 String value = editText.getText().toString();
                 switch (editText.getId()) {
-                    case R.id.qEditText:
+                    case R.id.SoilTypeAnswerTv:
                         type = value;
                         break;
-                    case R.id.caEditText:
-                        info1 = value;
+                    case R.id.SoilColorAnswerTv:
+                        color = value;
                         break;
-                    case R.id.wa1EditText:
-                        info2 = value;
+                    case R.id.SoilDensityAnswerTv:
+                        density = value;
                         break;
-                    case R.id.wa2EditText:
-                        info3 = value;
+                    case R.id.SoilFruitfulnessAnswerTv:
+                        fruitfulness = value;
                         break;
-                    case R.id.wa3EditText:
-                        info4 = value;
+                    case R.id.SoilHumidityAnswerTv:
+                        humidity = value;
                         break;
                 }
+                nextQuestion(v);
             }
         };
     }
 
     public void nextQuestion(View view) {
-        QuizPanel newQuestion = new QuizPanel(type, info1, info2, info3, info4);
+        QuizPanel newSoilType = new QuizPanel(type, color, density, fruitfulness, humidity);
     }
 
 }

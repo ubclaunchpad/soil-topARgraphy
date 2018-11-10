@@ -2,10 +2,10 @@
     <string name="app_name">Soil TopARgraphy Editor</string>
 
     //CreateQuiz
-    <string name="quiz_title">Enter_Info</string>
-    <string name="nextButtonTxt">Next</string>
-    <string name="quizTitleTxt">Info</string>
-    <string name="question_Hint">Type</string>
-    <string name="correct_answer_Hint">info1</string>
-    <string name="wrong_answer_Hint">info2</string>
+    <string name="soil_1">Soil 1</string>
+    <string name="soil_Type">Soil Type:</string>
+    <string name="soil_Color">Soil Color:</string>
+    <string name="soil_Density">Soil Density:</string>
+    <string name="soil_Fruitfulness">Soil Fruitfulness:</string>
+    <string name="soil_Humidity">Soil Humidity:</string>
 </resources>

@@ -8,7 +8,7 @@ data class QuizPanel(
 
 //fields
 var type: String,
-var info1: String,
-var info2: String,
-var info3: String,
-var info4: String)
+var color: String,
+var density: String,
+var fruitfulness: String,
+var humidity: String)

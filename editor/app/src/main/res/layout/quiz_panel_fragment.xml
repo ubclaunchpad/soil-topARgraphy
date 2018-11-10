@@ -1,83 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.quizpanel.QuizPanelFragment">
 
-    <Button
-        android:id="@+id/nexButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="nextQuestion"
-        android:text="@string/nextButtonTxt"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <TextView
-        android:id="@+id/titleTxt"
+        android:id="@+id/typeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/quizTitleTxt"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/soil_1"
+        android:textSize="30sp" />
 
-    <EditText
-        android:id="@+id/qEditText"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:hint="@string/question_Hint"
-        android:imeOptions="actionNext"
-        android:inputType="text"
-        android:textAlignment="center" />
+        android:layout_height="492dp"
+        android:layout_below="@+id/typeTv"
+        android:layout_alignParentStart="true"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/caEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:ems="10"
-        android:hint="@string/correct_answer_Hint"
-        android:imeOptions="actionNext"
-        android:inputType="text"
-        android:textAlignment="center" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/wa1EditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/wrong_answer_Hint"
-        android:imeOptions="actionNext"
-        android:inputType="text"
-        android:textAlignment="center" />
+            <TextView
+                android:id="@+id/SoilTypeTv"
+                android:layout_width="194dp"
+                android:layout_height="43dp"
+                android:text="@string/soil_Type"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/wa2EditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/wrong_answer_Hint"
-        android:imeOptions="actionNext"
-        android:inputType="text"
-        android:textAlignment="center" />
+            <EditText
+                android:id="@+id/SoilTypeAnswerTv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Soil Type"
+                android:inputType="text" />
+        </LinearLayout>
 
-    <EditText
-        android:id="@+id/wa3EditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/wrong_answer_Hint"
-        android:inputType="text"
-        android:textAlignment="center" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:orientation="horizontal">
 
-</FrameLayout>
+            <TextView
+                android:id="@+id/SoilColorTv"
+                android:layout_width="325dp"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:text="@string/soil_Color"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/SoilColorAnswerTv"
+                android:layout_width="323dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="Soil Color"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/SoilDensityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="49dp"
+                android:layout_weight="1"
+                android:text="@string/soil_Density"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/SoilDensityAnswerTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Soil Density"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/SoilFruitfullnessTv"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:layout_weight="1"
+                android:text="@string/soil_Fruitfulness"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/SoilFruitfulnessAnswerTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Soil Fruitfulness"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/SoilHUmidityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/soil_Humidity"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/SoilHumidityAnswerTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Soil Humidity:"
+                android:inputType="text" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
