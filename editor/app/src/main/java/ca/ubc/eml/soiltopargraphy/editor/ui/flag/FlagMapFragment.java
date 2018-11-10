@@ -90,29 +90,30 @@ public class FlagMapFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
+
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        //Using a switch here so that eventually, when we add more options in the toolbar, this function can handle multiple possible selections
+        Fragment newFragment = null;
+
         switch (item.getItemId()) {
             case R.id.action_to_listview:
                 //When the "List View" button is selected, swaps this fragment out for the flag list fragment
-                transaction.replace(R.id.container, new FlagListFragment());
-                transaction.commit();
+                newFragment = new FlagListFragment();
                 break;
             case R.id.action_edit:
-                //TODO: ensure this is the right fragment to go to
-                transaction.replace(R.id.container, new DescriptionPanelFragment());
-                transaction.commit();
+                newFragment = new DescriptionPanelFragment();
                 break;
             case R.id.action_delete:
                 //Deletes flag from room database
                 mViewModel.deleteFlag();
-                //Returns to FlagListFragment since there is now no flag to interact with in FlagMapFragment
-                transaction.replace(R.id.container, new FlagListFragment());
-                transaction.commit();
                 break;
             default:
                 break;
+        }
+
+        if (newFragment != null) {
+            transaction.replace(R.id.container, newFragment);
+            transaction.commit();
         }
 
         return true;
