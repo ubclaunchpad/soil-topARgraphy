@@ -33,33 +33,25 @@ import java.io.IOException
 class ImagePanelFragment : Fragment() {
     lateinit var photoPath: String
     lateinit var photoUri: Uri
-    private var mViewModel: ImagePanelViewModel? = null
+    private lateinit var mViewModel: ImagePanelViewModel
     private lateinit var mImageView: ImageView
 
-    fun onImageAddCameraButtonClick() {
+    private fun onImageAddCameraButtonClick() {
         //check permission
-        var camerapermission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.CAMERA)
-        var writeExternalPermission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        var camerapermission = ContextCompat.checkSelfPermission(this.context!!,Manifest.permission.CAMERA)
         val requestCode = 0
         if (camerapermission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this.requireActivity(),
                     arrayOf(Manifest.permission.CAMERA),
                     requestCode)
         }
-        if (writeExternalPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this.requireActivity(),
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    requestCode)
-        }
-        camerapermission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.CAMERA)
-        writeExternalPermission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (camerapermission == PackageManager.PERMISSION_GRANTED && writeExternalPermission == PackageManager.PERMISSION_GRANTED)
+        camerapermission = ContextCompat.checkSelfPermission(this.context!!,Manifest.permission.CAMERA)
+        if ( camerapermission == PackageManager.PERMISSION_GRANTED)
             addImageFromCamera()
-
     }
 
     //add image via gallery
-    fun onImageAddGalleryButtonClick() {
+    private fun onImageAddGalleryButtonClick() {
         //check permission
         var permission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
         val requestCode = 0
@@ -73,13 +65,13 @@ class ImagePanelFragment : Fragment() {
             addImageFromGallery()
     }
 
-    fun addImageFromGallery() {
+    private fun addImageFromGallery() {
         val getIntent = Intent(Intent.ACTION_GET_CONTENT)
         getIntent.setType("image/*")
         startActivityForResult(getIntent, IMAGE_PICK_CODE)
     }
 
-    fun createImageFile(): File? {
+    private fun createImageFile(): File? {
         val fileName = "MyPicture"
         val storageDir = context?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val image = File.createTempFile(
@@ -91,7 +83,7 @@ class ImagePanelFragment : Fragment() {
         return image
     }
 
-    fun addImageFromCamera() {
+    private fun addImageFromCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         if(intent.resolveActivity(context?.packageManager)!=null){
             var photoFile: File? = null
@@ -111,7 +103,7 @@ class ImagePanelFragment : Fragment() {
         }
     }
 
-    fun onToViewInfoPanelButtonClick() {
+    private fun onToViewInfoPanelButtonClick() {
         mViewModel?.imageTitle = view?.findViewById<EditText>(R.id.image_title)?.text.toString()
         val manager = activity?.supportFragmentManager
         if (manager != null) {
@@ -170,7 +162,7 @@ class ImagePanelFragment : Fragment() {
                 Glide.with(context!!).load(data?.data).into(mImageView)
 //            transformPicture(data.data)
                 view?.findViewById<ImageView>(R.id.imageView)?.visibility = View.VISIBLE
-                mViewModel?.uri = data?.data
+                mViewModel!!.uri = data!!.data
             }
         }
     }

@@ -19,7 +19,7 @@ class MainFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
 
-    fun onCreateInfoButtonClick(view: View){
+    private fun onCreateInfoButtonClick(view: View){
         val manager = activity?.supportFragmentManager
         if(manager!=null){
             val transaction = manager.beginTransaction()
