@@ -19,5 +19,9 @@ public interface InfoPanelDao {
     void deleteAll();
 
     @Query("SELECT * from info_panel_table")
+
     LiveData<List<InfoPanel>> getAllInfoPanels();
+
+    @Query("DELETE FROM info_panel_table WHERE name = :panelName")
+    void deletePanel(String panelName);
 }

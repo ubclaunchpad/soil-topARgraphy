@@ -49,6 +49,28 @@ public class AppRepository {
         }
     }
 
+    //Deletes a singular flag from the flag room database
+    public void deleteFlag(Flag flag) {
+
+        new deleteFlagAsyncTask(mFlagDao).execute(flag);
+
+        //Deletes the corresponding info panel from the info panel database at the same time
+        deletePanel(flag.getInfoPanel());
+    }
+
+    private static class deleteFlagAsyncTask extends AsyncTask<Flag, Void, Void> {
+
+        private FlagDao mAsyncTaskDao;
+
+        deleteFlagAsyncTask(FlagDao dao) { mAsyncTaskDao = dao; }
+
+        @Override
+        protected Void doInBackground(final Flag... params) {
+            mAsyncTaskDao.deleteFlag(params[0].getId());
+            return null;
+        }
+    }
+
     public void insertInfoPanel(InfoPanel infoPanel) {
         new insertInfoPanelAsyncTask(mInfoPanelDao).execute(infoPanel);
     }
@@ -64,6 +86,24 @@ public class AppRepository {
         @Override
         protected Void doInBackground(final InfoPanel... params) {
             mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    //Deletes a singular info panel from the database given its name
+    public void deletePanel(InfoPanel panel) {
+        new deletePanelAsyncTask(mInfoPanelDao).execute(panel);
+    }
+
+    private static class deletePanelAsyncTask extends AsyncTask<InfoPanel, Void, Void> {
+
+        private InfoPanelDao mAsyncTaskDao;
+
+        deletePanelAsyncTask(InfoPanelDao dao) { mAsyncTaskDao = dao; }
+
+        @Override
+        protected Void doInBackground(final InfoPanel... params) {
+            mAsyncTaskDao.deletePanel(params[0].getName());
             return null;
         }
     }

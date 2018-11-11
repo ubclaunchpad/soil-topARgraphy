@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
+import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository;
+import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment;
 
 public class FlagMapFragment extends Fragment {
 
@@ -88,23 +90,30 @@ public class FlagMapFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected (MenuItem item) {
-        //Using a switch here so that eventually, when we add more options in the toolbar, this function can handle multiple possible selections
+
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        Fragment newFragment = null;
+
         switch (item.getItemId()) {
-            //When the "List View" button is selected, swaps this fragment out for the flag list fragment
             case R.id.action_to_listview:
-                FragmentManager manager = getActivity().getSupportFragmentManager();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.replace(R.id.container, new FlagListFragment());
-                transaction.commit();
+                //When the "List View" button is selected, swaps this fragment out for the flag list fragment
+                newFragment = new FlagListFragment();
                 break;
             case R.id.action_edit:
-                //TODO: insert code to edit flag here
+                newFragment = new DescriptionPanelFragment();
                 break;
             case R.id.action_delete:
-                //TODO: insert code to delete flag here
+                //Deletes flag from room database
+                mViewModel.deleteFlag();
                 break;
             default:
                 break;
+        }
+
+        if (newFragment != null) {
+            transaction.replace(R.id.container, newFragment);
+            transaction.commit();
         }
 
         return true;
