@@ -20,4 +20,4 @@ before_install:
     - echo yes | sdkmanager "platforms;android-28"
 
 script:
-  - ./editor/gradlew build connectedCheck --stacktrace
+  - ./editor/gradlew build lint test --stacktrace
