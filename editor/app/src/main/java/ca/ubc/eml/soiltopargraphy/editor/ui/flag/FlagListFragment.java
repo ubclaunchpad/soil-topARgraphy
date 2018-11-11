@@ -1,6 +1,7 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -77,17 +78,17 @@ class FlagViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindTo(Flag flag) {
-        this.name.setText(flag.getPanel().getName());
+        this.name.setText(flag.getInfoPanel().getName());
 
-        String description = flag.getPanel().getDescription();
+        String description = flag.getInfoPanel().getDescription();
         if(description.length() > 50) {
-            this.description.setText(flag.getPanel().getName().substring(0, 47) + "...");
+            this.description.setText(flag.getInfoPanel().getName().substring(0, 47) + "...");
         }
         else {
-            this.description.setText(flag.getPanel().getName());
+            this.description.setText(flag.getInfoPanel().getName());
         }
 
-        this.image.setImageURI(flag.getPanel().getImage());
+        this.image.setImageURI(Uri.parse(flag.getInfoPanel().getImage()));
     }
 }
 
@@ -116,7 +117,7 @@ class FlagAdapter extends ListAdapter<Flag, FlagViewHolder> {
             new DiffUtil.ItemCallback<Flag>() {
                 @Override
                 public boolean areItemsTheSame(@NonNull Flag oldFlag, @NonNull Flag newFlag) {
-                    return oldFlag.getID() == newFlag.getID();
+                    return oldFlag.getId() == newFlag.getId();
                 }
                 @Override
                 public boolean areContentsTheSame(@NonNull Flag oldFlag, @NonNull Flag newFlag) {
