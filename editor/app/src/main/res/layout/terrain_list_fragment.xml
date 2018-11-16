@@ -5,11 +5,23 @@
     android:layout_height="match_parent"
     tools:context=".ui.terrain.TerrainListFragment">
 
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="320dp"
+        android:layout_marginTop="500dp"
+        android:background="@android:drawable/ic_input_add"
+        android:paddingLeft="1000dp"
+        android:paddingTop="1000dp" />
+
     <RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/flag_list_fragment_row"
-        android:scrollbars="vertical" />
+        android:layout_height="497dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/flag_list_fragment_row">
+
+    </RecyclerView>
 
 </FrameLayout>
