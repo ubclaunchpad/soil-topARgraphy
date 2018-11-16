@@ -13,15 +13,17 @@ public class Flag {
     private float latitude;
     private float longitude;
     private InfoPanel infoPanel;
+    private int terrainId;
     @PrimaryKey
     private int id;
 
 
-    public Flag(String location, float latitude, float longitude, InfoPanel infoPanel, int id) {
+    public Flag(String location, float latitude, float longitude, InfoPanel infoPanel, int terrainId, int id) {
         this.location = location;
         this.latitude = latitude;
         this.longitude = longitude;
         this.infoPanel = infoPanel;
+        this.terrainId = terrainId;
         this.id = id;
     }
 
@@ -56,6 +58,10 @@ public class Flag {
     public void setInfoPanel(InfoPanel infoPanel) {
         this.infoPanel = infoPanel;
     }
+
+    public int getTerrainId() { return terrainId; }
+
+    public void setTerrainId(int terrainId) { this.terrainId = terrainId; }
 
     public int getId() {
         return id;

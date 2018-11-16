@@ -1,6 +1,7 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.recyclerview.extensions.ListAdapter;
+
+import java.io.File;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
 
@@ -49,7 +52,10 @@ public class FlagListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FlagListViewModel flagViewModel = ViewModelProviders.of(this).get(FlagListViewModel.class);
         FlagAdapter flagAdapter = new FlagAdapter();
-        flagAdapter.submitList(flagViewModel.getFlagList());
+
+        // Submits a new updated list of flags to the flag adapter when a change is observed
+        // in the flag table in the room database via LiveData
+        flagViewModel.getFlagList().observe(this, list -> flagAdapter.submitList(list));
     }
 
 }
@@ -77,17 +83,17 @@ class FlagViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindTo(Flag flag) {
-        this.name.setText(flag.getPanel().getName());
+        this.name.setText(flag.getInfoPanel().getName());
 
-        String description = flag.getPanel().getDescription();
+        String description = flag.getInfoPanel().getDescription();
         if(description.length() > 50) {
-            this.description.setText(flag.getPanel().getName().substring(0, 47) + "...");
+            this.description.setText(flag.getInfoPanel().getName().substring(0, 47) + "...");
         }
         else {
-            this.description.setText(flag.getPanel().getName());
+            this.description.setText(flag.getInfoPanel().getName());
         }
 
-        this.image.setImageURI(flag.getPanel().getImage());
+        this.image.setImageURI(Uri.fromFile(new File(flag.getInfoPanel().getName())));
     }
 }
 
@@ -116,7 +122,7 @@ class FlagAdapter extends ListAdapter<Flag, FlagViewHolder> {
             new DiffUtil.ItemCallback<Flag>() {
                 @Override
                 public boolean areItemsTheSame(@NonNull Flag oldFlag, @NonNull Flag newFlag) {
-                    return oldFlag.getID() == newFlag.getID();
+                    return oldFlag.getId() == newFlag.getId();
                 }
                 @Override
                 public boolean areContentsTheSame(@NonNull Flag oldFlag, @NonNull Flag newFlag) {
