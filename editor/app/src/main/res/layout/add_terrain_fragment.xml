@@ -5,9 +5,37 @@
     android:layout_height="match_parent"
     tools:context=".ui.terrain.AddTerrainFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+    <EditText
+        android:id="@+id/latitudeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="80dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="Latitude" />
 
+    <EditText
+        android:id="@+id/longitudeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="160dp"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:text="Longitude" />
+
+    <Button
+        android:id="@+id/createButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="450dp"
+        android:text="Create" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="54dp"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_delete" />
 </FrameLayout>
