@@ -20,4 +20,7 @@ public interface FlagDao {
 
     @Query("SELECT * from flag_table")
     LiveData<List<Flag>> getAllFlags();
+
+    @Query("DELETE FROM flag_table WHERE id = :flagId")
+    void deleteFlag(int flagId);
 }
