@@ -3,6 +3,7 @@ package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel
 import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.insert
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -63,7 +64,6 @@ class InfoPanelFragment : Fragment() {
     private fun onClickSaveInfoPnael(view :View){
         val quiz =  selectQuizPanel()
         val panel = InfoPanel(name = viewModel.name!!,description = viewModel.description!!,image = viewModel.image!!)
-        AppDatabase.getDatabase(context).infoPanelDao().insert(panel)
     }
     private fun selectQuizPanel(){
     }

@@ -7,7 +7,6 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag;
-import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
 
 @Database(entities = {Flag.class}, version = 1)
 @TypeConverters({Converters.class})
