@@ -2,11 +2,20 @@ package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
+import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain;
 
-@Entity(tableName = "flag_table")
+import static android.arch.persistence.room.ForeignKey.CASCADE;
+
+@Entity(tableName = "flag_table",
+        foreignKeys = @ForeignKey(entity = Terrain.class,
+                parentColumns = "terrainId",
+                childColumns = "terrainId",
+                onDelete = CASCADE))
+
 public class Flag {
 
     private String location;
@@ -14,7 +23,7 @@ public class Flag {
     private float longitude;
     private InfoPanel infoPanel;
     private int terrainId;
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
 

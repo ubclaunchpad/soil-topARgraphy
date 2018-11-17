@@ -144,13 +144,6 @@ public class AppRepository {
     //Deletes a singular terrain from the database given its unique id
     public void deleteTerrain(Terrain terrain) {
         new deleteTerrainAsyncTask(mTerrainDao).execute(terrain);
-
-        // Gets all the flags that are associated with the terrain that was just deleted
-        // and deletes all these flags from the flag table
-        List<Flag> flagsInTerrain = mFlagDao.getFlagsInTerrainNotLive(terrain.getTerrainId());
-        for(Flag flag : flagsInTerrain) {
-            deleteFlag(flag);
-        }
     }
 
     private static class deleteTerrainAsyncTask extends AsyncTask<Terrain, Void, Void> {

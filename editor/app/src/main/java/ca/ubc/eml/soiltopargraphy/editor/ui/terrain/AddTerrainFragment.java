@@ -42,16 +42,17 @@ public class AddTerrainFragment extends Fragment {
             }
         });
 
-        EditText latitudeText = addTerrainView.findViewById(R.id.latitudeText);
-        EditText longitudeText = addTerrainView.findViewById(R.id.longitudeText);
-
-        double latitude = Double.parseDouble(latitudeText.getText().toString());
-        double longitude = Double.parseDouble(longitudeText.getText().toString());
-
         Button createButton = addTerrainView.findViewById(R.id.createButton);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                EditText latitudeText = addTerrainView.findViewById(R.id.latitudeText);
+                EditText longitudeText = addTerrainView.findViewById(R.id.longitudeText);
+
+                double latitude = Double.parseDouble(latitudeText.getText().toString());
+                double longitude = Double.parseDouble(longitudeText.getText().toString());
+
                 Terrain terrain = new Terrain(latitude, longitude);
                 mViewModel.addTerrain(terrain);
             }

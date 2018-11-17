@@ -113,6 +113,6 @@ class TerrainViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindTo(Terrain terrain) {
-        this.terrainId.setText(terrain.getTerrainId());
+        terrainId.setText(terrain.getTerrainId());
     }
 }
