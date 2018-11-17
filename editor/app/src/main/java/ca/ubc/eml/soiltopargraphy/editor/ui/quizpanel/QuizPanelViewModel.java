@@ -5,4 +5,6 @@ import android.arch.lifecycle.ViewModel;
 public class QuizPanelViewModel extends ViewModel {
 
     // TODO: Implement the ViewModel
+
+
 }

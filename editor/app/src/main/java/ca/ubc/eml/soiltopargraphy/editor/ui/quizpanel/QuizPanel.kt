@@ -5,6 +5,10 @@ package ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel
  */
 
 data class QuizPanel(
-        val question: String,
-        val answer: String // TODO: implements how to differentiate correct and wrong answers
-)
+
+//fields
+var soilType: String,
+var color: String,
+var density: String,
+var fruitfulness: String,
+var humidity: String)

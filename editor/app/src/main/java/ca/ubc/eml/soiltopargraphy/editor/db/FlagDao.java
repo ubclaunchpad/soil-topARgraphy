@@ -30,10 +30,4 @@ public interface FlagDao {
     @Query("SELECT * from flag_table WHERE terrainId = :terrainId")
     LiveData<List<Flag>> getFlagsInTerrainLive(int terrainId);
 
-    // Given a certain terrainId, gets all the flags in the table associated with that terrainId
-    // but does NOT store it in a LiveData list. This is used to get the flags that should be deleted
-    // when a terrain is deleted (a function that doesn't require LiveData).
-    @Query("SELECT * from flag_table WHERE terrainId = :terrainId")
-    List<Flag> getFlagsInTerrainNotLive(int terrainId);
-
 }

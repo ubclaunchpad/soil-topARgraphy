@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Soil TopARgraphy Editor</string>
+
+    //CreateQuiz
+    <string name="soil_Type">Soil Type:</string>
+    <string name="soil_Color">Soil Color:</string>
+    <string name="soil_Density">Soil Density:</string>
+    <string name="soil_Fruitfulness">Soil Fruitfulness:</string>
+    <string name="soil_Humidity">Soil Humidity:</string>
     <string name="share_level_title">Share your custom level</string>
 </resources>
