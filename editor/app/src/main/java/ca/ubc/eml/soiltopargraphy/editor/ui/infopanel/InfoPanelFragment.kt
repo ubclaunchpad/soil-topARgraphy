@@ -62,7 +62,7 @@ class InfoPanelFragment : Fragment() {
     }
     private fun onClickSaveInfoPnael(view :View){
         val quiz =  selectQuizPanel()
-        val panel = InfoPanel(name = viewModel.name ,description = viewModel.description,image = viewModel.image)
+        val panel = InfoPanel(name = viewModel.name!!,description = viewModel.description!!,image = viewModel.image!!)
         AppDatabase.getDatabase(context).infoPanelDao().insert(panel)
     }
     private fun selectQuizPanel(){

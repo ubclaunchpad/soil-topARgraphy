@@ -31,8 +31,8 @@ import java.io.IOException
 
 
 class ImagePanelFragment : Fragment() {
-    lateinit var photoPath: String
-    lateinit var photoUri: Uri
+    private lateinit var photoPath: String
+    private lateinit var photoUri: Uri
     private lateinit var mViewModel: ImagePanelViewModel
     private lateinit var mImageView: ImageView
 
@@ -85,7 +85,7 @@ class ImagePanelFragment : Fragment() {
 
     private fun addImageFromCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if(intent.resolveActivity(context?.packageManager)!=null){
+        if(intent.resolveActivity(context!!.packageManager)!=null){
             var photoFile: File? = null
             try{
                 photoFile = createImageFile()
@@ -104,7 +104,7 @@ class ImagePanelFragment : Fragment() {
     }
 
     private fun onToViewInfoPanelButtonClick() {
-        mViewModel?.imageTitle = view?.findViewById<EditText>(R.id.image_title)?.text.toString()
+        mViewModel.imageTitle = view?.findViewById<EditText>(R.id.image_title)?.text.toString()
         val manager = activity?.supportFragmentManager
         if (manager != null) {
             val transaction = manager.beginTransaction()
@@ -144,17 +144,17 @@ class ImagePanelFragment : Fragment() {
             return ImagePanelFragment()
         }
 
-        private val IMAGE_PICK_CODE = 20
-        private val CAMERA_PICK_CODE = 21
+        private const val IMAGE_PICK_CODE = 20
+        private const val CAMERA_PICK_CODE = 21
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode != RESULT_CANCELED) {
             if (requestCode == CAMERA_PICK_CODE && resultCode == RESULT_OK) {
-                mViewModel?.uri = photoUri
-                mImageView.setImageURI(mViewModel?.uri)
+                mViewModel.uri = photoUri
+                mImageView.setImageURI(mViewModel.uri)
                 Glide.with(context!!).load(photoUri).into(mImageView)
-                mImageView?.visibility = View.VISIBLE
+                mImageView.visibility = View.VISIBLE
             }
             if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK) {
 
@@ -162,7 +162,7 @@ class ImagePanelFragment : Fragment() {
                 Glide.with(context!!).load(data?.data).into(mImageView)
 //            transformPicture(data.data)
                 view?.findViewById<ImageView>(R.id.imageView)?.visibility = View.VISIBLE
-                mViewModel!!.uri = data!!.data
+                mViewModel.uri = data!!.data
             }
         }
     }

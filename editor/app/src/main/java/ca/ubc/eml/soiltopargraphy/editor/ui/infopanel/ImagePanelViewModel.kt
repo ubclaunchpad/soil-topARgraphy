@@ -4,6 +4,6 @@ import android.arch.lifecycle.ViewModel
 import android.net.Uri
 
 class ImagePanelViewModel : ViewModel(){
-    lateinit var uri : Uri
-    lateinit var imageTitle: String
+    var uri: Uri?=null
+    var imageTitle: String?=null
 }// TODO: Implement the ViewModel
