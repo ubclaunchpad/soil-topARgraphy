@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,20 +8,28 @@
     tools:context=".ui.quizpanel.QuizPanelFragment">
 
     <TextView
-        android:id="@+id/typeTv"
+        android:id="@+id/type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/soil_1"
-        android:textSize="30sp" />
+        android:text="@string/soil_Type"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="492dp"
-        android:layout_below="@+id/typeTv"
+        android:layout_height="515dp"
+        android:layout_below="@+id/type"
         android:layout_alignParentStart="true"
-        android:orientation="vertical">
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/type">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +37,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/SoilTypeTv"
+                android:id="@+id/SoilType"
                 android:layout_width="194dp"
                 android:layout_height="43dp"
                 android:text="@string/soil_Type"
@@ -36,7 +45,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/SoilTypeAnswerTv"
+                android:id="@+id/SoilTypeAnswer"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -50,7 +59,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/SoilColorTv"
+                android:id="@+id/SoilColor"
                 android:layout_width="325dp"
                 android:layout_height="38dp"
                 android:layout_weight="1"
@@ -59,7 +68,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/SoilColorAnswerTv"
+                android:id="@+id/SoilColorAnswer"
                 android:layout_width="323dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -73,7 +82,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/SoilDensityTv"
+                android:id="@+id/SoilDensity"
                 android:layout_width="wrap_content"
                 android:layout_height="49dp"
                 android:layout_weight="1"
@@ -82,7 +91,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/SoilDensityAnswerTv"
+                android:id="@+id/SoilDensityAnswer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -96,7 +105,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/SoilFruitfullnessTv"
+                android:id="@+id/SoilFruitfullness"
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
                 android:layout_weight="1"
@@ -105,7 +114,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/SoilFruitfulnessAnswerTv"
+                android:id="@+id/SoilFruitfulnessAnswer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -119,7 +128,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/SoilHUmidityTv"
+                android:id="@+id/SoilHUmidity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -128,7 +137,7 @@
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/SoilHumidityAnswerTv"
+                android:id="@+id/SoilHumidityAnswer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -137,4 +146,4 @@
         </LinearLayout>
 
     </LinearLayout>
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

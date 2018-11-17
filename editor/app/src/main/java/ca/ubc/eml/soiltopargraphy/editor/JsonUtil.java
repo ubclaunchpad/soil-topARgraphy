@@ -9,34 +9,32 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuizPanel;
 public class JsonUtil {
 
     // Convert InfoPanel data to JSon data
-    public static String InfoToJSon (InfoPanel infoPanel){
+    public static JSONObject infoToJson (InfoPanel infoPanel){
         JSONObject jsInfoPanel = new JSONObject();
         try {
             jsInfoPanel.put("Name", infoPanel.getName());
             jsInfoPanel.put("Description", infoPanel.getDescription());
             jsInfoPanel.put("Image", infoPanel.getImage());
             jsInfoPanel.put("Questionnaire", infoPanel.getQuiz());
-            return jsInfoPanel.toString();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return jsInfoPanel;
     }
 
     //Convert the QuizPanel data to JSon code
-    public static String QuizToJSon (QuizPanel questionnaire){
-        JSONObject jsInfoPanel = new JSONObject();
+    public static JSONObject quizToJson (QuizPanel questionnaire){
+        JSONObject jsQuizPanel = new JSONObject();
         try {
-            jsInfoPanel.put("Type", questionnaire.getType());
-            jsInfoPanel.put("Color", questionnaire.getColor());
-            jsInfoPanel.put("Density", questionnaire.getDensity());
-            jsInfoPanel.put("Fruitfulness", questionnaire.getFruitfulness());
-            jsInfoPanel.put("Humidity", questionnaire.getHumidity());
-            return jsInfoPanel.toString();
+            jsQuizPanel.put("Type", questionnaire.getSoilType());
+            jsQuizPanel.put("Color", questionnaire.getColor());
+            jsQuizPanel.put("Density", questionnaire.getDensity());
+            jsQuizPanel.put("Fruitfulness", questionnaire.getFruitfulness());
+            jsQuizPanel.put("Humidity", questionnaire.getHumidity());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return jsQuizPanel;
     }
 }

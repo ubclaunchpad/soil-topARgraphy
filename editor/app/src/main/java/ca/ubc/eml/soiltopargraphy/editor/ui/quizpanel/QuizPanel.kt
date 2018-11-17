@@ -9,7 +9,7 @@ import android.arch.persistence.room.Entity
 data class QuizPanel(
 
 //fields
-var type: String,
+var soilType: String,
 var color: String,
 var density: String,
 var fruitfulness: String,

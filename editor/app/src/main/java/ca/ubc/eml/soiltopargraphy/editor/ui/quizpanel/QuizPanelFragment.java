@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import ca.ubc.eml.soiltopargraphy.editor.MainActivity;
 import ca.ubc.eml.soiltopargraphy.editor.R;
 
 /**
@@ -20,7 +19,7 @@ public class QuizPanelFragment extends Fragment {
 
     private QuizPanelViewModel mViewModel;
 
-    private String type;
+    private String soilType;
     private String color;
     private String density;
     private String fruitfulness;
@@ -47,19 +46,19 @@ public class QuizPanelFragment extends Fragment {
                 EditText editText = (EditText) v;
                 String value = editText.getText().toString();
                 switch (editText.getId()) {
-                    case R.id.SoilTypeAnswerTv:
-                        type = value;
+                    case R.id.SoilTypeAnswer:
+                        soilType = value;
                         break;
-                    case R.id.SoilColorAnswerTv:
+                    case R.id.SoilColorAnswer:
                         color = value;
                         break;
-                    case R.id.SoilDensityAnswerTv:
+                    case R.id.SoilDensityAnswer:
                         density = value;
                         break;
-                    case R.id.SoilFruitfulnessAnswerTv:
+                    case R.id.SoilFruitfulnessAnswer:
                         fruitfulness = value;
                         break;
-                    case R.id.SoilHumidityAnswerTv:
+                    case R.id.SoilHumidityAnswer:
                         humidity = value;
                         break;
                 }
@@ -69,7 +68,7 @@ public class QuizPanelFragment extends Fragment {
     }
 
     public void nextQuestion(View view) {
-        QuizPanel newSoilType = new QuizPanel(type, color, density, fruitfulness, humidity);
+        QuizPanel newSoilType = new QuizPanel(soilType, color, density, fruitfulness, humidity);
     }
 
 }

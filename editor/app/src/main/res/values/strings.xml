@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Soil TopARgraphy Editor</string>
-<<<<<<< HEAD
 
     //CreateQuiz
-    <string name="soil_1">Soil 1</string>
     <string name="soil_Type">Soil Type:</string>
     <string name="soil_Color">Soil Color:</string>
     <string name="soil_Density">Soil Density:</string>
