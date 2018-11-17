@@ -13,13 +13,14 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
-import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository;
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment;
 
 public class FlagMapFragment extends Fragment {
@@ -30,9 +31,29 @@ public class FlagMapFragment extends Fragment {
         return new FlagMapFragment();
     }
 
+
+    private Button flag;
+    private ViewGroup rootLayout;
+    private int _xDelta;
+    private int _yDelta;
+
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
+        // =================================================================================================
+        // DRAGGABLE FLAG
+        super.onCreate(savedInstanceState);
+        getActivity().setContentView(R.layout.flag_map_fragment);
+        rootLayout = (ViewGroup) getActivity().findViewById(R.id.view_root);
+        flag = (Button) rootLayout.findViewById(R.id.flagItem);
+
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(150, 150);
+        flag.setLayoutParams(layoutParams);
+        flag.setOnTouchListener(new ChoiceTouchListener());
+        // ==================================================================================================
+
 
         mViewModel = ViewModelProviders.of(this).get(FlagMapViewModel.class);
 
@@ -44,7 +65,7 @@ public class FlagMapFragment extends Fragment {
         Toolbar flagToolBar = view.findViewById(R.id.flagToolBar);
 
         //Sets the action bar for the activity as the custom flag toolbar
-        ((AppCompatActivity)getActivity()).setSupportActionBar(flagToolBar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(flagToolBar);
 
         //Ensures that the menu is actually displayed in the toolbar
         setHasOptionsMenu(true);
@@ -63,7 +84,7 @@ public class FlagMapFragment extends Fragment {
 
         //After clicking on the flag, if the user clicks anywhere else on the screen, updates
         //the toolbar to go back to showing only the listview item
-        FrameLayout frameLayout = view.findViewById(R.id.frameLayout);
+        FrameLayout frameLayout = view.findViewById(R.id.view_root);
         frameLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +95,41 @@ public class FlagMapFragment extends Fragment {
 
         return view;
     }
+
+    // ===========================================================================================================
+    // DRAGGING BEHAVIOR
+    private final class ChoiceTouchListener implements View.OnTouchListener {
+        public boolean onTouch(View view, MotionEvent event) {
+
+            final int X = (int) event.getRawX();
+            final int Y = (int) event.getRawY();
+            switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                case MotionEvent.ACTION_DOWN:
+                    RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+                    _xDelta = X - lParams.leftMargin;
+                    _yDelta = Y - lParams.topMargin;
+                    break;
+                case MotionEvent.ACTION_UP:
+                    break;
+                case MotionEvent.ACTION_POINTER_DOWN:
+                    break;
+                case MotionEvent.ACTION_POINTER_UP:
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+                    layoutParams.leftMargin = X - _xDelta;
+                    layoutParams.topMargin = Y - _yDelta;
+                    layoutParams.rightMargin = -250;
+                    layoutParams.bottomMargin = -250;
+                    view.setLayoutParams(layoutParams);
+                    break;
+            }
+            rootLayout.invalidate();
+            return true;
+        }
+    }
+    // ================================================================================================================
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
