@@ -4,9 +4,9 @@ import android.arch.lifecycle.ViewModel;
 import android.net.Uri
 
 class InfoPanelViewModel : ViewModel() {
-    var name: String?=null
-    var description: String?=null
-    var image: Uri?=null
-    var ImageTitle: String?=null
+    var name: String? = null
+    var description: String? = null
+    var image: Uri ? = null
+    var ImageTitle: String ? = null
     // TODO: Implement the ViewModel
 }

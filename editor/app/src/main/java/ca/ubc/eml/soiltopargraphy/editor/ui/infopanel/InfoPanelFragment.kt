@@ -3,14 +3,17 @@ package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel
 import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.insert
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
 import ca.ubc.eml.soiltopargraphy.editor.R
+import ca.ubc.eml.soiltopargraphy.editor.db.AppDatabase
 import com.bumptech.glide.Glide
 
 class InfoPanelFragment : Fragment() {
@@ -24,6 +27,8 @@ class InfoPanelFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view  = inflater.inflate(R.layout.info_panel_fragment, container, false)
+        val saveButton = view?.findViewById<Button>(R.id.save_info_panel)
+        saveButton?.setOnClickListener{onClickSaveInfoPnael(view)}
         return view
     }
 
@@ -55,6 +60,12 @@ class InfoPanelFragment : Fragment() {
         descriptionView?.text = viewModel.description
         imageTitleView?.text = viewModel.ImageTitle
         // TODO: Use the ViewModel
+    }
+    private fun onClickSaveInfoPnael(view :View){
+        val quiz =  selectQuizPanel()
+        val panel = InfoPanel(name = viewModel.name!!,description = viewModel.description!!,image = viewModel.image!!)
+    }
+    private fun selectQuizPanel(){
     }
 
 }

@@ -1,7 +1,6 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel
 
 import android.arch.lifecycle.ViewModelProviders
-import android.graphics.ColorSpace
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -18,7 +17,7 @@ import ca.ubc.eml.soiltopargraphy.editor.R
 class DescriptionPanelFragment : Fragment() {
 
     private lateinit var mViewModel: DescriptionPanelViewModel
-    fun onToImageAddButtonClick(){
+    private fun onToImageAddButtonClick(){
         //record the field in ui to the viewModel
         mViewModel.name = view?.findViewById<EditText>(R.id.Title)?.text.toString()
         mViewModel.description = view?.findViewById<EditText>(R.id.Description)?.text.toString()

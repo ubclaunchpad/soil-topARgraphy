@@ -9,4 +9,6 @@
     <string name="add_image_via_gallery">Add image via gallery</string>
     <string name="add_image_via_camera">Add image via camera</string>
     <string name="proceed_info_panel">Go to info panel</string>
+    <string name="share_level_title">Share your custom level</string>
+    <string name="save_info_panel">Save info panel</string>
 </resources>
