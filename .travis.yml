@@ -1,24 +1,26 @@
+env:
+    global:
+        - ANDROID_API_LEVEL=28
+        - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+
 language: android
 android:
     components:
         - tools
+        - tools
         - platform-tools
-        - build-tools-26.0.1
-        - android-22
-        - sys-img-armeabi-v7a-android-22
+        - build-tools-$ANDROID_BUILD_TOOLS_VERSION
+        - android-$ANDROID_API_LEVEL
+        - extra-google-m2repository
+        - extra-android-m2repository
+jdk:
+    - oraclejdk8
 
-install:
-    - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout;1.0.2"
-    - echo yes | sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
-    # see https://stackoverflow.com/questions/42731625/travis-ci-failed-because-cannot-accept-license-constrain-layout
-    # or  https://stackoverflow.com/questions/37615379/travis-ci-build-doesnt-work-with-android-constraint-layout
-
-# Emulator Management: Create, Start and Wait
+before_install:
+    - echo yes | sdkmanager "platforms;android-28"
+    
 before_script:
-  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
-  - emulator -avd test -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+    - cd editor
 
 script:
-  - ./gradlew build connectedCheck --stacktrace
+  - ./gradlew build lint test --stacktrace

@@ -7,13 +7,11 @@ import android.os.AsyncTask;
 import java.util.List;
 
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag;
-import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain;
 
 public class AppRepository {
 
     private FlagDao mFlagDao;
-    private InfoPanelDao mInfoPanelDao;
     private TerrainDao mTerrainDao;
 
     // Making this public so FlagMapViewModel can access
@@ -21,15 +19,11 @@ public class AppRepository {
         AppDatabase db = AppDatabase.getDatabase(application);
 
         mFlagDao = db.flagDao();
-        mInfoPanelDao = db.infoPanelDao();
         mTerrainDao = db.terrainDao();
     }
 
     public LiveData<List<Flag>> getAllFlags() {
         return mFlagDao.getAllFlags();
-    }
-    public LiveData<List<InfoPanel>> getAllInfoPanels() {
-        return mInfoPanelDao.getAllInfoPanels();
     }
     public LiveData<List<Terrain>> getAllTerrains() { return mTerrainDao.getAllTerrains(); }
 
@@ -57,11 +51,7 @@ public class AppRepository {
 
     //Deletes a singular flag from the flag room database
     public void deleteFlag(Flag flag) {
-
         new deleteFlagAsyncTask(mFlagDao).execute(flag);
-
-        //Deletes the corresponding info panel from the info panel database at the same time
-        deletePanel(flag.getInfoPanel());
     }
 
     private static class deleteFlagAsyncTask extends AsyncTask<Flag, Void, Void> {
@@ -79,45 +69,6 @@ public class AppRepository {
 
     public LiveData<List<Flag>> getFlagsInTerrain(Terrain terrain) {
         return mFlagDao.getFlagsInTerrainLive(terrain.getTerrainId());
-    }
-
-    /* INFOPANEL FUNCTIONS **************************************************************************************/
-
-    public void insertInfoPanel(InfoPanel infoPanel) {
-        new insertInfoPanelAsyncTask(mInfoPanelDao).execute(infoPanel);
-    }
-
-    private static class insertInfoPanelAsyncTask extends AsyncTask<InfoPanel, Void, Void> {
-
-        private InfoPanelDao mAsyncTaskDao;
-
-        insertInfoPanelAsyncTask(InfoPanelDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(final InfoPanel... params) {
-            mAsyncTaskDao.insert(params[0]);
-            return null;
-        }
-    }
-
-    //Deletes a singular info panel from the database given its name
-    public void deletePanel(InfoPanel panel) {
-        new deletePanelAsyncTask(mInfoPanelDao).execute(panel);
-    }
-
-    private static class deletePanelAsyncTask extends AsyncTask<InfoPanel, Void, Void> {
-
-        private InfoPanelDao mAsyncTaskDao;
-
-        deletePanelAsyncTask(InfoPanelDao dao) { mAsyncTaskDao = dao; }
-
-        @Override
-        protected Void doInBackground(final InfoPanel... params) {
-            mAsyncTaskDao.deletePanel(params[0].getName());
-            return null;
-        }
     }
 
     /* TERRAIN FUNCTIONS ****************************************************************************************/

@@ -1,13 +1,8 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuizPanel;
 
-@Entity(tableName = "info_panel_table")
 public class InfoPanel {
-    @PrimaryKey
     private String name;
     private String description;
     private String image;

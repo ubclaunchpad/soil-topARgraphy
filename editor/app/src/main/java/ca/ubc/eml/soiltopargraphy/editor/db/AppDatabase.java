@@ -3,17 +3,17 @@ package ca.ubc.eml.soiltopargraphy.editor.db;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag;
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain;
 
-@Database(entities = {Flag.class, InfoPanel.class, Terrain.class}, version = 1)
+@Database(entities = {Flag.class, Terrain.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract FlagDao flagDao();
-    public abstract InfoPanelDao infoPanelDao();
     public abstract TerrainDao terrainDao();
 
     private static volatile AppDatabase INSTANCE;
