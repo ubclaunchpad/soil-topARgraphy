@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b059f062bc6898746ba8bbfbcab56a46",
+    "identityHash": "35287df6f07e778fa2e720cac3e96ebe",
     "entities": [
       {
         "tableName": "flag_table",
@@ -51,7 +51,16 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_flag_table_terrainId",
+            "unique": false,
+            "columnNames": [
+              "terrainId"
+            ],
+            "createSql": "CREATE  INDEX `index_flag_table_terrainId` ON `${TABLE_NAME}` (`terrainId`)"
+          }
+        ],
         "foreignKeys": [
           {
             "table": "terrain_table",
@@ -101,7 +110,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b059f062bc6898746ba8bbfbcab56a46\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"35287df6f07e778fa2e720cac3e96ebe\")"
     ]
   }
 }

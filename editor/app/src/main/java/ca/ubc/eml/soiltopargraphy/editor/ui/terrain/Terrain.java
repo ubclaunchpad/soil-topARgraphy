@@ -11,7 +11,7 @@ public class Terrain {
     private double longitude;
     //TODO: Add other terrain variables
 
-    Terrain(double latitude, double longitude) {
+    public Terrain(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -30,6 +30,10 @@ public class Terrain {
 
     public double getLongitude() {
         return longitude;
+    }
+
+    public void setTerrainId(int terrainId) {
+        this.terrainId = terrainId;
     }
 
     public int getTerrainId() { return terrainId; }

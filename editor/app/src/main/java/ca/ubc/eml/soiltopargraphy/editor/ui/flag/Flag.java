@@ -3,6 +3,7 @@ package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
@@ -14,7 +15,8 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
         foreignKeys = @ForeignKey(entity = Terrain.class,
                 parentColumns = "terrainId",
                 childColumns = "terrainId",
-                onDelete = CASCADE))
+                onDelete = CASCADE),
+        indices = {@Index("terrainId")})
 
 public class Flag {
 

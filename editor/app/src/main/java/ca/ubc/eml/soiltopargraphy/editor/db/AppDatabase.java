@@ -11,6 +11,7 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain;
 
 @Database(entities = {Flag.class, Terrain.class}, version = 1)
+@TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract FlagDao flagDao();
