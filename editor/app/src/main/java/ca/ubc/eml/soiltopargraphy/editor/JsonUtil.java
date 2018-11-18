@@ -4,7 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
-import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuizPanel;
+import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel;
 
 public class JsonUtil {
 
@@ -23,8 +23,8 @@ public class JsonUtil {
         return jsInfoPanel;
     }
 
-    //Convert the QuizPanel data to JSon code
-    public static JSONObject quizToJson (QuizPanel questionnaire){
+    //Convert the QuestionnairePanel data to JSon code
+    public static JSONObject quizToJson (QuestionnairePanel questionnaire){
         JSONObject jsQuizPanel = new JSONObject();
         try {
             jsQuizPanel.put("Type", questionnaire.getSoilType());

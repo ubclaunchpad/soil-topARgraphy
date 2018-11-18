@@ -1,14 +1,14 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.infopanel;
 
-import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuizPanel;
+import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel;
 
 public class InfoPanel {
     private String name;
     private String description;
     private String image;
-    private QuizPanel quiz;
+    private QuestionnairePanel quiz;
 
-    public InfoPanel(String name, String description, String image, QuizPanel quiz) {
+    public InfoPanel(String name, String description, String image, QuestionnairePanel quiz) {
         this.name = name;
         this.description = description;
         this.image = image;
@@ -39,11 +39,11 @@ public class InfoPanel {
         this.image = image;
     }
 
-    public QuizPanel getQuiz() {
+    public QuestionnairePanel getQuiz() {
         return quiz;
     }
 
-    public void setQuiz(QuizPanel quiz) {
+    public void setQuiz(QuestionnairePanel quiz) {
         this.quiz = quiz;
     }
 }

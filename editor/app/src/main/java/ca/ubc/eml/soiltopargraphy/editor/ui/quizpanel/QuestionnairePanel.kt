@@ -1,10 +1,10 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel
 
 /**
- * QuizPanel will hold question, answers (which includes a correct answer)
+ * QuestionnairePanel will hold question, answers (which includes a correct answer)
  */
 
-data class QuizPanel(
+data class QuestionnairePanel(
 
 //fields
 var soilType: String,
