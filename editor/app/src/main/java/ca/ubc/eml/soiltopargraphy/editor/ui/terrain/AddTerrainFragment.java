@@ -42,21 +42,15 @@ public class AddTerrainFragment extends Fragment {
             }
         });
 
+        EditText latitudeText = addTerrainView.findViewById(R.id.latitudeText);
+        EditText longitudeText = addTerrainView.findViewById(R.id.longitudeText);
+
+        // When user presses the "create" button, creates a new instance of terrain and saves the
+        // terrain to the terrain table in the database
         Button createButton = addTerrainView.findViewById(R.id.createButton);
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                EditText latitudeText = addTerrainView.findViewById(R.id.latitudeText);
-                EditText longitudeText = addTerrainView.findViewById(R.id.longitudeText);
-
-                double latitude = Double.parseDouble(latitudeText.getText().toString());
-                double longitude = Double.parseDouble(longitudeText.getText().toString());
-
-                Terrain terrain = new Terrain(latitude, longitude);
-                mViewModel.addTerrain(terrain);
-            }
-        });
+        createButton.setOnClickListener(view ->
+                mViewModel.createNewTerrain(latitudeText.getText(), longitudeText.getText())
+        );
 
         return addTerrainView;
     }
@@ -65,7 +59,6 @@ public class AddTerrainFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(AddTerrainViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }

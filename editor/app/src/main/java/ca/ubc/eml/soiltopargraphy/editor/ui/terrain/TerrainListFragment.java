@@ -19,6 +19,10 @@ import android.widget.TextView;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
 
+/**
+ * Fragment where the list of terrains are displayed
+ */
+
 public class TerrainListFragment extends Fragment {
 
     private TerrainListViewModel terrainViewModel;
@@ -31,26 +35,26 @@ public class TerrainListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        // Inflates the terrain list fragment UI and finds the recycler view to populate
         View terrainListView = inflater.inflate(R.layout.terrain_list_fragment, container, false);
         RecyclerView mRecyclerView = terrainListView.findViewById(R.id.recyclerView);
 
+        // Sets the layout manager for the recycler view to be linear (standard vertical scrolling)
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        // Sets the adapter to be the terrain adapter below
         TerrainAdapter terrainAdapter = new TerrainAdapter();
         mRecyclerView.setAdapter(terrainAdapter);
 
+        // When the "add" button is clicked, switches to fragment which allows user to create a new terrain
         Button addButton = terrainListView.findViewById(R.id.addButton);
-
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        addButton.setOnClickListener(view -> {
                 FragmentManager manager = getActivity().getSupportFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
                 Fragment newFragment = new AddTerrainFragment();
                 transaction.replace(R.id.container, newFragment);
                 transaction.commit();
-            }
         });
 
         return terrainListView;
@@ -63,8 +67,8 @@ public class TerrainListFragment extends Fragment {
 
         TerrainAdapter terrainAdapter = new TerrainAdapter();
 
-        // Submits a new updated list of terrains to the terrain adapter when a change is observed
-        // in the terrains table in the room database via LiveData
+        // Submits an updated list of terrains to the adapter when a change is observed
+        // in the terrains table in the room database (via LiveData)
         terrainViewModel.getTerrains().observe(this, list -> terrainAdapter.submitList(list));
     }
 
@@ -76,6 +80,7 @@ class TerrainAdapter extends ListAdapter<Terrain, TerrainViewHolder> {
         super(TerrainAdapter.DIFF_CALLBACK);
     }
 
+    // Creates viewholders with the layout specified in the row xml file
     @Override
     public TerrainViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -84,6 +89,7 @@ class TerrainAdapter extends ListAdapter<Terrain, TerrainViewHolder> {
         return new TerrainViewHolder(itemView);
     }
 
+    // Binds terrains to viewholders as they should appear on the screen
     @Override
     public void onBindViewHolder(TerrainViewHolder holder, int position) {
         holder.bindTo(this.getItem(position));
@@ -104,14 +110,17 @@ class TerrainAdapter extends ListAdapter<Terrain, TerrainViewHolder> {
 
 }
 
+// Dictates how the viewholders should be populated with data
 class TerrainViewHolder extends RecyclerView.ViewHolder {
     private TextView terrainId;
 
+    // Finds all of the view to be populated and connects them to variables
     public TerrainViewHolder(View view) {
         super(view);
         terrainId = view.findViewById(R.id.nameTextView);
     }
 
+    // Populates the views with the appropriate data from a given terrain
     public void bindTo(Terrain terrain) {
         terrainId.setText(terrain.getTerrainId());
     }

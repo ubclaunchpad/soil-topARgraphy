@@ -23,6 +23,7 @@ public class FlagListViewModel extends AndroidViewModel {
         mRepository = new AppRepository(application);
     }
 
+    // Gets the livedata list of flags from the flag table in the room database
     public LiveData<List<Flag>> getFlagList(){
         if(flagList == null) {
             flagList = mRepository.getFlagsInTerrain(terrain);
