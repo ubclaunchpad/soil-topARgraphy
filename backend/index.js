@@ -34,9 +34,9 @@ function init(hmap, hmap_width, hmap_height, scale_plane=1, scale_height=1) {
 	SCENE.background = new THREE.Color(0xffffff)
 
 	let geom = new THREE.PlaneBufferGeometry(hmap_width * scale_plane, 
-													hmap_height * scale_plane, 
-													hmap_width - 1, 
-													hmap_height - 1)
+						hmap_height * scale_plane, 
+						hmap_width - 1, 
+						hmap_height - 1)
 	// let count = geom.attributes.position.count
 	// geom.addAttribute( 'color', new THREE.BufferAttribute( new Float32Array( count * 3 ), 3 ) )
 	let verts = geom.attributes.position.array
