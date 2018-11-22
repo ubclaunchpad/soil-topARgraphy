@@ -1,11 +1,9 @@
 import * as THREE from 'three'
 import * as Shaders from './shaders'
+import('three-fly-controls').then(module => module(THREE))
 import saveAs from 'file-saver'
 
-// controls: wasd + rf + qe + mouse
-require('three-fly-controls')(THREE)
-
-var container, camera, scene, renderer, controls
+var CAMERA, SCENE, RENDERER, CONTROLS
 
 const MAX_IMG_PX = [512, 512] // Maximum size in pixels the heightmap can be
 
@@ -28,15 +26,17 @@ function getHeightMap(img) { // Extracts heightmap data
  * scale_plane - multiplier to scale generated mesh by
  * scale_height - multiplier to scale height values by
  */
-function init(hmap, hmap_width, hmap_height, scale_plane=0.01, scale_height=1) {
-	container = document.getElementById('container')
-	camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 10000)
-	camera.position.z = 1800
-	scene = new THREE.Scene()
-	scene.background = new THREE.Color(0xffffff)
+function init(hmap, hmap_width, hmap_height, scale_plane=1, scale_height=1) {
+	let CONTAINER = document.getElementById('container')
+	CAMERA = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 1, 10000)
+	CAMERA.position.z = 1800
+	SCENE = new THREE.Scene()
+	SCENE.background = new THREE.Color(0xffffff)
 
-	let plane = [hmap_width * scale_plane, hmap_height * scale_plane, hmap_width - 1, hmap_height - 1]
-	let geom = new THREE.PlaneBufferGeometry(...plane)
+	let geom = new THREE.PlaneBufferGeometry(hmap_width * scale_plane, 
+													hmap_height * scale_plane, 
+													hmap_width - 1, 
+													hmap_height - 1)
 	// let count = geom.attributes.position.count
 	// geom.addAttribute( 'color', new THREE.BufferAttribute( new Float32Array( count * 3 ), 3 ) )
 	let verts = geom.attributes.position.array
@@ -75,32 +75,31 @@ function init(hmap, hmap_width, hmap_height, scale_plane=0.01, scale_height=1) {
 	mesh.rotation.y = Math.PI
 	mesh.matrixAutoUpdate = false
 	mesh.updateMatrix()
-	scene.add(mesh)
+	SCENE.add(mesh)
 
-	renderer = new THREE.WebGLRenderer({ antialias: true })
-	renderer.setPixelRatio(window.devicePixelRatio)
-	renderer.setSize(window.innerWidth, window.innerHeight)
-	container.appendChild(renderer.domElement)
+	RENDERER = new THREE.WebGLRenderer({ antialias: true })
+	RENDERER.setPixelRatio(window.devicePixelRatio)
+	RENDERER.setSize(window.innerWidth, window.innerHeight)
+	CONTAINER.appendChild(RENDERER.domElement)
 
-	controls = new THREE.FlyControls(camera, renderer.domElement)
-	controls.enableDamping = true
-	controls.dampingFactor = .15
-	controls.rotateSpeed = .2
+	CONTROLS = new THREE.FlyControls(CAMERA, RENDERER.domElement)
+	CONTROLS.enableDamping = true
+	CONTROLS.dampingFactor = .15
+	CONTROLS.rotateSpeed = .2
 
-	camera.lookAt(scene.position)
+	CAMERA.lookAt(SCENE.position)
 }
 
 function animate() {
 	requestAnimationFrame(animate)
-	renderer.render(scene, camera)
-
-	controls.update()
+	RENDERER.render(SCENE, CAMERA)
+	CONTROLS.update()
 }
 
 window.saveOBJ = (filename) => {
 	let OBJExporter = require('three-obj-exporter')
 	let exporter = new OBJExporter()
-	let result = exporter.parse(scene)
+	let result = exporter.parse(SCENE)
 	let file = new File(result.split("\n"), "export.obj", {type: "text/plain;charset=utf-8"})
 	saveAs(file)
 

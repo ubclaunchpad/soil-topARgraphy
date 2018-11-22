@@ -1,11 +1,10 @@
 # Terrain generator
 
 Generates a terrain model from a heightmap and colours it.
-Change the path in the IMG_URL require towards the end to change the heightmap file.
 
 ## What's included
 
-- Generating terrain models from heightmaps
+- Generating terrain models from heightmaps (or any image file, really)
 - Colouring said models using GLSL shaders
 - Multiple heightmaps to try
 - The beginnings of an API in Express
@@ -28,6 +27,8 @@ Change the path in the IMG_URL require towards the end to change the heightmap f
 Run `yarn install` or `npm install`
 
 ## Usage
+
+Change the path in the IMG_URL require towards the end to change the heightmap file.
 
 Run `yarn start` or `npm start`
 

@@ -79,4 +79,4 @@ void main()
 }
 `
 
-module.exports = { vertShader, fragShader }
+export { vertShader, fragShader }
