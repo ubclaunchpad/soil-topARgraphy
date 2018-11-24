@@ -38,34 +38,21 @@ class ImagePanelFragment : Fragment() {
 
     private fun onImageAddCameraButtonClick() {
         //check permission
-        var camerapermission = ContextCompat.checkSelfPermission(this.context!!,Manifest.permission.CAMERA)
+        var camerapermission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.CAMERA)
         val requestCode = 0
         if (camerapermission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this.requireActivity(),
                     arrayOf(Manifest.permission.CAMERA),
                     requestCode)
         }
-        camerapermission = ContextCompat.checkSelfPermission(this.context!!,Manifest.permission.CAMERA)
-        if ( camerapermission == PackageManager.PERMISSION_GRANTED)
+        camerapermission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.CAMERA)
+        if (camerapermission == PackageManager.PERMISSION_GRANTED)
             addImageFromCamera()
     }
 
     //add image via gallery
     private fun onImageAddGalleryButtonClick() {
         //check permission
-        var permission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
-        val requestCode = 0
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this.requireActivity(),
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                    requestCode)
-        }
-        permission = ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
-        if (permission == PackageManager.PERMISSION_GRANTED)
-            addImageFromGallery()
-    }
-
-    private fun addImageFromGallery() {
         val getIntent = Intent(Intent.ACTION_GET_CONTENT)
         getIntent.setType("image/*")
         startActivityForResult(getIntent, IMAGE_PICK_CODE)
@@ -85,19 +72,19 @@ class ImagePanelFragment : Fragment() {
 
     private fun addImageFromCamera() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        if(intent.resolveActivity(context!!.packageManager)!=null){
+        if (intent.resolveActivity(context!!.packageManager) != null) {
             var photoFile: File? = null
-            try{
+            try {
                 photoFile = createImageFile()
+            } catch (e: IOException) {
             }
-            catch (e: IOException){}
-            if(photoFile != null){
-                 photoUri = FileProvider.getUriForFile(
+            if (photoFile != null) {
+                photoUri = FileProvider.getUriForFile(
                         context!!,
                         "ca.ubc.eml.soiltopargraphy.editor.fileProvider",
                         photoFile
                 )
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri)
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                 startActivityForResult(intent, CAMERA_PICK_CODE)
             }
         }
