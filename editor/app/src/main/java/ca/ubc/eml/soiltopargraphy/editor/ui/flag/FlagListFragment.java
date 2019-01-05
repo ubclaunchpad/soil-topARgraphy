@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.recyclerview.extensions.ListAdapter;
 
+import java.io.File;
+
 import ca.ubc.eml.soiltopargraphy.editor.R;
 
 /**
@@ -33,12 +35,15 @@ public class FlagListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        // Inflates the flag list fragment UI and finds the recycler view to populate
         View flagListView = inflater.inflate(R.layout.flag_list_fragment, container, false);
         RecyclerView recyclerView = flagListView.findViewById(R.id.recyclerView);
 
+        // Sets the layout manager for the recycler view to be linear (standard vertical scrolling)
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(mLayoutManager);
 
+        // Sets the adapter to be the flag adapter below
         FlagAdapter flagAdapter = new FlagAdapter();
         recyclerView.setAdapter(flagAdapter);
 
@@ -50,18 +55,22 @@ public class FlagListFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         FlagListViewModel flagViewModel = ViewModelProviders.of(this).get(FlagListViewModel.class);
         FlagAdapter flagAdapter = new FlagAdapter();
-        flagAdapter.submitList(flagViewModel.getFlagList());
+
+        // Submits a new updated list of flags to the flag adapter when a change is observed
+        // in the flag table in the room database via LiveData
+        flagViewModel.getFlagList().observe(this, list -> flagAdapter.submitList(list));
     }
 
 }
 
-
+// Dictates how the viewholders should be populated with data
 class FlagViewHolder extends RecyclerView.ViewHolder {
     private TextView name;
     private TextView description;
     private ImageView image;
     private Button editButton;
 
+    // Finds all of the view to be populated and connects them to variables
     public FlagViewHolder(View view) {
         super(view);
         name = view.findViewById(R.id.nameTextView);
@@ -77,6 +86,7 @@ class FlagViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
+    // Populates the views with the appropriate data from a given flag
     public void bindTo(Flag flag) {
         this.name.setText(flag.getInfoPanel().getName());
 
@@ -99,6 +109,7 @@ class FlagAdapter extends ListAdapter<Flag, FlagViewHolder> {
         super(FlagAdapter.DIFF_CALLBACK);
     }
 
+    // Creates viewholders with the layout specified in the row xml file
     @Override
     public FlagViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -107,6 +118,7 @@ class FlagAdapter extends ListAdapter<Flag, FlagViewHolder> {
         return new FlagViewHolder(itemView);
     }
 
+    // Binds flags to viewholders as they should appear on the screen
     @Override
     public void onBindViewHolder(FlagViewHolder holder, int position) {
         holder.bindTo(this.getItem(position));

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3eaa6f28948a39911b3e2317a04ac2bd",
+    "identityHash": "35287df6f07e778fa2e720cac3e96ebe",
     "entities": [
       {
         "tableName": "flag_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`location` TEXT, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `infoPanel` TEXT, `id` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`location` TEXT, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL, `infoPanel` TEXT, `terrainId` INTEGER NOT NULL, `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, FOREIGN KEY(`terrainId`) REFERENCES `terrain_table`(`terrainId`) ON UPDATE NO ACTION ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "location",
@@ -33,6 +33,12 @@
             "notNull": false
           },
           {
+            "fieldPath": "terrainId",
+            "columnName": "terrainId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
             "fieldPath": "id",
             "columnName": "id",
             "affinity": "INTEGER",
@@ -43,7 +49,60 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_flag_table_terrainId",
+            "unique": false,
+            "columnNames": [
+              "terrainId"
+            ],
+            "createSql": "CREATE  INDEX `index_flag_table_terrainId` ON `${TABLE_NAME}` (`terrainId`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "terrain_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "terrainId"
+            ],
+            "referencedColumns": [
+              "terrainId"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "terrain_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`terrainId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `latitude` REAL NOT NULL, `longitude` REAL NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "terrainId",
+            "columnName": "terrainId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "latitude",
+            "columnName": "latitude",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longitude",
+            "columnName": "longitude",
+            "affinity": "REAL",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "terrainId"
+          ],
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -51,7 +110,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"3eaa6f28948a39911b3e2317a04ac2bd\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"35287df6f07e778fa2e720cac3e96ebe\")"
     ]
   }
 }
