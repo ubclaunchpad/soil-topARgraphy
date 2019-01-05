@@ -15,9 +15,9 @@ import ca.ubc.eml.soiltopargraphy.editor.R;
 /**
  */
 
-public class QuizPanelFragment extends Fragment {
+public class QuestionnairePanelFragment extends Fragment {
 
-    private QuizPanelViewModel mViewModel;
+    private QuestionnairePanelViewModel mViewModel;
 
     private String soilType;
     private String color;
@@ -26,20 +26,20 @@ public class QuizPanelFragment extends Fragment {
     private String humidity;
 
 
-    public static QuizPanelFragment newInstance() {
-        return new QuizPanelFragment();
+    public static QuestionnairePanelFragment newInstance() {
+        return new QuestionnairePanelFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.quiz_panel_fragment, container, false);
+        return inflater.inflate(R.layout.questionnaire_panel_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(QuizPanelViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(QuestionnairePanelViewModel.class);
         new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -68,7 +68,7 @@ public class QuizPanelFragment extends Fragment {
     }
 
     public void nextQuestion(View view) {
-        QuizPanel newSoilType = new QuizPanel(soilType, color, density, fruitfulness, humidity);
+        QuestionnairePanel newSoilType = new QuestionnairePanel(soilType, color, density, fruitfulness, humidity);
     }
 
 }
