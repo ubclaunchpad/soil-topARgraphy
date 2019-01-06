@@ -146,4 +146,13 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/toMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
