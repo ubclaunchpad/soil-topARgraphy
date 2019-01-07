@@ -62,10 +62,10 @@ class InfoPanelFragment : Fragment() {
         // TODO: Use the ViewModel
     }
     private fun onClickSaveInfoPnael(view :View){
-        val quiz =  selectQuizPanel()
-        val panel = InfoPanel(name = viewModel.name!!,description = viewModel.description!!,image = viewModel.image!!)
+        val quiz =  selectQuestionnairePanel()
+        val panel = InfoPanel(name = viewModel.name!!,description = viewModel.description!!,image = viewModel.image!!,Questionnaire = null)
     }
-    private fun selectQuizPanel(){
+    private fun selectQuestionnairePanel(){
     }
 
 }
