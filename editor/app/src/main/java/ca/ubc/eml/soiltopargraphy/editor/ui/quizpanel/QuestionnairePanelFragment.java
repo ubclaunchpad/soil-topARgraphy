@@ -79,7 +79,7 @@ public class QuestionnairePanelFragment extends Fragment {
         Fragment nextFragment = new FlagMapFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.frameLayout, nextFragment).commit();
+        transaction.replace(R.id.container, nextFragment).commit();
     }
     }
 
