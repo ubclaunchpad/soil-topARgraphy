@@ -98,7 +98,7 @@ class FlagViewHolder extends RecyclerView.ViewHolder {
             this.description.setText(flag.getInfoPanel().getName());
         }
 
-        this.image.setImageURI(Uri.parse(flag.getInfoPanel().getImage()));
+        this.image.setImageURI(Uri.parse(String.valueOf(flag.getInfoPanel().getImage())));
     }
 }
 

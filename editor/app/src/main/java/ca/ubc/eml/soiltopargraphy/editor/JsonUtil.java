@@ -15,7 +15,7 @@ public class JsonUtil {
             jsInfoPanel.put("Name", infoPanel.getName());
             jsInfoPanel.put("Description", infoPanel.getDescription());
             jsInfoPanel.put("Image", infoPanel.getImage());
-            jsInfoPanel.put("Questionnaire", infoPanel.getQuiz());
+            jsInfoPanel.put("Questionnaire", infoPanel.getQuestionnaire());
         } catch (JSONException e) {
             e.printStackTrace();
         }
