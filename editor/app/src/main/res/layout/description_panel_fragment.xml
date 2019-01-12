@@ -16,10 +16,10 @@
         android:hint="@string/info_panel_title_edit"
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
+        android:scrollHorizontally="true"
         app:layout_constraintBottom_toTopOf="@+id/Description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:scrollHorizontally="true"
         app:layout_constraintTop_toTopOf="parent"
         tools:targetApi="o" />
 
