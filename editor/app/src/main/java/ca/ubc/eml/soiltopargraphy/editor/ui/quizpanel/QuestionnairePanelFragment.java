@@ -75,7 +75,7 @@ public class QuestionnairePanelFragment extends Fragment {
     }
 
 
-    public void onClick(View v) {
+    public void clickToMain(View v) {
         Fragment nextFragment = new FlagMapFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
