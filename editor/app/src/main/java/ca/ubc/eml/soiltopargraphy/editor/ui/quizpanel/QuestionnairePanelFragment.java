@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.support.v4.app.FragmentTransaction;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagMapFragment;
@@ -78,9 +79,10 @@ public class QuestionnairePanelFragment extends Fragment {
     public void onClick(View v) {
         Fragment nextFragment = new FlagMapFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.container, nextFragment).commit();
+
     }
-    }
+}
 
 
