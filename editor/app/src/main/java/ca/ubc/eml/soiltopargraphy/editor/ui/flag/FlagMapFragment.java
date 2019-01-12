@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
-import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository;
+
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment;
 
 public class FlagMapFragment extends Fragment {
@@ -64,12 +64,9 @@ public class FlagMapFragment extends Fragment {
         //After clicking on the flag, if the user clicks anywhere else on the screen, updates
         //the toolbar to go back to showing only the listview item
         FrameLayout frameLayout = view.findViewById(R.id.frameLayout);
-        frameLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        frameLayout.setOnClickListener(v -> {
                 mViewModel.setFlagItemClicked(false);
                 getActivity().invalidateOptionsMenu();
-            }
         });
 
         return view;

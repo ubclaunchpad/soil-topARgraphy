@@ -1,5 +1,14 @@
 <resources>
     <string name="app_name">Soil TopARgraphy Editor</string>
+    <string name="description_text_field">Enter the description for the panel</string>
+    <string name="info_panel_title_edit">Enter the title for this info panel</string>
+    <string name="proceed_image_add_button">Press this button to add an image</string>
+    <string name="edit_info_panel">Press this button to edit info panel</string>
+    <string name="add_image_button">add image</string>
+    <string name="Image_Title">Enter Image Title</string>
+    <string name="add_image_via_gallery">Add image via gallery</string>
+    <string name="add_image_via_camera">Add image via camera</string>
+    <string name="proceed_info_panel">Go to info panel</string>
 
     //CreateQuiz
     <string name="soil_Type">Soil Type:</string>
@@ -8,4 +17,5 @@
     <string name="soil_Fruitfulness">Soil Fruitfulness:</string>
     <string name="soil_Humidity">Soil Humidity:</string>
     <string name="share_level_title">Share your custom level</string>
+    <string name="save_info_panel">Save info panel</string>
 </resources>
