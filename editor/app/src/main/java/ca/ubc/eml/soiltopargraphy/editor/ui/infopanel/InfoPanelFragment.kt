@@ -5,15 +5,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.SyncStateContract.Helpers.insert
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.support.v4.app.FragmentTransaction
 
 import ca.ubc.eml.soiltopargraphy.editor.R
 import ca.ubc.eml.soiltopargraphy.editor.db.AppDatabase
+import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagMapFragment
 import com.bumptech.glide.Glide
 
 class InfoPanelFragment : Fragment() {
@@ -66,6 +69,13 @@ class InfoPanelFragment : Fragment() {
         val panel = InfoPanel(name = viewModel.name!!,description = viewModel.description!!,image = viewModel.image!!,Questionnaire = null)
     }
     private fun selectQuestionnairePanel(){
+    }
+
+    fun onClick (view: View) {
+        val nextFragment = FlagMapFragment()
+        val fragmentManager = activity!!.supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.container, nextFragment).commit()
     }
 
 }
