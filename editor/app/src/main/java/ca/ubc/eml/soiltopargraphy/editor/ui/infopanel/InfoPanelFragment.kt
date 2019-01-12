@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.support.v4.app.FragmentTransaction
 
 import ca.ubc.eml.soiltopargraphy.editor.R
 import ca.ubc.eml.soiltopargraphy.editor.db.AppDatabase

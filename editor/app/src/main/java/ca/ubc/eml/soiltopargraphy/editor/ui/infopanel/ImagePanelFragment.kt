@@ -24,6 +24,8 @@ import com.bumptech.glide.Glide
 import android.support.v4.content.FileProvider
 import java.io.File
 import java.io.IOException
+import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagMapFragment
+
 
 /**
  * Fragment where user uploads image from library or take image
@@ -152,6 +154,13 @@ class ImagePanelFragment : Fragment() {
                 mViewModel.uri = data!!.data
             }
         }
+    }
+
+    fun onClick(view: View) {
+        val nextFragment = FlagMapFragment()
+        val fragmentManager = activity!!.supportFragmentManager
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(R.id.container, nextFragment).commit()
     }
 
 
