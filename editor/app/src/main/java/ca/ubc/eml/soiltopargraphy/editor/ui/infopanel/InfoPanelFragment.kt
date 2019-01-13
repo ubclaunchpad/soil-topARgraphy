@@ -70,7 +70,7 @@ class InfoPanelFragment : Fragment() {
     private fun selectQuestionnairePanel(){
     }
 
-    fun clickToMain(view: View) {
+    fun ToMain(view: View) {
         val nextFragment = FlagMapFragment()
         val fragmentManager = activity!!.supportFragmentManager
         val transaction = fragmentManager.beginTransaction()

@@ -97,7 +97,7 @@
         android:id="@+id/toMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="clickToMain"
+        android:onClick="ToMain"
         android:text="To Main"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -156,7 +156,7 @@ class ImagePanelFragment : Fragment() {
         }
     }
 
-    fun clickToMain(view: View) {
+    fun toMain(view: View) {
         val nextFragment = FlagMapFragment()
         val fragmentManager = activity!!.supportFragmentManager
         val transaction = fragmentManager.beginTransaction()
