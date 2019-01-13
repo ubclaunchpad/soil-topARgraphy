@@ -98,7 +98,7 @@
         app:layout_constraintVertical_bias="0.272" />
 
     <Button
-        android:id="@+id/toMain"
+        android:id="@+id/toMainFromImage"
         android:layout_width="88dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"

@@ -76,11 +76,13 @@ public class QuestionnairePanelFragment extends Fragment {
 
 
     public void clickToMain(View v) {
-        Fragment nextFragment = new FlagMapFragment();
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.container, nextFragment).commit();
-
+        if (fragmentManager != null) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.container, FlagMapFragment.newInstance());
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
     }
 }
 

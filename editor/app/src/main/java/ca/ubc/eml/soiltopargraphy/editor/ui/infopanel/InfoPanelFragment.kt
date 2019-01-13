@@ -71,10 +71,13 @@ class InfoPanelFragment : Fragment() {
     }
 
     fun ToMain(view: View) {
-        val nextFragment = FlagMapFragment()
-        val fragmentManager = activity!!.supportFragmentManager
-        val transaction = fragmentManager.beginTransaction()
-        transaction.replace(R.id.container, nextFragment).commit()
+        val manager = activity?.supportFragmentManager
+        if (manager != null) {
+            val transaction = manager.beginTransaction()
+            transaction.replace(R.id.container, FlagMapFragment.newInstance())
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
     }
 
 }
