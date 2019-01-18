@@ -22,6 +22,7 @@ import android.widget.ImageView
 import ca.ubc.eml.soiltopargraphy.editor.R
 import com.bumptech.glide.Glide
 import android.support.v4.content.FileProvider
+import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanelFragment
 import java.io.File
 import java.io.IOException
 
@@ -105,12 +106,36 @@ class ImagePanelFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.image_panel_fragment, container, false)
+
         val addImageViaCameraButton = view.findViewById<Button>(R.id.add_image_via_camera_button)
         addImageViaCameraButton.setOnClickListener { onImageAddCameraButtonClick() }
+
         val addImageViaGalleryButton = view.findViewById<Button>(R.id.add_image_via_gallery_button)
         addImageViaGalleryButton.setOnClickListener { onImageAddGalleryButtonClick() }
+
         val toViewInfoPanelButton = view.findViewById<Button>(R.id.to_view_info_panel_button)
         toViewInfoPanelButton.setOnClickListener { onToViewInfoPanelButtonClick() }
+
+        val leftButton = view.findViewById<Button>(R.id.buttonLeft)
+
+        // When the left navigation button is clicked, switches this fragment out for the DescriptionPanel fragment
+        leftButton.setOnClickListener{
+            val manager = activity!!.supportFragmentManager
+            val transaction = manager.beginTransaction()
+            transaction.replace(R.id.container, DescriptionPanelFragment())
+            transaction.commit()
+        }
+
+        // When the right navigation button is clicked, switches this fragment out for the QuestionnairePanel fragment
+        val rightButton = view.findViewById<Button>(R.id.buttonRight)
+
+        rightButton.setOnClickListener{
+            val manager = activity!!.supportFragmentManager
+            val transaction = manager.beginTransaction()
+            transaction.replace(R.id.container, QuestionnairePanelFragment())
+            transaction.commit()
+        }
+
         mImageView = view.findViewById(R.id.imageView)
         return view
     }
