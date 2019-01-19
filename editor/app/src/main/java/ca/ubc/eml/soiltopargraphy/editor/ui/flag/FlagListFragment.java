@@ -1,11 +1,14 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
+import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +22,10 @@ import android.support.v7.recyclerview.extensions.ListAdapter;
 
 import java.io.File;
 
+import ca.ubc.eml.soiltopargraphy.editor.MainActivity;
 import ca.ubc.eml.soiltopargraphy.editor.R;
+import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment;
+import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain;
 
 /**
  * Fragment where the list of flags (and their image and descriptions) are displayed
@@ -54,11 +60,25 @@ public class FlagListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         FlagListViewModel flagViewModel = ViewModelProviders.of(this).get(FlagListViewModel.class);
+
+        // Note: this Terrain is just a dummy terrain used for testing purposes to avoid a null pointer
+        // exception error TODO: delete once terrains are working properly
+        flagViewModel.setTerrain(new Terrain(5.2, 6.7));
+
         FlagAdapter flagAdapter = new FlagAdapter();
 
         // Submits a new updated list of flags to the flag adapter when a change is observed
         // in the flag table in the room database via LiveData
         flagViewModel.getFlagList().observe(this, list -> flagAdapter.submitList(list));
+    }
+
+    // When edit button is clicked, it calls this method which switches out this fragment for the
+    // description panel fragment
+    public void switchToDescriptionPanel() {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.container, new DescriptionPanelFragment());
+        transaction.commit();
     }
 
 }
@@ -81,7 +101,10 @@ class FlagViewHolder extends RecyclerView.ViewHolder {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // Calls a method within FlagListFragment because switching between fragments requires
+                // getActivity() from Fragment class which is not extended here
+                FlagListFragment fragment = new FlagListFragment();
+                fragment.switchToDescriptionPanel();
             }
         });
     }

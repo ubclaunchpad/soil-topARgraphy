@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
+import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.ImagePanelFragment;
+import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment;
 
 /**
  */
@@ -33,7 +37,23 @@ public class QuestionnairePanelFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.questionnaire_panel_fragment, container, false);
+
+        View view = inflater.inflate(R.layout.questionnaire_panel_fragment, container, false);
+
+        View leftButton = view.findViewById(R.id.buttonLeft);
+
+        // When the left navigation button is clicked, switches this fragment out for the ImagePanel fragment
+        leftButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.replace(R.id.container, new ImagePanelFragment());
+                transaction.commit();
+            }
+        });
+
+        return view;
     }
 
     @Override

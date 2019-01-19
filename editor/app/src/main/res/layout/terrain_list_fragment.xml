@@ -24,13 +24,13 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <RecyclerView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="497dp"
         android:scrollbars="vertical"
         tools:listitem="@layout/flag_list_fragment_row">
 
-    </RecyclerView>
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

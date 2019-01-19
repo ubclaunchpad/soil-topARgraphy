@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.quizpanel.QuestionnairePanelFragment">
 
+    <Button
+        android:id="@+id/buttonLeft"
+        android:layout_width="64dp"
+        android:layout_height="57dp"
+        android:text="@string/left"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/type"
         android:layout_width="wrap_content"
@@ -97,6 +108,7 @@
                 android:layout_weight="1"
                 android:hint="Soil Density"
                 android:inputType="text" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -146,4 +158,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
