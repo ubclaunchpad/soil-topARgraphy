@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.Button;
 
 import ca.ubc.eml.soiltopargraphy.editor.R;
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagMapFragment;
@@ -73,6 +74,7 @@ public class QuestionnairePanelFragment extends Fragment {
     public void nextQuestion(View view) {
         QuestionnairePanel newSoilType = new QuestionnairePanel(soilType, color, density, fruitfulness, humidity);
     }
+
 
 
     public void clickToMain(View v) {

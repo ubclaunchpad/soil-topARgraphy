@@ -25,6 +25,7 @@ import android.support.v4.content.FileProvider
 import java.io.File
 import java.io.IOException
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagMapFragment
+import kotlinx.android.synthetic.*
 
 
 /**
@@ -155,6 +156,8 @@ class ImagePanelFragment : Fragment() {
             }
         }
     }
+
+
 
     fun toMain(view: View) {
         val manager = activity?.supportFragmentManager
