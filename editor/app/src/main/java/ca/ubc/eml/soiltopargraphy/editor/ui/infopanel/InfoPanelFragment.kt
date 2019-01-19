@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.SyncStateContract.Helpers.insert
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import android.widget.TextView
 
 import ca.ubc.eml.soiltopargraphy.editor.R
 import ca.ubc.eml.soiltopargraphy.editor.db.AppDatabase
+import ca.ubc.eml.soiltopargraphy.editor.ui.main.MainFragment
 import com.bumptech.glide.Glide
 
 class InfoPanelFragment : Fragment() {
@@ -29,6 +31,18 @@ class InfoPanelFragment : Fragment() {
         val view  = inflater.inflate(R.layout.info_panel_fragment, container, false)
         val saveButton = view?.findViewById<Button>(R.id.save_info_panel)
         saveButton?.setOnClickListener{onClickSaveInfoPnael(view)}
+
+        val toMainFromInfo = view.findViewById<View>(R.id.toMainFromInfo) as Button
+
+        toMainFromInfo.setOnClickListener {
+            val fragmentManager = activity!!.supportFragmentManager
+            if (fragmentManager != null) {
+                val transaction = fragmentManager.beginTransaction()
+                transaction.replace(R.id.container, MainFragment())
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
         return view
     }
 
@@ -67,5 +81,6 @@ class InfoPanelFragment : Fragment() {
     }
     private fun selectQuestionnairePanel(){
     }
+
 
 }
