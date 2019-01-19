@@ -16,19 +16,6 @@
         android:theme="?attr/actionBarTheme" />
 
     <Button
-        android:id="@+id/flagItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="100dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Pretend I'm a Flag"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/create_info_button"
         android:layout_width="305dp"
         android:layout_height="55dp"
@@ -43,6 +30,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:background="@android:drawable/ic_menu_add" />
+
+    <Button
+        android:id="@+id/flagItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pretend I'm a flag!"
+        tools:layout_editor_absoluteX="112dp"
+        tools:layout_editor_absoluteY="243dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_flag"
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="355dp" />
 
 </android.support.constraint.ConstraintLayout>
 

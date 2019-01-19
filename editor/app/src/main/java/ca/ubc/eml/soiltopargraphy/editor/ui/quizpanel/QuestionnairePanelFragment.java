@@ -40,7 +40,7 @@ public class QuestionnairePanelFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.questionnaire_panel_fragment, container, false);
+        final View view = inflater.inflate(R.layout.questionnaire_panel_fragment, container, false);
 
         View leftButton = view.findViewById(R.id.buttonLeft);
 
@@ -55,7 +55,7 @@ public class QuestionnairePanelFragment extends Fragment {
             }
         });
 
-        Button buttonToMain = (Button) view.findViewById(R.id.toMainFromQuestionnaire);
+        final Button buttonToMain = (Button) view.findViewById(R.id.toMainFromQuestionnaire);
 
         buttonToMain.setOnClickListener(new View.OnClickListener() {
             @Override

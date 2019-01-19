@@ -1,7 +1,9 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
@@ -9,6 +11,8 @@ import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
 import ca.ubc.eml.soiltopargraphy.editor.R
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagListFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
@@ -67,6 +71,17 @@ class MainFragment : Fragment() {
         frameLayout.setOnClickListener { v ->
             mViewModel.flagItemClicked = false
             activity!!.invalidateOptionsMenu()
+        }
+
+        // Button to add a new flag
+        val addFlag = view.findViewById<View>(R.id.addButton)
+        button.setOnClickListener {
+            //Add flag to centre of screen
+            val flagImage: ImageView = ImageView(context)
+            flagImage.setImageResource(R.drawable.ic_flag)
+            flagImage.x = (view.width / 2).toFloat()
+            flagImage.y = (view.height / 2).toFloat()
+            flagImage.visibility = (View.VISIBLE)
         }
 
         return view
