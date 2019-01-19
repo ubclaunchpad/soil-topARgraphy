@@ -18,4 +18,6 @@
     <string name="soil_Humidity">Soil Humidity:</string>
     <string name="share_level_title">Share your custom level</string>
     <string name="save_info_panel">Save info panel</string>
+    <string name="left"><![CDATA[<]]></string>
+    <string name="right"><![CDATA[>]]></string>
 </resources>

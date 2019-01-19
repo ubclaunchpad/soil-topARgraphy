@@ -14,7 +14,7 @@ public class AppRepository {
     private FlagDao mFlagDao;
     private TerrainDao mTerrainDao;
 
-    // Making this public so FlagMapViewModel can access
+    // Making this public so MainViewModel can access
     public AppRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
 

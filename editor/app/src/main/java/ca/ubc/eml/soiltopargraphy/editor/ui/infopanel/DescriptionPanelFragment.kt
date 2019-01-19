@@ -35,6 +35,15 @@ class DescriptionPanelFragment : Fragment() {
         val view = inflater.inflate(R.layout.description_panel_fragment, container, false)
         val toImageEditButton = view.findViewById<View>(R.id.to_image_add)
         toImageEditButton.setOnClickListener{onToImageAddButtonClick()}
+
+        // When the right navigation button is clicked, switches this fragment out for the ImagePanel fragment
+        val rightButton = view.findViewById<View>(R.id.buttonRight)
+        rightButton.setOnClickListener{
+            val manager = activity!!.supportFragmentManager
+            val transaction = manager.beginTransaction()
+            transaction.replace(R.id.container, ImagePanelFragment())
+            transaction.commit()}
+
         return view
     }
 
