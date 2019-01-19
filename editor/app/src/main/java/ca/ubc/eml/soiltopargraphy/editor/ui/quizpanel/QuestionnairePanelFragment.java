@@ -55,6 +55,24 @@ public class QuestionnairePanelFragment extends Fragment {
             }
         });
 
+        Button buttonToMain = (Button) view.findViewById(R.id.toMainFromQuestionnaire);
+
+        buttonToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                if (fragmentManager != null) {
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.container, new MainFragment());
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            }
+
+        });
+
+
+
         return view;
     }
 
@@ -87,6 +105,7 @@ public class QuestionnairePanelFragment extends Fragment {
                 nextQuestion(v);
             }
         };
+
     }
 
     public void nextQuestion(View view) {
@@ -94,16 +113,6 @@ public class QuestionnairePanelFragment extends Fragment {
     }
 
 
-
-    public void clickToMain(View v) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        if (fragmentManager != null) {
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(R.id.container, new MainFragment());
-            transaction.addToBackStack(null);
-            transaction.commit();
-        }
-    }
 }
 
 

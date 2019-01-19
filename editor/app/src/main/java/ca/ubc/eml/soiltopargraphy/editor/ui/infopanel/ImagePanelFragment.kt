@@ -139,6 +139,18 @@ class ImagePanelFragment : Fragment() {
             transaction.commit()
         }
 
+        val toMainFromImage = view.findViewById<View>(R.id.toMainFromImage) as Button
+
+        toMainFromImage.setOnClickListener {
+            val manager = activity?.supportFragmentManager
+            if (manager != null) {
+                val transaction = manager.beginTransaction()
+                transaction.replace(R.id.container, MainFragment.newInstance())
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
+
         mImageView = view.findViewById(R.id.imageView)
         return view
     }
@@ -179,18 +191,6 @@ class ImagePanelFragment : Fragment() {
                 view?.findViewById<ImageView>(R.id.imageView)?.visibility = View.VISIBLE
                 mViewModel.uri = data!!.data
             }
-        }
-    }
-
-
-
-    fun toMain(view: View) {
-        val manager = activity?.supportFragmentManager
-        if (manager != null) {
-            val transaction = manager.beginTransaction()
-            transaction.replace(R.id.container, MainFragment.newInstance())
-            transaction.addToBackStack(null)
-            transaction.commit()
         }
     }
 
