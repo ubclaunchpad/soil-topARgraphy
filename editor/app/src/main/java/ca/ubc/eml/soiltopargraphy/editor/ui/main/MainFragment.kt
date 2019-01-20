@@ -1,7 +1,11 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
+
 import android.content.Context
+
+import android.net.Uri
+
 import android.os.Bundle
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
@@ -11,11 +15,19 @@ import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.Button
 import android.widget.FrameLayout
+
 import android.widget.ImageView
 import android.widget.LinearLayout
+
+import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
+
 import ca.ubc.eml.soiltopargraphy.editor.R
+import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagListFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
+import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
+import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
+import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
 
 class MainFragment : Fragment() {
 
@@ -100,6 +112,11 @@ class MainFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
+        //THIS IS A HARDCODED FLAG FOR TESTING PURPOSES ONLY
+        val questionnaire = QuestionnairePanel("","","","","")
+        val infoPanel = InfoPanel("", "", Uri.EMPTY, questionnaire)
+        val flag = Flag("", 0.toFloat(), 0.toFloat(), infoPanel, 1,1)
+
         val manager = activity!!.supportFragmentManager
         val transaction = manager.beginTransaction()
         var newFragment: Fragment? = null
@@ -112,6 +129,11 @@ class MainFragment : Fragment() {
             R.id.action_delete ->
                 //Deletes flag from room database
                 mViewModel.deleteFlag()
+            R.id.action_back ->
+                // When the back button is selected, swaps this fragment out for the TerrainListFragment
+                newFragment = TerrainListFragment()
+            R.id.action_toJSON ->
+                JsonUtil.infoToJson(flag.infoPanel)
             else -> {
             }
         }
@@ -128,12 +150,16 @@ class MainFragment : Fragment() {
         //When flag is clicked, shows only edit and delete options
         if (mViewModel.flagItemClicked) {
             menu!!.findItem(R.id.action_to_listview).isVisible = false
+            menu.findItem(R.id.action_back).isVisible = false
             menu.findItem(R.id.action_edit).isVisible = true
             menu.findItem(R.id.action_delete).isVisible = true
-        } else {
+            menu.findItem(R.id.action_toJSON).isVisible = true
+        } else { //When flag is not clicked, shows only listview option
             menu!!.findItem(R.id.action_to_listview).isVisible = true
+            menu.findItem(R.id.action_back).isVisible = true
             menu.findItem(R.id.action_edit).isVisible = false
             menu.findItem(R.id.action_delete).isVisible = false
-        } //When flag is not clicked, shows only listview options
+            menu.findItem(R.id.action_toJSON).isVisible = false
+        }
     }
 }

@@ -16,5 +16,15 @@
         android:orderInCategory="100"
         android:title="Delete"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_toJSON"
+        android:orderInCategory="100"
+        android:title="Export"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_back"
+        android:orderInCategory="100"
+        android:title="Back"
+        app:showAsAction="always" />
 
 </menu>
