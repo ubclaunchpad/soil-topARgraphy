@@ -2,19 +2,14 @@ package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
 
-import android.content.Context
-
 import android.net.Uri
 
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.Button
-import android.widget.FrameLayout
 
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -28,6 +23,7 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
+
 
 class MainFragment : Fragment() {
 
@@ -88,12 +84,17 @@ class MainFragment : Fragment() {
         // Button to add a new flag
         val addFlag = view.findViewById<View>(R.id.addButton)
         button.setOnClickListener {
+
             //Add flag to centre of screen
-            val flagImage: ImageView = ImageView(context)
+            view.findViewById<View>(R.id.frameLayout)
+            val linearLayout: LinearLayout = LinearLayout(this.context)
+            linearLayout.layout(0, 0, 0, 0)
+            linearLayout.layoutParams = ViewGroup.LayoutParams(100, 100)
+            linearLayout.orientation = LinearLayout.HORIZONTAL
+            (view as ViewGroup).addView(linearLayout)
+            var flagImage: ImageView = ImageView(this.context)
             flagImage.setImageResource(R.drawable.ic_flag)
-            flagImage.x = (view.width / 2).toFloat()
-            flagImage.y = (view.height / 2).toFloat()
-            flagImage.visibility = (View.VISIBLE)
+            linearLayout.addView(flagImage)
         }
 
         return view
