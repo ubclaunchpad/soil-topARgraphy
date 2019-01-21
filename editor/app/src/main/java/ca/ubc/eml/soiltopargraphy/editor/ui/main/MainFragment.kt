@@ -1,5 +1,6 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
+import android.app.ActionBar
 import android.arch.lifecycle.ViewModelProviders
 
 import android.net.Uri
@@ -9,10 +10,11 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.*
+import android.widget.AbsoluteLayout
 import android.widget.Button
 
 import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 
 import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
 
@@ -23,6 +25,7 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
+import kotlinx.android.synthetic.main.main_fragment.*
 
 
 class MainFragment : Fragment() {
@@ -83,18 +86,20 @@ class MainFragment : Fragment() {
 
         // Button to add a new flag
         val addFlag = view.findViewById<View>(R.id.addButton)
-        button.setOnClickListener {
+        addFlag.setOnClickListener {
 
             //Add flag to centre of screen
-            view.findViewById<View>(R.id.frameLayout)
-            val linearLayout: LinearLayout = LinearLayout(this.context)
-            linearLayout.layout(0, 0, 0, 0)
-            linearLayout.layoutParams = ViewGroup.LayoutParams(100, 100)
-            linearLayout.orientation = LinearLayout.HORIZONTAL
-            (view as ViewGroup).addView(linearLayout)
+
+            view.findViewById<View>(R.id.imageView2)
+            val relativLayout: RelativeLayout = RelativeLayout(this.context)
+            //relativLayout.layout(0, 0, 0, 0)
+            relativLayout.layoutParams = ViewGroup.LayoutParams(view.width, view.height)
+            (view as ViewGroup).addView(relativLayout)
             var flagImage: ImageView = ImageView(this.context)
             flagImage.setImageResource(R.drawable.ic_flag)
-            linearLayout.addView(flagImage)
+            var layoutParams = flagImage.layoutParams
+            layoutParams.apply { relativLayout.gravity = 50 }
+            relativLayout.addView(flagImage)
         }
 
         return view
