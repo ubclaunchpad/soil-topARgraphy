@@ -1,15 +1,15 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.Button
-import android.widget.FrameLayout
 import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
 import ca.ubc.eml.soiltopargraphy.editor.R
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag
@@ -17,7 +17,10 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagListFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
+import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
+import android.graphics.drawable.BitmapDrawable
+
 
 class MainFragment : Fragment() {
 
@@ -26,6 +29,14 @@ class MainFragment : Fragment() {
     }
 
     private lateinit var mViewModel: MainViewModel
+    // Terrain that the user is interacting with
+    private var mTerrain: Terrain? = null
+
+    // Tells the main fragment which terrain was associated with the item that was clicked
+    // from TerrainsInListview
+    fun setTerrain(terrain: Terrain) {
+        mTerrain = terrain
+    }
 
     private fun onCreateInfoButtonClick(view: View){
         val manager = activity?.supportFragmentManager
@@ -45,6 +56,10 @@ class MainFragment : Fragment() {
         button.setOnClickListener { onCreateInfoButtonClick(view) }
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        // Sets the viewmodel terrain as the terrain that the user is currently interacting with
+        // (couldn't do this in the setTerrain function because of the late initialization
+        // of mViewModel)
+        mViewModel.terrain = mTerrain
 
         //Ensures the toolbar initially displays the options that it should
         //(ie. just the listview option) when the flag item is not clicked
@@ -74,6 +89,12 @@ class MainFragment : Fragment() {
             mViewModel.flagItemClicked = false
             activity!!.invalidateOptionsMenu()
         }
+
+        val heightmapView = view.findViewById<android.support.v7.widget.AppCompatImageView>(R.id.heightmapView)
+        val heightmap: Bitmap = BitmapFactory.decodeByteArray(mViewModel.terrain!!.heightmap, 0, mViewModel.terrain?.heightmap!!.size)
+
+        val drawableHeightmap = BitmapDrawable(resources, heightmap)
+        heightmapView.setImageDrawable(drawableHeightmap)
 
         return view
     }
