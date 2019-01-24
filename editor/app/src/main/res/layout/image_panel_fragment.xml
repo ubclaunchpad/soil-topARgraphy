@@ -17,7 +17,7 @@
         android:layout_marginRight="50dp"
         android:layout_marginBottom="17dp"
         android:text="@string/proceed_info_panel"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/heightmapView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/heightmapView"
         android:layout_width="283dp"
         android:layout_height="190dp"
         android:layout_marginStart="8dp"
@@ -54,7 +54,7 @@
         android:layout_marginRight="200dp"
         android:layout_marginBottom="17dp"
         android:text="@string/add_image_via_camera"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/heightmapView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="15dp"
         android:text="@string/add_image_via_gallery"
-        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintBottom_toTopOf="@+id/heightmapView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/add_image_via_camera_button"
@@ -94,7 +94,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/heightmapView"
         app:layout_constraintVertical_bias="0.272" />
 
     <Button

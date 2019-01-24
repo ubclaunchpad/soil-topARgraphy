@@ -2,41 +2,46 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/nameTextView"
+        android:id="@+id/latitudeText"
         android:layout_width="209dp"
         android:layout_height="40dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Flag Name"
+        android:text="Terrain Name"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/mImageView"
+        app:layout_constraintEnd_toStartOf="@+id/heightmapView"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descriptionTextView"
-        android:layout_width="221dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="8dp"
+        android:id="@+id/longitudeText"
+        android:layout_width="209dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Description"
-        app:layout_constraintEnd_toStartOf="@+id/mImageView"
-        app:layout_constraintHorizontal_bias="0.576"
+        android:text="Terrain Name"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/heightmapView"
+        app:layout_constraintHorizontal_bias="0.045"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/mImageView"
+        android:id="@+id/heightmapView"
         android:layout_width="121dp"
         android:layout_height="117dp"
         android:layout_marginStart="176dp"
@@ -49,7 +54,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[5]" />
+        tools:srcCompat="@drawable/hardcoded_heightmap" />
 
     <Button
         android:id="@+id/editButton"
@@ -61,7 +66,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@android:drawable/ic_menu_edit"
-        app:layout_constraintEnd_toStartOf="@+id/mImageView"
-        app:layout_constraintStart_toEndOf="@+id/nameTextView"
+        app:layout_constraintEnd_toStartOf="@+id/heightmapView"
+        app:layout_constraintStart_toEndOf="@+id/latitudeText"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
