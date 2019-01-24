@@ -26,12 +26,6 @@ public class AppRepository {
         return mFlagDao.getAllFlags();
     }
     public LiveData<List<Terrain>> getAllTerrains() {
-        if (mTerrainDao.getAllTerrains() == null) {
-            System.out.println("database really is empty");
-        }
-        else {
-            System.out.println("NOT EMPTY!");
-        }
         return mTerrainDao.getAllTerrains();
     }
 
