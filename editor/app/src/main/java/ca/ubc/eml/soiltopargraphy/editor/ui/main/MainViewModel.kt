@@ -6,10 +6,12 @@ import android.arch.lifecycle.LiveData
 
 import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag
+import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain
 
 class MainViewModel// gets a reference to the repository and he list of words from the repository.
 (application: Application) : AndroidViewModel(application) {
     var flagItemClicked: Boolean = false
+    var terrain: Terrain? = null
 
     private val mRepository: AppRepository
 
