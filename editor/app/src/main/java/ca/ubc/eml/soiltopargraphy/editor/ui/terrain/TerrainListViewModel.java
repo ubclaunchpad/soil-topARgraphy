@@ -24,6 +24,7 @@ public class TerrainListViewModel extends AndroidViewModel {
         if(terrains == null) {
             terrains = mRepository.getAllTerrains();
         }
+
         return terrains;
     }
 
