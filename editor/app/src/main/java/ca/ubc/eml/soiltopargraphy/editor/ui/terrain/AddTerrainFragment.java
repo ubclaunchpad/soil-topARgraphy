@@ -44,13 +44,20 @@ public class AddTerrainFragment extends Fragment {
 
         EditText latitudeText = addTerrainView.findViewById(R.id.latitudeText);
         EditText longitudeText = addTerrainView.findViewById(R.id.longitudeText);
+        EditText heightText = addTerrainView.findViewById(R.id.heightText);
+        EditText widthText = addTerrainView.findViewById(R.id.widthText);
 
         // When user presses the "create" button, creates a new instance of terrain and saves the
         // terrain to the terrain table in the database
         Button createButton = addTerrainView.findViewById(R.id.createButton);
-        createButton.setOnClickListener(view ->
-                mViewModel.createNewTerrain(latitudeText.getText(), longitudeText.getText())
-        );
+        createButton.setOnClickListener(view -> {
+            mViewModel.createNewTerrain(latitudeText.getText(), longitudeText.getText(), heightText.getText(), widthText.getText());
+            FragmentManager manager = getActivity().getSupportFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            Fragment newFragment = new TerrainListFragment();
+            transaction.replace(R.id.container, newFragment);
+            transaction.commit();
+        });
 
         return addTerrainView;
     }
