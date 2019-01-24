@@ -1,6 +1,5 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.flag;
 
-import android.app.Activity;
 import android.arch.lifecycle.ViewModelProviders;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,9 +19,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.recyclerview.extensions.ListAdapter;
 
-import java.io.File;
-
-import ca.ubc.eml.soiltopargraphy.editor.MainActivity;
 import ca.ubc.eml.soiltopargraphy.editor.R;
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment;
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain;
@@ -36,6 +32,7 @@ public class FlagListFragment extends Fragment {
     public static FlagListFragment newInstance() {
         return new FlagListFragment();
     }
+    private FlagAdapter flagAdapter = new FlagAdapter();
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -50,7 +47,6 @@ public class FlagListFragment extends Fragment {
         recyclerView.setLayoutManager(mLayoutManager);
 
         // Sets the adapter to be the flag adapter below
-        FlagAdapter flagAdapter = new FlagAdapter();
         recyclerView.setAdapter(flagAdapter);
 
         return flagListView;
@@ -63,9 +59,8 @@ public class FlagListFragment extends Fragment {
 
         // Note: this Terrain is just a dummy terrain used for testing purposes to avoid a null pointer
         // exception error TODO: delete once terrains are working properly
-        flagViewModel.setTerrain(new Terrain(5.2, 6.7));
-
-        FlagAdapter flagAdapter = new FlagAdapter();
+        byte[] byteArray = new byte[7];
+        flagViewModel.setTerrain(new Terrain(5.2, 6.7, 5.2,7,byteArray));
 
         // Submits a new updated list of flags to the flag adapter when a change is observed
         // in the flag table in the room database via LiveData
@@ -93,9 +88,9 @@ class FlagViewHolder extends RecyclerView.ViewHolder {
     // Finds all of the view to be populated and connects them to variables
     public FlagViewHolder(View view) {
         super(view);
-        name = view.findViewById(R.id.nameTextView);
+        name = view.findViewById(R.id.latitudeText);
         description = view.findViewById(R.id.descriptionTextView);
-        image = view.findViewById(R.id.mImageView);
+        image = view.findViewById(R.id.heightmapView);
         editButton = view.findViewById(R.id.editButton);
 
         editButton.setOnClickListener(new View.OnClickListener() {
