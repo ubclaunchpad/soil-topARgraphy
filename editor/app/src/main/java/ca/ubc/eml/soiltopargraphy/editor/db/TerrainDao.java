@@ -21,7 +21,7 @@ public interface TerrainDao {
     @Query("DELETE FROM terrain_table")
     void deleteAll();
 
-    @Query("SELECT * from terrain_table")
+    @Query("SELECT * FROM terrain_table")
     LiveData<List<Terrain>> getAllTerrains();
 
     @Query("DELETE FROM terrain_table WHERE terrainId = :terrainId")
