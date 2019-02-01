@@ -170,9 +170,7 @@ class ImagePanelFragment : Fragment() {
             }
             if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK) {
 
-//            view?.findViewById<ImageView>(R.id.imageView)?.setImageURI(data.data)
                 Glide.with(context!!).load(data?.data).into(mImageView)
-//            transformPicture(data.data)
                 view?.findViewById<ImageView>(R.id.heightmapView)?.visibility = View.VISIBLE
                 mViewModel.uri = data!!.data
             }
