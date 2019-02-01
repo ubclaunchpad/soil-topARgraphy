@@ -171,6 +171,7 @@ class ImagePanelFragment : Fragment() {
             if (requestCode == IMAGE_PICK_CODE && resultCode == RESULT_OK) {
 
                 Glide.with(context!!).load(data?.data).into(mImageView)
+                //imageview to heightmapview
                 view?.findViewById<ImageView>(R.id.heightmapView)?.visibility = View.VISIBLE
                 mViewModel.uri = data!!.data
             }
