@@ -136,7 +136,7 @@ class ImagePanelFragment : Fragment() {
             transaction.commit()
         }
 
-        mImageView = view.findViewById(R.id.imageView)
+        mImageView = view.findViewById(R.id.heightmapView)
         return view
     }
 
@@ -173,7 +173,7 @@ class ImagePanelFragment : Fragment() {
 //            view?.findViewById<ImageView>(R.id.imageView)?.setImageURI(data.data)
                 Glide.with(context!!).load(data?.data).into(mImageView)
 //            transformPicture(data.data)
-                view?.findViewById<ImageView>(R.id.imageView)?.visibility = View.VISIBLE
+                view?.findViewById<ImageView>(R.id.heightmapView)?.visibility = View.VISIBLE
                 mViewModel.uri = data!!.data
             }
         }
