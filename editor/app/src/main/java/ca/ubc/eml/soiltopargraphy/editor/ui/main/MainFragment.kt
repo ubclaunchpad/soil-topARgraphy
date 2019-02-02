@@ -20,6 +20,7 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
 import android.graphics.drawable.BitmapDrawable
+import com.bumptech.glide.Glide
 
 
 class MainFragment : Fragment() {
@@ -90,11 +91,10 @@ class MainFragment : Fragment() {
             activity!!.invalidateOptionsMenu()
         }
 
-        val heightmapView = view.findViewById<android.support.v7.widget.AppCompatImageView>(R.id.heightmapView)
-        val heightmap: Bitmap = BitmapFactory.decodeByteArray(mViewModel.terrain!!.heightmap, 0, mViewModel.terrain?.heightmap!!.size)
 
-        val drawableHeightmap = BitmapDrawable(resources, heightmap)
-        heightmapView.setImageDrawable(drawableHeightmap)
+
+        val heightmapView = view.findViewById<android.support.v7.widget.AppCompatImageView>(R.id.heightmapView)
+        Glide.with(context!!).load(R.drawable.hardcoded_heightmap).into(heightmapView)
 
         return view
     }

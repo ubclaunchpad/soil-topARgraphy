@@ -23,6 +23,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.graphics.drawable.BitmapDrawable;
 
+import com.bumptech.glide.Glide;
+
 import ca.ubc.eml.soiltopargraphy.editor.MainActivity;
 import ca.ubc.eml.soiltopargraphy.editor.R;
 import ca.ubc.eml.soiltopargraphy.editor.ui.main.MainFragment;
@@ -147,9 +149,7 @@ class TerrainAdapter extends ListAdapter<Terrain, TerrainAdapter.TerrainViewHold
             terrainLatitude.setText("Latitude: " + terrain.getLatitude());
             terrainLongitude.setText("Longitude: " + terrain.getLongitude());
 
-            Bitmap heightmap = BitmapFactory.decodeByteArray(terrain.getHeightmap(), 0, terrain.getHeightmap().length);
-            Drawable drawableHeightmap = new BitmapDrawable(heightmap);
-            heightmapThumbnail.setImageDrawable(drawableHeightmap);
+            Glide.with(context).load(R.drawable.hardcoded_heightmap).into(heightmapThumbnail);
 
             // Sets onClickListener for each individual item
             itemView.setOnClickListener(view -> {
