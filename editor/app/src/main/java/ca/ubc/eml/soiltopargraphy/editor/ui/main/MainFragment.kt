@@ -1,20 +1,17 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
-import android.app.ActionBar
 import android.arch.lifecycle.ViewModelProviders
 
 import android.net.Uri
 
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
+import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.*
-import android.widget.AbsoluteLayout
-import android.widget.Button
-
-import android.widget.ImageView
-import android.widget.RelativeLayout
+import android.widget.*
 
 import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
 
@@ -25,7 +22,6 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
-import kotlinx.android.synthetic.main.main_fragment.*
 
 
 class MainFragment : Fragment() {
@@ -36,15 +32,16 @@ class MainFragment : Fragment() {
 
     private lateinit var mViewModel: MainViewModel
 
-    private fun onCreateInfoButtonClick(view: View){
+    private fun onCreateInfoButtonClick(view: View) {
         val manager = activity?.supportFragmentManager
-        if(manager!=null){
+        if (manager != null) {
             val transaction = manager.beginTransaction()
             transaction.replace(R.id.container, DescriptionPanelFragment.newInstance())
             transaction.addToBackStack(null)
             transaction.commit()
         }
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.main_fragment, container, false)
@@ -90,16 +87,20 @@ class MainFragment : Fragment() {
 
             //Add flag to centre of screen
 
-            view.findViewById<View>(R.id.imageView2)
-            val relativLayout: RelativeLayout = RelativeLayout(this.context)
-            //relativLayout.layout(0, 0, 0, 0)
-            relativLayout.layoutParams = ViewGroup.LayoutParams(view.width, view.height)
-            (view as ViewGroup).addView(relativLayout)
-            var flagImage: ImageView = ImageView(this.context)
+            val relativeLayout = RelativeLayout(this.context)
+
+            val layoutParams = RelativeLayout.LayoutParams(
+                    RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.MATCH_PARENT)
+            layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT)
+
+            relativeLayout.layoutParams = layoutParams
+            (view as ViewGroup).addView(relativeLayout)
+
+            var flagImage = ImageView(this.context)
             flagImage.setImageResource(R.drawable.ic_flag)
-            var layoutParams = flagImage.layoutParams
-            layoutParams.apply { relativLayout.gravity = 50 }
-            relativLayout.addView(flagImage)
+
+            relativeLayout.addView(flagImage)
         }
 
         return view
@@ -119,9 +120,9 @@ class MainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         //THIS IS A HARDCODED FLAG FOR TESTING PURPOSES ONLY
-        val questionnaire = QuestionnairePanel("","","","","")
+        val questionnaire = QuestionnairePanel("", "", "", "", "")
         val infoPanel = InfoPanel("", "", Uri.EMPTY, questionnaire)
-        val flag = Flag("", 0.toFloat(), 0.toFloat(), infoPanel, 1,1)
+        val flag = Flag("", 0.toFloat(), 0.toFloat(), infoPanel, 1, 1)
 
         val manager = activity!!.supportFragmentManager
         val transaction = manager.beginTransaction()
