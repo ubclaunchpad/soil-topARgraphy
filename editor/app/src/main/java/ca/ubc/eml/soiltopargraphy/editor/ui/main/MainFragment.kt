@@ -21,13 +21,31 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapFragment
+import com.google.android.gms.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.main_fragment.*
 
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), OnMapReadyCallback {
 
     companion object {
         fun newInstance() = MainFragment()
+    }
+
+    // For Google maps
+    private var googleMap: GoogleMap? = null
+    private val mapFragment: MapFragment? = MapFragment.newInstance()
+
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        val ft = fragmentManager!!.beginTransaction()
+        ft.add(frameLayout.id, mapFragment as Fragment)
+        ft.commit()
+        this.mapFragment.getMapAsync(this)
+
+        //To reference the map once it has been created
+        this.googleMap = googleMap
     }
 
     private lateinit var mViewModel: MainViewModel
