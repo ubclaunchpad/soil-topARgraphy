@@ -3,6 +3,7 @@ package ca.ubc.eml.soiltopargraphy.editor;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag;
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel;
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel;
 
@@ -37,4 +38,33 @@ public class JsonUtil {
         }
         return jsQuizPanel;
     }
+    //simple function to convert the flag to a JSon object
+    public static JSONObject flagToJson(Flag flag){
+        JSONObject jsFlag = new JSONObject();
+        try{
+            jsFlag.put("location",flag.getLocation());
+            jsFlag.put("latitude",flag.getLatitude());
+            jsFlag.put("longitude",flag.getLongitude());
+            jsFlag.put("infoPanel",flag.getInfoPanel());
+            jsFlag.put("terrainId",flag.getTerrainId());
+            jsFlag.put("id",flag.getId());
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        return jsFlag;
+    }
+    //wrapper for the flag to json when the relative percent coordinate is save
+    public static JSONObject flagToJsonWithCoordinate(double vTopLeftXpct,double vTopLeftYpct,double vBottonRightXpct,double vBottonRightYpct,Flag flag){
+        JSONObject jsFlag = flagToJson(flag);
+        try{
+            jsFlag.put("vTopLeftXpct",vTopLeftXpct);
+            jsFlag.put("vTopLeftYpct",vTopLeftYpct);
+            jsFlag.put("vBottonRightXpct",vBottonRightXpct);
+            jsFlag.put("vBottonRightYpct",vBottonRightYpct);
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+        return jsFlag;
+    }
+
 }

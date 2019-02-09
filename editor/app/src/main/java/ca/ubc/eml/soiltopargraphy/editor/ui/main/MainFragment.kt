@@ -18,6 +18,7 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
+import org.json.JSONObject
 
 class MainFragment : Fragment() {
 
@@ -27,15 +28,16 @@ class MainFragment : Fragment() {
 
     private lateinit var mViewModel: MainViewModel
 
-    private fun onCreateInfoButtonClick(view: View){
+    private fun onCreateInfoButtonClick(view: View) {
         val manager = activity?.supportFragmentManager
-        if(manager!=null){
+        if (manager != null) {
             val transaction = manager.beginTransaction()
             transaction.replace(R.id.container, DescriptionPanelFragment.newInstance())
             transaction.addToBackStack(null)
             transaction.commit()
         }
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         val view = inflater.inflate(R.layout.main_fragment, container, false)
@@ -92,10 +94,9 @@ class MainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         //THIS IS A HARDCODED FLAG FOR TESTING PURPOSES ONLY
-        val questionnaire = QuestionnairePanel("","","","","")
+        val questionnaire = QuestionnairePanel("", "", "", "", "")
         val infoPanel = InfoPanel("", "", Uri.EMPTY, questionnaire)
-        val flag = Flag("", 0.toFloat(), 0.toFloat(), infoPanel, 1,1)
-
+        val flag = Flag("", 0.toFloat(), 0.toFloat(), infoPanel, 1, 1)
         val manager = activity!!.supportFragmentManager
         val transaction = manager.beginTransaction()
         var newFragment: Fragment? = null
@@ -140,5 +141,23 @@ class MainFragment : Fragment() {
             menu.findItem(R.id.action_delete).isVisible = false
             menu.findItem(R.id.action_toJSON).isVisible = false
         }
+    }
+
+    private fun onExportJsonClick(view: View) {
+        // get the view for the icon that represent the flag
+        val flagView = view.findViewById<View>(R.id.flagItem)
+        val parent = flagView.parent as View
+        val pHeight = parent.height
+        val pWidth = parent.width
+        //get the top left xy percent that the flag hold
+        val vTopLeftXpct = flagView.left.toDouble() / pWidth.toDouble()
+        val vTopLeftYpct = flagView.top.toDouble() / pHeight.toDouble()
+        //get the bottom right xy percent that the flag hold
+        val vBottonRightXpct = flagView.right.toDouble() / pWidth.toDouble()
+        val vBottonRightYpct = flagView.bottom.toDouble() / pHeight.toDouble()
+        //TODO: right now hardcode the flag in, should try to find the flag itself
+        val flag = Flag("", 0.toFloat(), 0.toFloat(), null, 1, 1)
+        val toWrite = JsonUtil.flagToJsonWithCoordinate(vTopLeftXpct, vTopLeftYpct, vBottonRightXpct, vBottonRightYpct, flag)
+        //TODO: Find a place to store the flag themselves
     }
 }
