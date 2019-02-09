@@ -5,14 +5,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 
 import android.os.Bundle
-import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.*
-import android.view.Gravity.CENTER_HORIZONTAL
-import android.view.Gravity.CENTER_VERTICAL
 import android.widget.*
 
 import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
@@ -90,40 +87,8 @@ class MainFragment : Fragment() {
         addFlag.setOnClickListener {
 
             //Add flag to centre of screen
+            
 
-            val relativeLayout =  RelativeLayout(view.context)
-
-            val layoutParams = RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.MATCH_PARENT,
-                    RelativeLayout.LayoutParams.MATCH_PARENT)
-
-            layoutParams.width = view.width
-            layoutParams.height = view.height
-
-            layoutParams.addRule(CENTER_VERTICAL)
-
-            relativeLayout.layoutParams = layoutParams
-            (view as ViewGroup).addView(relativeLayout)
-
-            var flagImage = ImageView(view.context)
-            flagImage.setImageResource(R.drawable.ic_flag)
-
-            relativeLayout.addView(flagImage)
-
-//            var flagImage = ImageView(this.context)
-//            flagImage.setImageResource(R.drawable.ic_flag)
-//
-////            val mapLayout = view.findViewById<RelativeLayout>(R.id.mapConstraintLayout)
-////
-////
-////            mapLayout.setHorizontalGravity(CENTER_HORIZONTAL)
-////            mapLayout.setVerticalGravity(CENTER_VERTICAL)
-////            mapLayout.addView(flagImage)
-//
-//            val layoutParams = flagImage.layoutParams as RelativeLayout.LayoutParams
-//
-//            layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT)
-//            flagImage.layoutParams = layoutParams
 
         }
 
