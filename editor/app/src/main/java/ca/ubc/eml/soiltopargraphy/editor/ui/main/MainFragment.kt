@@ -87,7 +87,7 @@ class MainFragment : Fragment() {
         addFlag.setOnClickListener {
 
             //Add flag to centre of screen
-            
+
 
 
         }
