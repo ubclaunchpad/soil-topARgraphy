@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 
 import android.os.Bundle
-import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -21,32 +20,31 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapFragment
-import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.main_fragment.*
 
 
 class MainFragment : Fragment(), OnMapReadyCallback {
 
+    val googleMap: GoogleMap? = null
+    var mapView: MapView? = null
+
     companion object {
         fun newInstance() = MainFragment()
     }
 
-    // For Google maps
-    private var googleMap: GoogleMap? = null
-    private val mapFragment: MapFragment? = MapFragment.newInstance()
+    override fun onMapReady(p0: GoogleMap?) {
+        MapsInitializer.initialize(context)
 
+        googleMap!!.mapType = GoogleMap.MAP_TYPE_NORMAL
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        val ft = fragmentManager!!.beginTransaction()
-        ft.add(frameLayout.id, mapFragment as Fragment)
-        ft.commit()
-        this.mapFragment.getMapAsync(this)
-
-        //To reference the map once it has been created
-        this.googleMap = googleMap
+        val start: CameraPosition = CameraPosition.builder().target(LatLng(50.753836, -120.404478)) as CameraPosition
+        googleMap!!.moveCamera(CameraUpdateFactory.newCameraPosition(start))
     }
+
+
 
     private lateinit var mViewModel: MainViewModel
 
@@ -62,6 +60,14 @@ class MainFragment : Fragment(), OnMapReadyCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
+
+        //Google maps
+        mapView = view!!.findViewById(R.id.map)
+        if (mapView != null) {
+            mapView!!.onCreate(null)
+            mapView!!.onResume()
+            mapView!!.getMapAsync(this)
+        }
 
         val view = inflater.inflate(R.layout.main_fragment, container, false)
 
