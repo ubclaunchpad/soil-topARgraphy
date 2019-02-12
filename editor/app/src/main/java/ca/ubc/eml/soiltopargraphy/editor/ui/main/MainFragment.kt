@@ -28,22 +28,12 @@ import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment(), OnMapReadyCallback {
 
-    val googleMap: GoogleMap? = null
-    var mapView: MapView? = null
+    var mGoogleMap: GoogleMap? = null
+    var mMapView: MapView? = null
 
     companion object {
         fun newInstance() = MainFragment()
     }
-
-    override fun onMapReady(p0: GoogleMap?) {
-        MapsInitializer.initialize(context)
-
-        googleMap!!.mapType = GoogleMap.MAP_TYPE_NORMAL
-
-        val start: CameraPosition = CameraPosition.builder().target(LatLng(50.753836, -120.404478)) as CameraPosition
-        googleMap!!.moveCamera(CameraUpdateFactory.newCameraPosition(start))
-    }
-
 
 
     private lateinit var mViewModel: MainViewModel
@@ -60,14 +50,6 @@ class MainFragment : Fragment(), OnMapReadyCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-
-        //Google maps
-        mapView = view!!.findViewById(R.id.map)
-        if (mapView != null) {
-            mapView!!.onCreate(null)
-            mapView!!.onResume()
-            mapView!!.getMapAsync(this)
-        }
 
         val view = inflater.inflate(R.layout.main_fragment, container, false)
 
@@ -117,6 +99,28 @@ class MainFragment : Fragment(), OnMapReadyCallback {
         }
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mMapView = view.findViewById(R.id.map) as MapView
+
+        if (mMapView != null){
+            mMapView!!.onCreate(null)
+            mMapView!!.onResume()
+            mMapView!!.getMapAsync(this)
+        }
+    }
+
+    override fun onMapReady(p0: GoogleMap?) {
+
+        MapsInitializer.initialize(this.context)
+
+        mGoogleMap!!.mapType = GoogleMap.MAP_TYPE_NORMAL
+
+        //val start = CameraPosition.builder().target(LatLng(50.753836, -120.404478))
+        mGoogleMap!!.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.fromLatLngZoom(LatLng(50.753836, -120.404478),mGoogleMap!!.maxZoomLevel)))
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
