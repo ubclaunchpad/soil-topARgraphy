@@ -29,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="497dp"
         android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="parent"
         tools:listitem="@layout/flag_list_fragment_row">
 
     </android.support.v7.widget.RecyclerView>
