@@ -1,6 +1,7 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
+import android.arch.persistence.room.Database
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -12,13 +13,15 @@ import android.widget.Button
 import android.widget.FrameLayout
 import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
 import ca.ubc.eml.soiltopargraphy.editor.R
+import ca.ubc.eml.soiltopargraphy.editor.db.AppDatabase_Impl
+import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository
+import ca.ubc.eml.soiltopargraphy.editor.db.FlagDao
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagListFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
-
 class MainFragment : Fragment() {
 
     companion object {
@@ -141,4 +144,5 @@ class MainFragment : Fragment() {
             menu.findItem(R.id.action_toJSON).isVisible = false
         }
     }
+
 }
