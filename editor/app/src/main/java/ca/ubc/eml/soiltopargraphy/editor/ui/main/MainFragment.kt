@@ -115,7 +115,7 @@ class MainFragment : Fragment(), OnMapReadyCallback {
         this.googleMap = googleMap
         googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
-        var start: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(50.753836, -120.404478), 14.0f)
+        var start: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(50.713836, -120.350008), 12.0f)
 
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(start))
 
