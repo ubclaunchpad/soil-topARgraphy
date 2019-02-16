@@ -1,18 +1,14 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
-
 import android.net.Uri
-
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.*
 import android.widget.*
-
 import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
-
 import ca.ubc.eml.soiltopargraphy.editor.R
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagListFragment
@@ -23,14 +19,12 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
-import kotlinx.android.synthetic.main.main_fragment.*
-
 
 class MainFragment : Fragment(), OnMapReadyCallback {
 
 
     //Google maps
-    lateinit var mGoogleMap: GoogleMap
+    lateinit var googleMap: GoogleMap
     lateinit var mMapView: MapView
 
     companion object {
@@ -103,7 +97,7 @@ class MainFragment : Fragment(), OnMapReadyCallback {
         return view
     }
 
-    //Google maps
+    //Creates the mapView for the Google map
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -114,11 +108,11 @@ class MainFragment : Fragment(), OnMapReadyCallback {
         mMapView.getMapAsync(this)
     }
 
-    //Google maps
+    //Sets up what the map initially shows after the screen has loaded
     override fun onMapReady(googleMap: GoogleMap) {
 
         MapsInitializer.initialize(context)
-        mGoogleMap = googleMap
+        this.googleMap = googleMap
         googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
         var start: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(50.753836, -120.404478), 14.0f)
