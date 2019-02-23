@@ -23,6 +23,8 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.PolyUtil
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener
 
 
 class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
@@ -134,10 +136,30 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
             marker.remove()
         })
 
+        setDragProperties()
+
         var start: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(50.713836, -120.350008), 12.0f)
         mViewModel.createMarker(googleMap)
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(start))
         googleMap.setOnMapLongClickListener(this)
+    }
+
+    private fun setDragProperties() {
+        this.googleMap.setOnMarkerDragListener(object : OnMarkerDragListener {
+            override fun onMarkerDragStart(marker: Marker) {
+                // ...
+            }
+
+            override fun onMarkerDragEnd(marker: Marker) {
+                if (!PolyUtil.containsLocation(marker.position, polygon.points, true)) {
+                    marker.remove()
+                }
+            }
+
+            override fun onMarkerDrag(marker: Marker) {
+                // ...
+            }
+        })
     }
 
 
