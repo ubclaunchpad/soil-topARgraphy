@@ -6,6 +6,9 @@ import android.arch.lifecycle.LiveData
 
 import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 class MainViewModel// gets a reference to the repository and he list of words from the repository.
 (application: Application) : AndroidViewModel(application) {
@@ -36,5 +39,30 @@ class MainViewModel// gets a reference to the repository and he list of words fr
     //flag from the room database
     fun deleteFlag() {
         mRepository.deleteFlag(mFlag)
+    }
+    //method to create marker from the database
+    //TODO:Possible to create marker that is only inside view ?
+    fun createMarker(map: GoogleMap):List<MarkerOptions>?{
+        var markers: MutableList<MarkerOptions> = mutableListOf<MarkerOptions>()
+        if(flags.value!=null) {
+            for (flag in flags.value!!.listIterator()) {
+                val markerOption = MarkerOptions()
+                markerOption.position(LatLng(flag.latitude.toDouble(), flag.longitude.toDouble()))
+                markerOption.title(flag.latitude.toDouble().toString() + " : " + flag.longitude.toDouble())
+                markerOption.draggable(true)
+                markers.add(markerOption)
+                //add the marker into the map
+                val marker = map.addMarker(markerOption)
+                marker.tag = flag
+            }
+            return markers
+        }
+        return null
+    }
+    // save the marker as flag inside the map
+    //TODO: extend this method using information from other fragments
+    fun saveMarkerAsFlag(point: LatLng){
+        val flag = Flag("",point.latitude.toFloat(),point.longitude.toFloat(),null,0,0)
+        insert(flag)
     }
 }

@@ -19,8 +19,11 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 
-class MainFragment : Fragment(), OnMapReadyCallback {
+
+class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
 
     //Google maps
@@ -30,7 +33,6 @@ class MainFragment : Fragment(), OnMapReadyCallback {
     companion object {
         fun newInstance() = MainFragment()
     }
-
 
     private lateinit var mViewModel: MainViewModel
 
@@ -116,9 +118,9 @@ class MainFragment : Fragment(), OnMapReadyCallback {
         googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
         var start: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(50.713836, -120.350008), 12.0f)
-
+        mViewModel.createMarker(googleMap)
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(start))
-
+        googleMap.setOnMapLongClickListener(this)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -167,7 +169,6 @@ class MainFragment : Fragment(), OnMapReadyCallback {
 
         return true
     }
-
     override fun onPrepareOptionsMenu(menu: Menu?) {
         //When flag is clicked, shows only edit and delete options
         if (mViewModel.flagItemClicked) {
@@ -183,5 +184,11 @@ class MainFragment : Fragment(), OnMapReadyCallback {
             menu.findItem(R.id.action_delete).isVisible = false
             menu.findItem(R.id.action_toJSON).isVisible = false
         }
+    }
+
+    override fun onMapLongClick(point: LatLng) {
+        this.googleMap.addMarker(MarkerOptions()
+                .position(point)
+                .draggable(true))
     }
 }
