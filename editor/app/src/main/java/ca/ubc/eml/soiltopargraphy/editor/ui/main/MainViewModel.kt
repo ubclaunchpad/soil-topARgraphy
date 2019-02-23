@@ -56,4 +56,10 @@ class MainViewModel// gets a reference to the repository and he list of words fr
         }
         return markers
     }
+    // save the marker as flag inside the map
+    //TODO: extend this method using information from other fragments
+    fun saveMarkerAsFlag(point: LatLng){
+        val flag = Flag("",point.latitude.toFloat(),point.longitude.toFloat(),null,0,0)
+        insert(flag)
+    }
 }
