@@ -1,5 +1,6 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
+import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
@@ -70,14 +71,6 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         //Ensures that the menu is actually displayed in the toolbar
         setHasOptionsMenu(true)
 
-        //Assigns an onClickListener to flag item that will update the toolbar when flag is clicked
-        //TODO: Button flagItem should be replaced with actual flag item before merging
-        val flagItem = view.findViewById<Button>(R.id.flagItem)
-        flagItem.setOnClickListener {
-            //When flag is clicked, updates the view model variable to reflect this and refreshes the toolbar view
-            mViewModel.flagItemClicked = true
-            activity!!.invalidateOptionsMenu()
-        }
 
         //After clicking on the flag, if the user clicks anywhere else on the screen, updates
         //the toolbar to go back to showing only the listview item
@@ -96,7 +89,11 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
 
         val saveFlag = view.findViewById<Button>(R.id.saveButton)
         saveFlag.setOnClickListener {
-            ViewModel.
+
+            //get list of flags from database
+            val flags =
+            val mainViewModel = MainViewModel(Application()).saveMarkerAsFlag()
+
         }
 
         return view

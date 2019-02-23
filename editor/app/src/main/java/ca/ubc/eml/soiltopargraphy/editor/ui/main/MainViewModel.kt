@@ -16,7 +16,7 @@ class MainViewModel// gets a reference to the repository and he list of words fr
 
     private val mRepository: AppRepository
 
-    internal val flags: LiveData<List<Flag>>
+     internal val flags: LiveData<List<Flag>>
         get() = mRepository.allFlags
 
     //This is the flag that the Main Fragment is allowing the user to interact with
@@ -61,8 +61,7 @@ class MainViewModel// gets a reference to the repository and he list of words fr
     }
     // save the marker as flag inside the map
     //TODO: extend this method using information from other fragments
-    fun saveMarkerAsFlag(point: LatLng){
-        val flag = Flag("",point.latitude.toFloat(),point.longitude.toFloat(),null,0,0)
+    fun saveMarkerAsFlag(flag: Flag){
         insert(flag)
     }
 }
