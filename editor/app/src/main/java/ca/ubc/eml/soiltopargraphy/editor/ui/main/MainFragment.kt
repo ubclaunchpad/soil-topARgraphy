@@ -12,6 +12,8 @@ import android.view.*
 import android.widget.*
 import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
 import ca.ubc.eml.soiltopargraphy.editor.R
+import ca.ubc.eml.soiltopargraphy.editor.db.AppDatabase
+import ca.ubc.eml.soiltopargraphy.editor.db.FlagDao
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagListFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
@@ -87,12 +89,21 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         }
 
 
+        //Update the database with new flag information when the save button is clicked
         val saveFlag = view.findViewById<Button>(R.id.saveButton)
         saveFlag.setOnClickListener {
 
             //get list of flags from database
-            val flags =
-            val mainViewModel = MainViewModel(Application()).saveMarkerAsFlag()
+            val db = AppDatabase.getDatabase(Application())
+
+            val mFlagDao = db.flagDao()
+            val flags = mFlagDao.allFlags
+
+            val mainViewModel = MainViewModel(Application())
+
+            for (flag in flags ){
+                mainViewModel.saveMarkerAsFlag(flag)
+            }
 
         }
 
