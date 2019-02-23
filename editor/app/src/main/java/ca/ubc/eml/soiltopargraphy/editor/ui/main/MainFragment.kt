@@ -101,9 +101,6 @@ class MainFragment : Fragment(), OnMapReadyCallback {
             activity!!.invalidateOptionsMenu()
         }
 
-        val heightmapView = view.findViewById<android.support.v7.widget.AppCompatImageView>(R.id.heightmapView)
-        Glide.with(context!!).load(R.drawable.hardcoded_heightmap).into(heightmapView)
-
         // Button to add a new flag
         val addFlag = view.findViewById<View>(R.id.addButton)
         addFlag.setOnClickListener {
