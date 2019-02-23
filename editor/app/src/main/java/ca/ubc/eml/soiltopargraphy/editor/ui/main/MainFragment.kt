@@ -1,46 +1,52 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
-import android.arch.persistence.room.Database
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.*
-import android.widget.Button
-import android.widget.FrameLayout
+import android.widget.*
 import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
 import ca.ubc.eml.soiltopargraphy.editor.R
-import ca.ubc.eml.soiltopargraphy.editor.db.AppDatabase_Impl
-import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository
-import ca.ubc.eml.soiltopargraphy.editor.db.FlagDao
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagListFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
-class MainFragment : Fragment() {
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+
+class MainFragment : Fragment(), OnMapReadyCallback {
+
+
+    //Google maps
+    lateinit var googleMap: GoogleMap
+    lateinit var mMapView: MapView
 
     companion object {
         fun newInstance() = MainFragment()
     }
 
+
     private lateinit var mViewModel: MainViewModel
 
-    private fun onCreateInfoButtonClick(view: View){
+    private fun onCreateInfoButtonClick(view: View) {
         val manager = activity?.supportFragmentManager
-        if(manager!=null){
+        if (manager != null) {
             val transaction = manager.beginTransaction()
             transaction.replace(R.id.container, DescriptionPanelFragment.newInstance())
             transaction.addToBackStack(null)
             transaction.commit()
         }
     }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
+
         val view = inflater.inflate(R.layout.main_fragment, container, false)
 
         //attach listener to method for creating info panel
@@ -78,7 +84,41 @@ class MainFragment : Fragment() {
             activity!!.invalidateOptionsMenu()
         }
 
+        // Button to add a new flag
+        val addFlag = view.findViewById<View>(R.id.addButton)
+        addFlag.setOnClickListener {
+
+            //Add flag to centre of screen
+
+
+
+        }
+
         return view
+    }
+
+    //Creates the mapView for the Google map
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        mMapView = view.findViewById(R.id.map)
+
+        mMapView.onCreate(null)
+        mMapView.onResume()
+        mMapView.getMapAsync(this)
+    }
+
+    //Sets up what the map initially shows after the screen has loaded
+    override fun onMapReady(googleMap: GoogleMap) {
+
+        MapsInitializer.initialize(context)
+        this.googleMap = googleMap
+        googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+
+        var start: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(50.713836, -120.350008), 12.0f)
+
+        googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(start))
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -95,9 +135,9 @@ class MainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         //THIS IS A HARDCODED FLAG FOR TESTING PURPOSES ONLY
-        val questionnaire = QuestionnairePanel("","","","","")
+        val questionnaire = QuestionnairePanel("", "", "", "", "")
         val infoPanel = InfoPanel("", "", Uri.EMPTY, questionnaire)
-        val flag = Flag("", 0.toFloat(), 0.toFloat(), infoPanel, 1,1)
+        val flag = Flag("", 0.toFloat(), 0.toFloat(), infoPanel, 1, 1)
 
         val manager = activity!!.supportFragmentManager
         val transaction = manager.beginTransaction()
@@ -144,5 +184,4 @@ class MainFragment : Fragment() {
             menu.findItem(R.id.action_toJSON).isVisible = false
         }
     }
-
 }
