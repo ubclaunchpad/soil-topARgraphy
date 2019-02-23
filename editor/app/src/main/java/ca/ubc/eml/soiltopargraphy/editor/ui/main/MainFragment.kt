@@ -1,5 +1,6 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
 import android.os.Bundle
@@ -88,10 +89,12 @@ class MainFragment : Fragment(), OnMapReadyCallback {
         val addFlag = view.findViewById<View>(R.id.addButton)
         addFlag.setOnClickListener {
 
-            //Add flag to centre of screen
+        }
 
 
-
+        val saveFlag = view.findViewById<Button>(R.id.saveButton)
+        saveFlag.setOnClickListener {
+            ViewModel.
         }
 
         return view
