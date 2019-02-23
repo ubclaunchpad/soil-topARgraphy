@@ -151,7 +151,7 @@ class ImagePanelFragment : Fragment() {
             }
         }
 
-        mImageView = view.findViewById(R.id.imageView)
+        mImageView = view.findViewById(R.id.heightmapView)
         return view
     }
 
