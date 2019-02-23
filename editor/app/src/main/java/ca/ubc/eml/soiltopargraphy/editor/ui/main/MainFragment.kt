@@ -1,6 +1,10 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
 import android.arch.lifecycle.ViewModelProviders
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -17,10 +21,8 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
 import com.google.android.gms.maps.*
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import com.google.maps.android.PolyUtil
 
 
 class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
@@ -29,6 +31,7 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
     //Google maps
     lateinit var googleMap: GoogleMap
     lateinit var mMapView: MapView
+    lateinit var polygon: Polygon
 
     companion object {
         fun newInstance() = MainFragment()
@@ -117,11 +120,27 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         this.googleMap = googleMap
         googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
 
+        this.polygon = googleMap.addPolygon(PolygonOptions()
+                .clickable(false)
+                .fillColor(0x7F048C74)
+                .strokeColor(0x7F048C74)
+                .add(LatLng(50.7892408129208, -120.4340181602787),
+                        LatLng(50.72889060494163, -120.4700933175354),
+                        LatLng(50.71279694839526, -120.3841084217637),
+                        LatLng(50.77768216037517, -120.350471954997),
+                        LatLng(50.7892408129208, -120.3841084217637)))
+
+        this.googleMap.setOnInfoWindowClickListener(GoogleMap.OnInfoWindowClickListener { marker ->
+            marker.remove()
+        })
+
         var start: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(50.713836, -120.350008), 12.0f)
         mViewModel.createMarker(googleMap)
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(start))
         googleMap.setOnMapLongClickListener(this)
     }
+
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -187,8 +206,23 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
     }
 
     override fun onMapLongClick(point: LatLng) {
-        this.googleMap.addMarker(MarkerOptions()
-                .position(point)
-                .draggable(true))
+        var marker = getMarkerIconFromDrawable(resources.getDrawable(R.drawable.ic_flag))
+        if (PolyUtil.containsLocation(point, this.polygon.points, true)) {
+            this.googleMap.addMarker(MarkerOptions()
+                    .icon(marker)
+                    .snippet("Press here to remove marker")
+                    .title("MARKER")
+                    .position(point)
+                    .draggable(true))
+        }
+    }
+
+    private fun getMarkerIconFromDrawable(drawable: Drawable): BitmapDescriptor {
+        val canvas = Canvas()
+        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        canvas.setBitmap(bitmap)
+        drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+        drawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 }
