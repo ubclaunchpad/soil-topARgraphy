@@ -42,19 +42,22 @@ class MainViewModel// gets a reference to the repository and he list of words fr
     }
     //method to create marker from the database
     //TODO:Possible to create marker that is only inside view ?
-    fun createMarker(map: GoogleMap):List<MarkerOptions>{
+    fun createMarker(map: GoogleMap):List<MarkerOptions>?{
         var markers: MutableList<MarkerOptions> = mutableListOf<MarkerOptions>()
-        for(flag in flags.value!!.listIterator()){
-           val markerOption= MarkerOptions()
-            markerOption.position( LatLng(flag.latitude.toDouble(),flag.longitude.toDouble()))
-            markerOption.title(flag.latitude.toDouble().toString()+ " : " + flag.longitude.toDouble())
-            markerOption.draggable(true)
-            markers.add(markerOption)
-            //add the marker into the map
-            val marker = map.addMarker(markerOption)
-            marker.tag = flag
+        if(flags.value!=null) {
+            for (flag in flags.value!!.listIterator()) {
+                val markerOption = MarkerOptions()
+                markerOption.position(LatLng(flag.latitude.toDouble(), flag.longitude.toDouble()))
+                markerOption.title(flag.latitude.toDouble().toString() + " : " + flag.longitude.toDouble())
+                markerOption.draggable(true)
+                markers.add(markerOption)
+                //add the marker into the map
+                val marker = map.addMarker(markerOption)
+                marker.tag = flag
+            }
+            return markers
         }
-        return markers
+        return null
     }
     // save the marker as flag inside the map
     //TODO: extend this method using information from other fragments
