@@ -25,6 +25,9 @@ import android.support.v4.content.FileProvider
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanelFragment
 import java.io.File
 import java.io.IOException
+import ca.ubc.eml.soiltopargraphy.editor.ui.main.MainFragment
+import kotlinx.android.synthetic.*
+
 
 /**
  * Fragment where user uploads image from library or take image
@@ -136,7 +139,19 @@ class ImagePanelFragment : Fragment() {
             transaction.commit()
         }
 
-        mImageView = view.findViewById(R.id.heightmapView)
+        val toMainFromImage = view.findViewById<View>(R.id.toMainFromImage) as Button
+
+        toMainFromImage.setOnClickListener {
+            val manager = activity?.supportFragmentManager
+            if (manager != null) {
+                val transaction = manager.beginTransaction()
+                transaction.replace(R.id.container, MainFragment.newInstance())
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
+
+        mImageView = view.findViewById(R.id.imageView)
         return view
     }
 

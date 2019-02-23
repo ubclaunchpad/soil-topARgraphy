@@ -98,6 +98,17 @@
         app:layout_constraintVertical_bias="0.272" />
 
     <Button
+        android:id="@+id/toMainFromImage"
+        android:layout_width="88dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
+        android:text="to Main"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/to_view_info_panel_button"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/buttonLeft"
         android:layout_width="54dp"
         android:layout_height="wrap_content"

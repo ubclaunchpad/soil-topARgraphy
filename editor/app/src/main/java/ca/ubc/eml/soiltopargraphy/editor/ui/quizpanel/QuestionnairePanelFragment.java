@@ -11,9 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-
+import android.support.v4.app.FragmentTransaction;
+import android.widget.Button;
 import ca.ubc.eml.soiltopargraphy.editor.R;
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.ImagePanelFragment;
+import ca.ubc.eml.soiltopargraphy.editor.ui.main.MainFragment;
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment;
 
 /**
@@ -38,7 +40,7 @@ public class QuestionnairePanelFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.questionnaire_panel_fragment, container, false);
+        final View view = inflater.inflate(R.layout.questionnaire_panel_fragment, container, false);
 
         View leftButton = view.findViewById(R.id.buttonLeft);
 
@@ -52,6 +54,24 @@ public class QuestionnairePanelFragment extends Fragment {
                 transaction.commit();
             }
         });
+
+        final Button buttonToMain = (Button) view.findViewById(R.id.toMainFromQuestionnaire);
+
+        buttonToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                if (fragmentManager != null) {
+                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                    transaction.replace(R.id.container, new MainFragment());
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
+            }
+
+        });
+
+
 
         return view;
     }
@@ -85,10 +105,14 @@ public class QuestionnairePanelFragment extends Fragment {
                 nextQuestion(v);
             }
         };
+
     }
 
     public void nextQuestion(View view) {
         QuestionnairePanel newSoilType = new QuestionnairePanel(soilType, color, density, fruitfulness, humidity);
     }
 
+
 }
+
+
