@@ -83,12 +83,6 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
             activity!!.invalidateOptionsMenu()
         }
 
-        // Button to add a new flag
-        val addFlag = view.findViewById<View>(R.id.addButton)
-        addFlag.setOnClickListener {
-
-        }
-
 
         //Update the database with new flag information when the save button is clicked
         val saveFlag = view.findViewById<Button>(R.id.saveButton)
