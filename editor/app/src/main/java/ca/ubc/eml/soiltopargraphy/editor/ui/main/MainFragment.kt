@@ -1,6 +1,7 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
 import android.app.Application
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
 import android.net.Uri
@@ -101,10 +102,11 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
 
             val mainViewModel = MainViewModel(Application())
 
-            for (flag in flags ){
-                mainViewModel.saveMarkerAsFlag(flag)
+            if (flags != null){
+                for (flag in flags as List<Flag> ){
+                    mainViewModel.saveMarkerAsFlag(flag)
+                }
             }
-
         }
 
         return view
@@ -126,7 +128,7 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
 
         MapsInitializer.initialize(context)
         this.googleMap = googleMap
-        googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+        googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
 
         var start: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(50.713836, -120.350008), 12.0f)
         mViewModel.createMarker(googleMap)
