@@ -26,6 +26,8 @@ import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.terrain_list_fragment.*
 
 
 class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
@@ -56,9 +58,21 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
 
         val view = inflater.inflate(R.layout.main_fragment, container, false)
 
+        val addButton = view.findViewById<Button>(R.id.addButton)
+        addButton.bringToFront()
+
         //attach listener to method for creating info panel
         val button = view.findViewById<View>(R.id.create_info_button)
         button.setOnClickListener { onCreateInfoButtonClick(view) }
+
+        //listener method for adding a flag
+        addButton.setOnClickListener {
+            //add a flag in the centre of the map
+            val center = this.googleMap.cameraPosition.target
+            this.googleMap.addMarker(MarkerOptions()
+                    .position(center)
+                    .draggable(true))
+        }
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
