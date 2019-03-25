@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:background="@android:drawable/ic_menu_add" />
+        android:text="Add" />
 
     <FrameLayout
         android:id="@+id/mapFrameLayout"
