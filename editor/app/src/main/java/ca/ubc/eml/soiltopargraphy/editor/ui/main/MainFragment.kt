@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -61,6 +62,8 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         val addButton = view.findViewById<Button>(R.id.addButton)
         addButton.bringToFront()
 
+        val shareButton = view.findViewById<Button>(R.id.shareButton)
+
         //attach listener to method for creating info panel
         val button = view.findViewById<View>(R.id.create_info_button)
         button.setOnClickListener { onCreateInfoButtonClick(view) }
@@ -72,6 +75,24 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
             this.googleMap.addMarker(MarkerOptions()
                     .position(center)
                     .draggable(true))
+        }
+
+        //listener for share button
+        shareButton.setOnClickListener {
+
+            val dataBase = AppDatabase.getDatabase(Application())
+            val flagDao = dataBase.flagDao()
+
+            var flagsToExport = flagDao.getFlagsInTerrainLive().toString() //TODO
+
+            var shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.setType("text/plain")
+            var shareBody = "Flag data: "
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, flagsToExport)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+            startActivity(Intent.createChooser(shareIntent, "Share flag data using: "))
+
+
         }
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
