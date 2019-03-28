@@ -37,6 +37,7 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
     //Google maps
     lateinit var googleMap: GoogleMap
     lateinit var mMapView: MapView
+    val coordinates = LatLng(50.713836, -120.350008)
 
     companion object {
         fun newInstance() = MainFragment()
@@ -78,22 +79,20 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         }
 
         //listener for share button
-        shareButton.setOnClickListener {
-
-            val dataBase = AppDatabase.getDatabase(Application())
-            val flagDao = dataBase.flagDao()
-
-            var flagsToExport = flagDao.getFlagsInTerrainLive().toString() //TODO
-
-            var shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.setType("text/plain")
-            var shareBody = "Flag data: "
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, flagsToExport)
-            shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
-            startActivity(Intent.createChooser(shareIntent, "Share flag data using: "))
-
-
-        }
+//        shareButton.setOnClickListener {
+//
+//            val dataBase = AppDatabase.getDatabase(Application())
+//            val flagDao = dataBase.flagDao()
+//
+//            var flagsToExport = flagDao.getFlagsInTerrainLive().toString() //TODO
+//
+//            var shareIntent = Intent(Intent.ACTION_SEND)
+//            shareIntent.type = "text/plain"
+//            var shareBody = "Flag data: "
+//            shareIntent.putExtra(Intent.EXTRA_SUBJECT, flagsToExport)
+//            shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+//            startActivity(Intent.createChooser(shareIntent, "Share flag data using: "))
+//        }
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
@@ -132,8 +131,8 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
             val mainViewModel = MainViewModel(Application())
 
             if (flags != null){
-                for (flag in flags as List<Flag> ){
-                    mainViewModel.saveMarkerAsFlag(flag)
+                for (flag in flags as List<*> ){
+                    mainViewModel.saveMarkerAsFlag(flag as Flag)
                 }
             }
         }
@@ -159,7 +158,7 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         this.googleMap = googleMap
         googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
 
-        var start: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(50.713836, -120.350008), 12.0f)
+        var start: CameraPosition = CameraPosition.fromLatLngZoom(coordinates, 12.0f)
         mViewModel.createMarker(googleMap)
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(start))
         googleMap.setOnMapLongClickListener(this)
