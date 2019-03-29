@@ -79,20 +79,20 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         }
 
         //listener for share button
-//        shareButton.setOnClickListener {
-//
-//            val dataBase = AppDatabase.getDatabase(Application())
-//            val flagDao = dataBase.flagDao()
-//
-//            var flagsToExport = flagDao.getFlagsInTerrainLive().toString() //TODO
-//
-//            var shareIntent = Intent(Intent.ACTION_SEND)
-//            shareIntent.type = "text/plain"
-//            var shareBody = "Flag data: "
-//            shareIntent.putExtra(Intent.EXTRA_SUBJECT, flagsToExport)
-//            shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
-//            startActivity(Intent.createChooser(shareIntent, "Share flag data using: "))
-//        }
+        shareButton.setOnClickListener {
+
+            val dataBase = AppDatabase.getDatabase(Application())
+            val flagDao = dataBase.flagDao()
+
+            var flagsToExport = flagDao.getFlagsInTerrainLive(1).toString() //TODO
+
+            var shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            var shareBody = "Flag data: "
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, flagsToExport)
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+            startActivity(Intent.createChooser(shareIntent, "Share flag data using: "))
+        }
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
