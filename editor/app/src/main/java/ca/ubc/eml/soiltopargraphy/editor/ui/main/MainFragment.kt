@@ -15,12 +15,15 @@ import android.widget.*
 import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
 import ca.ubc.eml.soiltopargraphy.editor.R
 import ca.ubc.eml.soiltopargraphy.editor.db.AppDatabase
+import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository
 import ca.ubc.eml.soiltopargraphy.editor.db.FlagDao
+import ca.ubc.eml.soiltopargraphy.editor.export.LevelWriter
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagListFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
+import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
@@ -38,6 +41,8 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
     lateinit var googleMap: GoogleMap
     lateinit var mMapView: MapView
     val coordinates = LatLng(50.713836, -120.350008)
+    var appRepo = AppRepository(Application())
+
 
     companion object {
         fun newInstance() = MainFragment()
@@ -60,9 +65,6 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
 
         val view = inflater.inflate(R.layout.main_fragment, container, false)
 
-        val addButton = view.findViewById<Button>(R.id.addButton)
-        addButton.bringToFront()
-
         val shareButton = view.findViewById<Button>(R.id.shareButton)
 
         //attach listener to method for creating info panel
@@ -70,6 +72,7 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         button.setOnClickListener { onCreateInfoButtonClick(view) }
 
         //listener method for adding a flag
+        val addButton = view.findViewById<Button>(R.id.addButton)
         addButton.setOnClickListener {
             //add a flag in the centre of the map
             val center = this.googleMap.cameraPosition.target
@@ -81,17 +84,11 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         //listener for share button
         shareButton.setOnClickListener {
 
-            val dataBase = AppDatabase.getDatabase(Application())
-            val flagDao = dataBase.flagDao()
 
-            var flagsToExport = flagDao.getFlagsInTerrainLive(1).toString() //TODO
-
-            var shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.type = "text/plain"
-            var shareBody = "Flag data: "
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, flagsToExport)
-            shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
-            startActivity(Intent.createChooser(shareIntent, "Share flag data using: "))
+            var flagsToExport = appRepo.getFlagsInTerrain(this.googleMap as Terrain)
+            var levelWriter = LevelWriter(this.context, "FlagData", flagsToExport as List<Flag>)
+            levelWriter.write(this.context)
+            startActivity(Intent.createChooser(levelWriter.share(this.context), "Share flag data using: "))
         }
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
@@ -123,10 +120,7 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         saveFlag.setOnClickListener {
 
             //get list of flags from database
-            val db = AppDatabase.getDatabase(Application())
-
-            val mFlagDao = db.flagDao()
-            val flags = mFlagDao.allFlags
+            val flags = appRepo.allFlags
 
             val mainViewModel = MainViewModel(Application())
 

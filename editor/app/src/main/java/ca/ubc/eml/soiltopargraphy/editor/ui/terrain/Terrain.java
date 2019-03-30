@@ -9,7 +9,6 @@ public class Terrain {
     // each time a new instance of a terrain is created
     @PrimaryKey(autoGenerate = true)
     private int terrainId;
-    static int pastTerrainId = 0;
     private double latitude;
     private double longitude;
     //TODO: Add other terrain variables
@@ -17,9 +16,6 @@ public class Terrain {
     public Terrain(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
-        //TODO: set terrainId to the next increment
-        setTerrainId(pastTerrainId + 1);
-        pastTerrainId = this.terrainId;
     }
 
     public void setLatitude(double latitude) {
