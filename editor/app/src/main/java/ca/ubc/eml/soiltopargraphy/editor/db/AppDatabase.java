@@ -11,14 +11,14 @@ import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain;
 
 @Database(entities = {Flag.class, Terrain.class}, version = 1)
 @TypeConverters({Converters.class})
-public abstract class AppDatabase extends RoomDatabase {
+public abstract class  AppDatabase extends RoomDatabase {
 
     public abstract FlagDao flagDao();
     public abstract TerrainDao terrainDao();
 
     private static volatile AppDatabase INSTANCE;
 
-    static AppDatabase getDatabase(final Context context) {
+    public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
