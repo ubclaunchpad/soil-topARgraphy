@@ -1,6 +1,10 @@
 package ca.ubc.eml.soiltopargraphy.editor.ui.main
 
+import android.app.Application
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,17 +14,24 @@ import android.view.*
 import android.widget.*
 import ca.ubc.eml.soiltopargraphy.editor.JsonUtil
 import ca.ubc.eml.soiltopargraphy.editor.R
+import ca.ubc.eml.soiltopargraphy.editor.db.AppDatabase
+import ca.ubc.eml.soiltopargraphy.editor.db.AppRepository
+import ca.ubc.eml.soiltopargraphy.editor.db.FlagDao
+import ca.ubc.eml.soiltopargraphy.editor.export.LevelWriter
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.Flag
 import ca.ubc.eml.soiltopargraphy.editor.ui.flag.FlagListFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.DescriptionPanelFragment
 import ca.ubc.eml.soiltopargraphy.editor.ui.infopanel.InfoPanel
 import ca.ubc.eml.soiltopargraphy.editor.ui.quizpanel.QuestionnairePanel
+import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.Terrain
 import ca.ubc.eml.soiltopargraphy.editor.ui.terrain.TerrainListFragment
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.main_fragment.*
+import kotlinx.android.synthetic.main.terrain_list_fragment.*
 
 
 class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
@@ -29,6 +40,9 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
     //Google maps
     lateinit var googleMap: GoogleMap
     lateinit var mMapView: MapView
+    val coordinates = LatLng(50.713836, -120.350008)
+    var appRepo = AppRepository(Application())
+
 
     companion object {
         fun newInstance() = MainFragment()
@@ -51,9 +65,31 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
 
         val view = inflater.inflate(R.layout.main_fragment, container, false)
 
+        val shareButton = view.findViewById<Button>(R.id.shareButton)
+
         //attach listener to method for creating info panel
         val button = view.findViewById<View>(R.id.create_info_button)
         button.setOnClickListener { onCreateInfoButtonClick(view) }
+
+        //listener method for adding a flag
+        val addButton = view.findViewById<Button>(R.id.addButton)
+        addButton.setOnClickListener {
+            //add a flag in the centre of the map
+            val center = this.googleMap.cameraPosition.target
+            this.googleMap.addMarker(MarkerOptions()
+                    .position(center)
+                    .draggable(true))
+        }
+
+        //listener for share button
+        shareButton.setOnClickListener {
+
+
+            var flagsToExport = appRepo.getFlagsInTerrain(this.googleMap as Terrain)
+            var levelWriter = LevelWriter(this.context, "FlagData", flagsToExport as List<Flag>)
+            levelWriter.write(this.context)
+            startActivity(Intent.createChooser(levelWriter.share(this.context), "Share flag data using: "))
+        }
 
         mViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
@@ -69,14 +105,6 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         //Ensures that the menu is actually displayed in the toolbar
         setHasOptionsMenu(true)
 
-        //Assigns an onClickListener to flag item that will update the toolbar when flag is clicked
-        //TODO: Button flagItem should be replaced with actual flag item before merging
-        val flagItem = view.findViewById<Button>(R.id.flagItem)
-        flagItem.setOnClickListener {
-            //When flag is clicked, updates the view model variable to reflect this and refreshes the toolbar view
-            mViewModel.flagItemClicked = true
-            activity!!.invalidateOptionsMenu()
-        }
 
         //After clicking on the flag, if the user clicks anywhere else on the screen, updates
         //the toolbar to go back to showing only the listview item
@@ -86,14 +114,21 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
             activity!!.invalidateOptionsMenu()
         }
 
-        // Button to add a new flag
-        val addFlag = view.findViewById<View>(R.id.addButton)
-        addFlag.setOnClickListener {
 
-            //Add flag to centre of screen
+        //Update the database with new flag information when the save button is clicked
+        val saveFlag = view.findViewById<Button>(R.id.saveButton)
+        saveFlag.setOnClickListener {
 
+            //get list of flags from database
+            val flags = appRepo.allFlags
 
+            val mainViewModel = MainViewModel(Application())
 
+            if (flags != null){
+                for (flag in flags as List<*> ){
+                    mainViewModel.saveMarkerAsFlag(flag as Flag)
+                }
+            }
         }
 
         return view
@@ -115,9 +150,9 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
 
         MapsInitializer.initialize(context)
         this.googleMap = googleMap
-        googleMap.mapType = GoogleMap.MAP_TYPE_NORMAL
+        googleMap.mapType = GoogleMap.MAP_TYPE_TERRAIN
 
-        var start: CameraPosition = CameraPosition.fromLatLngZoom(LatLng(50.713836, -120.350008), 12.0f)
+        var start: CameraPosition = CameraPosition.fromLatLngZoom(coordinates, 12.0f)
         mViewModel.createMarker(googleMap)
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(start))
         googleMap.setOnMapLongClickListener(this)
