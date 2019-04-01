@@ -91,6 +91,8 @@ class MainFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMapLongClickLis
         addFlag.setOnClickListener {
 
             //Add flag to centre of screen
+            val center = this.googleMap.cameraPosition.target
+            this.googleMap.addMarker(MarkerOptions().position(center).draggable(true))
 
 
 
